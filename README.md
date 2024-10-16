@@ -1,1 +1,73 @@
-# bagandgo
+# Bag & Go
+
+## Project Overview
+**Bag & Go** is a self-checkout web app designed for stores, eliminating the need for staff and relying solely on CCTV for security. Users can register, verify their identity, scan items via QR codes, and manage their purchases through a prepaid balance system. Admins can manage products, including discounted items, through a dedicated admin interface.
+
+## Team
+- **Beran Orkan Işık** - Team Leader, DevOps, Front-end developer
+- **Miraç Merthan Durdağ** - Budget Manager, Back-end developer
+- **Yiğit Güriş** - Business Analyst, Back-end developer
+- **Yiğit Alp Bilgin** - Budget Manager, Front-end developer
+- **Kerem Er** - Scribe, Back-end developer
+- **Cemal Yılmaz** - Business Analyst, Front-end developer
+- **Ceren Birsu Yılmaz** - QA, Front-end developer
+- **Ataberk Çiftlikli** - Subject Expert, DevOps, DB Manager & API Testing
+
+## Technology Stack
+- **Project Configuration Management**: Git, Docker, VSCode
+- **Backend**: Python, SQL, Postman
+- **Frontend**: HTML/CSS, ReactJS, Typescript
+
+## Features
+- User registration and login with basic identity verification.
+- QR code scanner for easy item scanning.
+- Digital receipts after each purchase.
+- Prepaid balance system for payments.
+- Admin interface for product management (add/remove items, apply discounts).
+- Separate pages for item categories and discounted items.
+- Search bar functionality.
+
+## Project Milestones
+| Feature                          | Estimated Completion Date |
+|-----------------------------------|---------------------------|
+| App foundations and user entry    | ~15.11.2024               |
+| Item management and payment       | ~30.11.2024               |
+| Security enhancements and polish  | ~15.12.2024               |
+| Pre-launch and testing            | ~30.12.2024               |
+
+## Installation & Setup
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/your-repo/bag-and-go.git
+    ```
+2. Navigate to the project directory:
+    ```bash
+    cd bag-and-go
+    ```
+3. Set up Docker (optional but recommended for consistent environments):
+    ```bash
+    docker-compose up --build
+    ```
+4. Run the backend (Python):
+    ```bash
+    cd backend
+    python manage.py runserver
+    ```
+5. Run the frontend (ReactJS):
+    ```bash
+    cd frontend
+    npm install
+    npm start
+    ```
+
+## Usage
+- Visit `localhost:3000` for the frontend interface.
+- Admins can log in and manage items through the `/admin` route.
+- Users can register, log in, and start self-checking out items through QR code scanning.
+
+## Contributing
+Feel free to submit issues or pull requests. For major changes, please discuss them first with the team.
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
