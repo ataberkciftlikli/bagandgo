@@ -1,0 +1,25 @@
+name: ssh and build
+
+on:
+  workflow_dispatch:
+  push:
+    branches: 
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ssh connection
+        uses: fifsky/ssh-action@master
+        with:
+          user: ${{ secrets.SERVER_USER }}
+          host: ${{ secrets.SERVER_IP }}
+          key: ${{ secrets.SERVER_KEY }}
+          command: |
+            sudo -s
+            git clone https://github.com/ataberkciftlikli/bagandgo
+            cd backend
+            git pull
+            bash ./deploy.sh
