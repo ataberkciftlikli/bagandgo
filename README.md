@@ -18,6 +18,9 @@
 - **Backend**: Python, SQL, Postman
 - **Frontend**: HTML/CSS, ReactJS, Typescript
 
+## Versions
+- **Backend**: Python 3.13, Django 5.1.2, Django Rest Framework 3.15.2
+
 ## Features
 - User registration and login with basic identity verification.
 - QR code scanner for easy item scanning.
