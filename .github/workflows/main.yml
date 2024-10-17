@@ -2,9 +2,9 @@ name: ssh and build
 
 on:
   workflow_dispatch:
-  push:
-    branches: 
-      - main
+  ##push:
+    ##branches: 
+      ##- main
 
 jobs:
   build:
@@ -18,8 +18,9 @@ jobs:
           host: ${{ secrets.SERVER_IP }}
           key: ${{ secrets.SERVER_KEY }}
           command: |
-            sudo -s
-            git clone https://github.com/ataberkciftlikli/bagandgo
-            cd backend
+            echo "hello" >> log.txt
+            git clone https://${{ secrets.GH_TOKEN }}@github.com/ataberkciftlikli/bagandgo.git
+            cd /home/ubuntu/bagandgo
             git pull
-            bash ./deploy.sh
+            git submodule update --recursive --remote
+            bash /home/ubuntu/bagandgo/deploy.sh
