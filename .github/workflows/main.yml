@@ -1,0 +1,26 @@
+name: ssh and build
+
+on:
+  workflow_dispatch:
+  ##push:
+    ##branches: 
+      ##- main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ssh connection
+        uses: fifsky/ssh-action@master
+        with:
+          user: ${{ secrets.SERVER_USER }}
+          host: ${{ secrets.SERVER_IP }}
+          key: ${{ secrets.SERVER_KEY }}
+          command: |
+            echo "hello" >> log.txt
+            git clone https://${{ secrets.GH_TOKEN }}@github.com/ataberkciftlikli/bagandgo.git
+            cd /home/ubuntu/bagandgo
+            git pull
+            git submodule update --recursive --remote
+            bash /home/ubuntu/bagandgo/deploy.sh
