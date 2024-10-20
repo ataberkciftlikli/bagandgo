@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import InputField from '../Register/InputField'; // Reuse the InputField component
 import ErrorMessage from '../Register/ErrorMessage'; // Reuse the ErrorMessage component
+import { Link } from 'react-router-dom'; // Import Link component from react-router-dom
 import './Login.css';
 
 const Login: React.FC = () => {
@@ -81,6 +82,12 @@ const Login: React.FC = () => {
             Login
           </button>
         </form>
+        <div className="text-center mt-3">
+            Don't have an account?{' '}
+            <Link to="/register" className="register-link">
+              Register
+            </Link>
+          </div>
       </div>
     </div>
   );
