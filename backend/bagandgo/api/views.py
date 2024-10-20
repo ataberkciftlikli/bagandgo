@@ -1,17 +1,25 @@
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.response import Response
-from rest_framework import status
-from rest_framework import permissions
-from django.contrib.auth import authenticate, login
-from rest_framework.permissions import AllowAny
 from django.contrib.auth.models import User
-from django.http import JsonResponse
+from django.http.response import JsonResponse
+from django.contrib.auth import authenticate, login
 from django.views.decorators.csrf import csrf_exempt
-import json
-from pyzbar.pyzbar import decode
-from PIL import Image
-import io
 
+
+from django.utils import timezone
+from django.shortcuts import redirect, render
+
+from rest_framework import filters, generics, status, viewsets, mixins, permissions
+from rest_framework.response import Response
+from rest_framework.decorators import action, api_view, permission_classes
+from rest_framework.authtoken.models import Token
+from rest_framework.permissions import AllowAny
+
+
+import json
+import io
+import random
+import os
+
+ 
 @api_view(['POST'])
 @permission_classes([AllowAny])  # Allows any user to access this endpoint
 def login_view(request):
@@ -29,7 +37,7 @@ def login_view(request):
         return Response({'message': 'Login successful.'}, status=status.HTTP_200_OK)
     else:
         return Response({'error': 'Invalid credentials.'}, status=status.HTTP_401_UNAUTHORIZED)
-    
+   
 
 @api_view(['POST'])
 @permission_classes([AllowAny])  # Allows any user to access this endpoint
@@ -55,31 +63,3 @@ def register_view(request):
     user = User.objects.create_user(username=username, email=email, password=password)
     return Response({'message': 'User registered successfully.'}, status=status.HTTP_201_CREATED)
 
-
-@api_view(['POST'])
-@permission_classes([AllowAny])  # Allows any user to access this endpoint
-def scan_qr_code(request):
-    if 'qr_code_image' not in request.FILES:
-        return Response({'error': 'Please upload a QR code image.'}, status=status.HTTP_400_BAD_REQUEST)
-
-    qr_code_image = request.FILES['qr_code_image']
-
-    try:
-        # Open the uploaded image
-        img = Image.open(qr_code_image)
-
-        # Decode the QR code using pyzbar
-        decoded_objects = decode(img)
-
-        if not decoded_objects:
-            return Response({'error': 'No QR code detected.'}, status=status.HTTP_400_BAD_REQUEST)
-
-        # Extract data from the first decoded QR code
-        qr_data = decoded_objects[0].data.decode('utf-8')
-
-        # Respond with the QR code data
-        return Response({'message': 'QR code scanned successfully.', 'qr_data': qr_data}, status=status.HTTP_200_OK)
-    
-    except Exception as e:
-        return Response({'error': 'Failed to process QR code image.', 'details': str(e)},
-                        status=status.HTTP_500_INTERNAL_SERVER_ERROR)
