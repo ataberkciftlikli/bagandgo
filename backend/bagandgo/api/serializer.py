@@ -3,7 +3,7 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 
-from .models import UserProfile
+from .models import UserProfile, ProductCategory, Product, Bag, Order
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -47,3 +47,15 @@ class LoginSerializer(serializers.Serializer):
         if user:
             return user
         raise serializers.ValidationError("Incorrect Credentials")
+
+class ProductCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductCategory
+        fields = ['id', 'name']
+
+class ProductSerializer(serializers.ModelSerializer):
+    category = ProductCategorySerializer(read_only=True)
+    category_id = serializers.IntegerField(write_only=True)
+    class Meta:
+        model = Product
+        fields = ['id', 'name', 'category', 'category_id', 'price', 'image', 'stock', 'barcode']

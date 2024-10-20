@@ -1,5 +1,6 @@
 from django.db import models
 from rest_framework.authtoken.models import Token
+import random
 
 
 # Create your models here.
@@ -20,3 +21,41 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+class ProductCategory(models.Model):
+    name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
+class Product(models.Model):
+    name = models.CharField(max_length=255)
+    category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE)
+    price = models.FloatField()
+    image = models.ImageField(upload_to='product_images/')
+    stock = models.IntegerField()
+    barcode = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+
+class Bag(models.Model):
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    products = models.ManyToManyField(Product)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.created_at}"
+
+class Order(models.Model):
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    products = models.ManyToManyField(Product)
+    total_price = models.FloatField()
+    confirmation_code = models.CharField(max_length=255, default=random.randint(100000, 999999))
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.confirmation_code}"
