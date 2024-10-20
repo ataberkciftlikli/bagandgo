@@ -1,15 +1,23 @@
+html, body {
+  height: 100%; /* Ensure the html and body elements occupy the full height */
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to bottom, #cad3f0, #e9ebf1) !important;
+}
+
 #register-page {
   width: 100%;
+  min-height: 100vh; /* Ensure the page container takes up the full height of the viewport */
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 0;
-  background-color: #1a2231;
+  box-sizing: border-box; /* Include padding and borders in width/height calculations */
 }
 
 #register-page .register-form {
-  width: 100%;
-  max-width: 450px;
+  width: 120%;
+  max-width: 550px;
   padding: 2rem;
   background: linear-gradient(135deg, #2c3e50, #34495e);
   border-radius: 20px;
@@ -20,6 +28,7 @@
   font-family: 'Arial', sans-serif;
   font-size: 24px;
   font-weight: 500;
+  font-weight: bold;
   line-height: 40px;
   text-align: center;
   color: #6dd5fa;
@@ -66,7 +75,7 @@
 
 #register-page .header {
   margin-bottom: 15px;
-  color: #ffffff;
+  color: #000000;
   font-size: 2.2em;
   text-align: center;
   width: 100%;
