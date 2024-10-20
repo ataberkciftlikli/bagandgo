@@ -28,6 +28,11 @@ By following these steps, we maintain code quality and avoid breaking `main`. Th
 - **Backend**: Python, SQL, Postman
 - **Frontend**: HTML/CSS, ReactJS, Typescript
 
+## Server Access Information
+- **Public IP address**: 20.199.80.88
+- **Username**: king
+- **Password**: [shared privately with team members]
+
 ## Versions
 - **Backend**: Python 3.13, Django 5.1.2, Django Rest Framework 3.15.2
 
