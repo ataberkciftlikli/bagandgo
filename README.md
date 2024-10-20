@@ -1,5 +1,15 @@
 # Bag & Go
 
+## Contribution Guidelines
+
+- **Branching:** Always create and work on your own branch. Never work directly on `main`.
+- **Pull Requests:** Once your work is done, submit a pull request for review. Do **not** push to `main` directly.
+- **Keep Updated:** Regularly pull the latest changes from `main` to avoid conflicts.
+- **Merge:** Only merge to `main` after your PR is reviewed and approved.
+
+By following these steps, we maintain code quality and avoid breaking `main`. Thank you!
+
+
 ## Project Overview
 **Bag & Go** is a self-checkout web app designed for stores, eliminating the need for staff and relying solely on CCTV for security. Users can register, verify their identity, scan items via QR codes, and manage their purchases through a prepaid balance system. Admins can manage products, including discounted items, through a dedicated admin interface.
 
