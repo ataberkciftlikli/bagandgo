@@ -19,6 +19,9 @@ import io
 import random
 import os
 
+from .models import AuthToken, UserProfile, ProductCategory, Product, Bag, Order
+from .serializer import UserSerializer, UserProfileSerializer, RegisterSerializer, LoginSerializer, ProductCategorySerializer, ProductSerializer
+
  
 @api_view(['POST'])
 @permission_classes([AllowAny])  # Allows any user to access this endpoint
@@ -63,3 +66,18 @@ def register_view(request):
     user = User.objects.create_user(username=username, email=email, password=password)
     return Response({'message': 'User registered successfully.'}, status=status.HTTP_201_CREATED)
 
+class ProductCategoryViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = ProductCategory.objects.all().order_by('id')
+    serializer_class = ProductCategorySerializer
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ['id', 'name']
+    ordering_fields = ['id', 'name']
+    filter_fields = ['id', 'name']
+
+class ProductViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Product.objects.all().order_by('id')
+    serializer_class = ProductSerializer
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ['id', 'name', 'category__name', 'price', 'stock', 'barcode']
+    ordering_fields = ['id', 'name', 'category', 'price', 'stock', 'barcode']
+    filter_fields = ['id', 'name', 'category', 'price', 'stock', 'barcode']

@@ -28,6 +28,11 @@ By following these steps, we maintain code quality and avoid breaking `main`. Th
 - **Backend**: Python, SQL, Postman
 - **Frontend**: HTML/CSS, ReactJS, Typescript
 
+## Server Access Information
+- **Public IP address**: 20.199.80.88
+- **Username**: king
+- **Password**: [shared privately with team members]
+
 ## Versions
 - **Backend**: Python 3.13, Django 5.1.2, Django Rest Framework 3.15.2
 
@@ -78,7 +83,7 @@ By following these steps, we maintain code quality and avoid breaking `main`. Th
 
 ## Usage
 - Visit `localhost:3000` for the frontend interface.
-- Admins can log in and manage items through the `/admin` route.
+- Admins can log in and manage items through the `localhost:8000/admin` route.
 - Users can register, log in, and start self-checking out items through QR code scanning.
 
 ## Contributing
