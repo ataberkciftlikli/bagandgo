@@ -83,7 +83,7 @@ By following these steps, we maintain code quality and avoid breaking `main`. Th
 
 ## Usage
 - Visit `localhost:3000` for the frontend interface.
-- Admins can log in and manage items through the `/admin` route.
+- Admins can log in and manage items through the `localhost:8000/admin` route.
 - Users can register, log in, and start self-checking out items through QR code scanning.
 
 ## Contributing
