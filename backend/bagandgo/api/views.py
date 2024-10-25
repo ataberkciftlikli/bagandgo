@@ -48,9 +48,11 @@ def register_view(request):
     username = request.data.get('username')
     email = request.data.get('email')
     password = request.data.get('password')
+    fistname = request.data.get('firstname')
+    lastname = request.data.get('lastname')
 
     # Validate input data
-    if not username or not email or not password:
+    if not username or not email or not password or not fistname or not lastname:
         return Response(
             {'error': 'All fields are required.'},
             status=status.HTTP_400_BAD_REQUEST
@@ -63,7 +65,7 @@ def register_view(request):
         return Response({'error': 'Email is already taken.'}, status=status.HTTP_400_BAD_REQUEST)
 
     # Create new user
-    user = User.objects.create_user(username=username, email=email, password=password)
+    user = User.objects.create_user(username=username, email=email, password=password, first_name=fistname, last_name=lastname)
     return Response({'message': 'User registered successfully.'}, status=status.HTTP_201_CREATED)
 
 class ProductCategoryViewSet(viewsets.ReadOnlyModelViewSet):
