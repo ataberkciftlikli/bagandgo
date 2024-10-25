@@ -51,11 +51,12 @@ def register_view(request):
     username = request.data.get('username')
     email = request.data.get('email')
     password = request.data.get('password')
-    fistname = request.data.get('firstname')
-    lastname = request.data.get('lastname')
+    firstname = request.data.get('first_name')
+    lastname = request.data.get('last_name')
+    address = request.data.get('address')
 
     # Validate input data
-    if not username or not email or not password or not fistname or not lastname:
+    if not username or not email or not password or not firstname or not lastname or not address:
         return Response(
             {'error': 'All fields are required.'},
             status=status.HTTP_400_BAD_REQUEST
@@ -68,8 +69,16 @@ def register_view(request):
         return Response({'error': 'Email is already taken.'}, status=status.HTTP_400_BAD_REQUEST)
 
     # Create new user
-    user = User.objects.create_user(username=username, email=email, password=password, first_name=fistname, last_name=lastname)
-    return Response({'message': 'User registered successfully.'}, status=status.HTTP_201_CREATED)
+    user = User.objects.create_user(username=username, email=email, password=password, first_name=firstname, last_name=lastname)
+    
+    drf_token = Token.objects.create(user=user)
+    token = AuthToken.objects.create(token=drf_token.key, user=user)
+    new_profile = UserProfile.objects.create(user=user, address=address, balance=0)
+    new_profile.save()
+    return Response({
+        "user": UserSerializer(user).data,
+        "token": token.token
+        }, status=status.HTTP_201_CREATED)
 
 class ProductCategoryViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = ProductCategory.objects.all().order_by('id')
