@@ -78,6 +78,6 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Product.objects.all().order_by('id')
     serializer_class = ProductSerializer
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
-    search_fields = ['id', 'name', 'category__name', 'price', 'stock', 'barcode']
-    ordering_fields = ['id', 'name', 'category', 'price', 'stock', 'barcode']
-    filter_fields = ['id', 'name', 'category', 'price', 'stock', 'barcode']
+    search_fields = ['id', 'name', 'category__name', 'price', 'old_price', 'is_discounted', 'stock', 'barcode']
+    ordering_fields = ['id', 'name', 'category', 'price', 'old_price', 'is_discounted', 'stock', 'barcode']
+    filter_fields = ['id', 'name', 'category', 'price', 'old_price', 'is_discounted', 'stock', 'barcode']

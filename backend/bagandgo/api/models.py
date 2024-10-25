@@ -32,6 +32,8 @@ class Product(models.Model):
     name = models.CharField(max_length=255)
     category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE)
     price = models.FloatField()
+    old_price = models.FloatField()
+    is_discounted = models.BooleanField(default=False)
     image = models.ImageField(upload_to='product_images/')
     stock = models.IntegerField()
     barcode = models.CharField(max_length=255)

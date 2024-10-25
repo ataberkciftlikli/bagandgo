@@ -58,4 +58,4 @@ class ProductSerializer(serializers.ModelSerializer):
     category_id = serializers.IntegerField(write_only=True)
     class Meta:
         model = Product
-        fields = ['id', 'name', 'category', 'category_id', 'price', 'image', 'stock', 'barcode']
+        fields = ['id', 'name', 'category', 'category_id', 'price', 'old_price', 'is_discounted', 'image', 'stock', 'barcode']
