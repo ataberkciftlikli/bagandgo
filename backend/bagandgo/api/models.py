@@ -18,7 +18,7 @@ class UserProfile(models.Model):
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     tc = models.CharField(max_length=11, null=True, blank=True)
     address = models.CharField(max_length=255, null=True, blank=True)
-    birth_date = models.DateField(null=True, blank=True)
+    birth_year = models.IntegerField(null=True, blank=True)
     balance = models.FloatField(default=0)
 
     def __str__(self):

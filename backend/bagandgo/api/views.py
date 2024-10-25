@@ -64,11 +64,11 @@ def register_view(request):
     lastname = request.data.get('last_name')
     address = request.data.get('address')
     tc = request.data.get('tc')
-    birth_date = request.data.get('birth_date')
+    birth_year = request.data.get('birth_year')
 
 
     # Validate input data
-    if not username or not email or not password or not firstname or not lastname or not address or not tc or not birth_date:
+    if not username or not email or not password or not firstname or not lastname or not address or not tc or not birth_year:
         return Response(
             {'error': 'All fields are required.'},
             status=status.HTTP_400_BAD_REQUEST
@@ -86,7 +86,7 @@ def register_view(request):
     drf_token = Token.objects.create(user=user)
     token = AuthToken.objects.create(token=drf_token.key, user=user)
     try:
-        new_profile = UserProfile.objects.create(user=user, address=address, tc=tc, birth_date=birth_date, balance=0)
+        new_profile = UserProfile.objects.create(user=user, address=address, tc=tc, birth_year=birth_year, balance=0)
         new_profile.save()
     except Exception as e:
         user.delete()
