@@ -40,7 +40,16 @@ def login_view(request):
     
     if user is not None:
         login(request, user)
-        return Response({'message': 'Login successful.'}, status=status.HTTP_200_OK)
+        try:
+            Token.objects.get(user=user).delete()
+        except Exception:
+            pass
+        drf_token = Token.objects.create(user=user)
+        token = AuthToken.objects.create(user=user, token=drf_token.key)
+        return Response({
+            'user': UserSerializer(user).data,
+            'token': token.token
+            }, status=status.HTTP_200_OK)
     else:
         return Response({'error': 'Invalid credentials.'}, status=status.HTTP_401_UNAUTHORIZED)
    
