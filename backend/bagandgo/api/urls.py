@@ -12,4 +12,4 @@ urlpatterns = [
     path('product/', include(router.urls)),
     path('register/', register_view, name='register-api'),
     path('login/', login_view, name = 'login-api'),
-]
+    ]

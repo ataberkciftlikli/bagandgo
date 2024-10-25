@@ -21,6 +21,9 @@ import os
 
 from .models import AuthToken, UserProfile, ProductCategory, Product, Bag, Order
 from .serializer import UserSerializer, UserProfileSerializer, RegisterSerializer, LoginSerializer, ProductCategorySerializer, ProductSerializer
+from django.http import FileResponse
+from django.conf import settings
+from django.urls import path
 
  
 @api_view(['POST'])
@@ -83,3 +86,11 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
     search_fields = ['id', 'name', 'category__name', 'price', 'old_price', 'is_discounted', 'stock', 'barcode']
     ordering_fields = ['id', 'name', 'category', 'price', 'old_price', 'is_discounted', 'stock', 'barcode']
     filter_fields = ['id', 'name', 'category', 'price', 'old_price', 'is_discounted', 'stock', 'barcode']
+
+    @action(detail=False, methods=['get'], url_path='product_images/(?P<filename>[^/]+)')
+    def image(self, request, filename=None):
+        file_path = os.path.join(settings.MEDIA_ROOT, 'product_images', filename)
+        if os.path.exists(file_path):
+            return FileResponse(open(file_path, 'rb'), content_type='image/jpeg')
+        else:
+            return Response({'error': 'Image not found.'}, status=status.HTTP_404_NOT_FOUND)
