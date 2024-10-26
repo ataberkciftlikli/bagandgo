@@ -96,43 +96,38 @@ def register_view(request):
         return Response({'error': 'Failed to create user profile.'}, status=status.HTTP_400_BAD_REQUEST)
     
     # T.C. identity verification request
-    body = f"""<?xml version="1.0" encoding="UTF-8"?>
-    <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-    <soap:Body>
-        <TCKimlikNoDogrula xmlns="http://tckimlik.nvi.gov.tr/WS">
-        <TCKimlikNo>{tc}</TCKimlikNo>
-        <Ad>{firstname}</Ad>
-        <Soyad>{lastname}</Soyad>
-        <DogumYili>{birth_year}</DogumYili>
-        </TCKimlikNoDogrula>
-    </soap:Body>
-    </soap:Envelope>"""
+    # body = f"""<?xml version="1.0" encoding="UTF-8"?>
+    # <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    # <soap:Body>
+    #     <TCKimlikNoDogrula xmlns="http://tckimlik.nvi.gov.tr/WS">
+    #     <TCKimlikNo>{int(tc)}</TCKimlikNo>
+    #     <Ad>{str(firstname)}</Ad>
+    #     <Soyad>{str(lastname)}</Soyad>
+    #     <DogumYili>{int(birth_year)}</DogumYili>
+    #     </TCKimlikNoDogrula>
+    # </soap:Body>
+    # </soap:Envelope>"""
 
-    headers = {
-        'content-type': 'text/xml; charset=UTF-8',
-        'host': 'tckimlik.nvi.gov.tr',
-    }
+    # headers = {
+    #     'content-type': 'text/xml; charset=UTF-8',
+    #     'host': 'tckimlik.nvi.gov.tr',
+    # }
 
-    try:
-        r = requests.post(
-            "https://tckimlik.nvi.gov.tr/Service/KPSPublic.asmx?WSDL",
-            headers=headers, data=body.encode('utf-8')
-        )
-        xml = BeautifulSoup(r.content, 'xml')
-        result = xml.find('TCKimlikNoDogrulaResult').text.strip()
+    # try:
+    #     r = requests.post(
+    #         "https://tckimlik.nvi.gov.tr/Service/KPSPublic.asmx?WSDL",
+    #         headers=headers, data=body.encode('utf-8')
+    #     )
+    #     xml = BeautifulSoup(r.content, 'xml')
+    #     result = xml.find('soap:Body').text
 
-        if result != "true":
-            user.delete()
-            return Response({"error": "Invalid TC number or user data"}, status=status.HTTP_400_BAD_REQUEST)
+    #     if result != "true":
+    #         user.delete()
+    #         return Response({"error": "Invalid TC number or user data"}, status=status.HTTP_400_BAD_REQUEST)
 
-    except Exception as e:
-        user.delete()
-        return Response({'error': 'Failed to verify TC number.'}, status=status.HTTP_400_BAD_REQUEST)
-
-    # Add TC verification fields to the profile if verification is successful
-    new_profile.tc_verification = True
-    new_profile.tc_verification_date = timezone.now()
-    new_profile.save()
+    # except Exception as e:
+    #     user.delete()
+    #     return Response({'error': 'Failed to verify TC number.'}, status=status.HTTP_400_BAD_REQUEST)
 
     return Response({
         "user": UserSerializer(user).data,
