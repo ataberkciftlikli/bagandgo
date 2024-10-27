@@ -1,0 +1,20 @@
+/* src/components/Profile/StorePreferences.css */
+.store-preferences-container {
+    padding: 15px;
+    background-color: #CAD3F0; 
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    color: #2E4255; 
+}
+
+.store-preferences-container h2 {
+    color: #2E4255; 
+    margin-bottom: 10px;
+}
+
+.store-preferences-container p {
+    margin: 5px 0;
+    font-size: 1rem;
+    color: #6C6C78; 
+}
