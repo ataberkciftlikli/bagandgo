@@ -1,6 +1,6 @@
 // components/Register/Register.tsx
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // Import Link component from react-router-dom
+import { Link, useNavigate } from 'react-router-dom'; // Import Link component from react-router-dom
 import InputField from './InputField';
 import ErrorMessage from './ErrorMessage';
 import './Register.css';
@@ -12,6 +12,8 @@ const Register = () => {
     password: '',
     confirmPassword: ''
   });
+
+  const navigate = useNavigate();
 
   const [errors, setErrors] = useState({
     email: '',
@@ -37,7 +39,15 @@ const Register = () => {
   return (
     <div id="register-page">
       <div className="main-section">
-        <div className="header">BagAndGo</div>
+      <div
+        className="header"
+        onClick={() => {
+          navigate('/home');
+        }}
+        style={{ cursor: 'pointer' }}
+      >
+        BagAndGo
+      </div>
         <form className="register-form w-100" onSubmit={handleSubmit}>
           <h2 className="text-center mb-4">Register</h2>
 

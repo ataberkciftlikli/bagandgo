@@ -1,9 +1,4 @@
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(to bottom, #cad3f0, #e9ebf1) !important;
-  }
+
   
   #login-page {
     width: 100%;
@@ -13,6 +8,7 @@ html, body {
     align-items: center;
     padding: 0;
     box-sizing: border-box;
+    background: linear-gradient(to bottom, #cad3f0, #e9ebf1) !important;
   }
   
   #login-page .login-form {

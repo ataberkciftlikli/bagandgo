@@ -1,0 +1,30 @@
+/* home.css */
+
+#home-page {
+    display: flex;
+    min-height: 100vh;
+  }
+  
+  #home-page .content {
+    flex: 1;
+    padding: 80px 20px 20px; /* Offset for header height */
+    margin-left: 200px; /* Offset for sidebar width */
+    transition: margin-left 0.3s ease;
+  }
+  
+  #home-page .sidebar-collapsed .content {
+    margin-left: 60px; /* Adjust margin when sidebar is collapsed */
+  }
+  
+  #home-page .placeholder-content {
+    max-width: 800px;
+    margin:  auto;
+    padding: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    #home-page .content {
+      margin-left: 60px; /* Adjust margin for mobile sidebar */
+    }
+  }
+  

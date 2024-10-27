@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import InputField from '../Register/InputField'; // Reuse the InputField component
 import ErrorMessage from '../Register/ErrorMessage'; // Reuse the ErrorMessage component
-import { Link } from 'react-router-dom'; // Import Link component from react-router-dom
+import { Link, useNavigate } from 'react-router-dom'; // Import Link component from react-router-dom
 import './Login.css';
 
 const Login: React.FC = () => {
@@ -9,6 +9,8 @@ const Login: React.FC = () => {
     email: '',
     password: ''
   });
+
+  const navigate = useNavigate();
 
   const [errors, setErrors] = useState({
     email: '',
@@ -49,7 +51,15 @@ const Login: React.FC = () => {
   return (
     <div id="login-page">
       <div className="main-section">
-        <div className="header">BagAndGo</div>
+      <div
+        className="header"
+        onClick={() => {
+          navigate('/home');
+        }}
+        style={{ cursor: 'pointer' }}
+      >
+        BagAndGo
+      </div>
         <form className="login-form w-100" onSubmit={handleSubmit}>
           <h2 className="text-center mb-4">Login</h2>
 
