@@ -209,3 +209,44 @@ def checkout(request):
     return Response({'message': 'Checkout successful. Your order has been placed.'}, status=status.HTTP_200_OK)
 
 
+# Serializer for updating user profile details
+class UpdateUserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['username', 'email']  # Basic fields; add more if needed
+        extra_kwargs = {'username': {'required': False}, 'email': {'required': False}}
+
+class UpdatePasswordSerializer(serializers.Serializer):
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)
+
+# View for updating profile details
+@api_view(['PUT'])
+@permission_classes([permissions.IsAuthenticated])
+def update_profile(request):
+    user = request.user
+    serializer = UpdateUserProfileSerializer(user, data=request.data, partial=True)
+
+    if serializer.is_valid():
+        serializer.save()
+        return Response({'message': 'Profile updated successfully.'}, status=status.HTTP_200_OK)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+# View for updating password
+@api_view(['PUT'])
+@permission_classes([permissions.IsAuthenticated])
+def update_password(request):
+    serializer = UpdatePasswordSerializer(data=request.data)
+    
+    if serializer.is_valid():
+        old_password = serializer.validated_data['old_password']
+        new_password = serializer.validated_data['new_password']
+        
+        if not request.user.check_password(old_password):
+            return Response({'error': 'Old password is incorrect.'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        request.user.set_password(new_password)
+        request.user.save()
+        return Response({'message': 'Password updated successfully.'}, status=status.HTTP_200_OK)
+    
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
