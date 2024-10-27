@@ -157,3 +157,55 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
             return FileResponse(open(file_path, 'rb'), content_type='image/jpeg')
         else:
             return Response({'error': 'Image not found.'}, status=status.HTTP_404_NOT_FOUND)
+        
+
+#View Cart
+@api_view(['GET'])
+@permission_classes([permissions.IsAuthenticated])
+def view_cart(request):
+    user = request.user
+    cart_items = Bag.objects.filter(user=user)
+    cart_data = [
+        {
+            'product': ProductSerializer(item.product).data,
+            'quantity': item.quantity
+        }
+        for item in cart_items
+    ]
+    return Response({'cart': cart_data}, status=status.HTTP_200_OK)
+
+#Add to Cart
+@api_view(['POST'])
+@permission_classes([permissions.IsAuthenticated])
+def add_to_cart(request):
+    product_id = request.data.get('product_id')
+    quantity = request.data.get('quantity', 1)
+    user = request.user
+
+    try:
+        product = Product.objects.get(id=product_id)
+        bag, created = Bag.objects.get_or_create(user=user, product=product)
+        bag.quantity += quantity
+        bag.save()
+        return Response({'message': 'Product added to cart successfully.'}, status=status.HTTP_200_OK)
+    except Product.DoesNotExist:
+        return Response({'error': 'Product not found.'}, status=status.HTTP_404_NOT_FOUND)
+    
+#Checkout
+@api_view(['POST'])
+@permission_classes([permissions.IsAuthenticated])
+def checkout(request):
+    user = request.user
+    cart_items = Bag.objects.filter(user=user)
+
+    if not cart_items:
+        return Response({'error': 'Your cart is empty.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    order = Order.objects.create(user=user)
+    for item in cart_items:
+        order.products.add(item.product)
+        item.delete()  # Remove item from cart after adding to order
+    
+    return Response({'message': 'Checkout successful. Your order has been placed.'}, status=status.HTTP_200_OK)
+
+
