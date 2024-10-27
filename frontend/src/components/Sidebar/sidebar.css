@@ -1,5 +1,5 @@
 #sidebar {
-  background: #e3e6f0;
+  background: linear-gradient(to bottom, #edeef1, #f7f7f7);
   width: 210px;
   padding: 20px;
   display: flex;

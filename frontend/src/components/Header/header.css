@@ -1,7 +1,6 @@
 
-
 #header {
-  background: linear-gradient(to left, #e4c6f1, #f7e3ff);
+  background: linear-gradient(to left, #CAD3F0, #D3D8ED);
   width: 100%;
   padding: 20px;
   display: flex;
@@ -63,7 +62,7 @@
 }
 
 #header .nav-link {
-  color: #333;
+  color: #2E4255;
   text-decoration: none;
   font-weight: bold;
   font-size: 16px;
@@ -77,9 +76,9 @@
 
 #header .nav-link.active,
 #header .nav-link:hover {
-  color: #000000;
-  background-color: #9D9DFF;
-  border: 2px solid #9D9DFF;
+  color: #D3D8ED;
+  background-color: #2E4255;
+  border: 2px solid #2E4255;
 }
 
 #header .exit-button {
@@ -97,15 +96,22 @@
 
 #header .exit-button.active,
 #header .exit-button:hover {
-  color: #000000;
-  background-color: #9D9DFF;
-  border: 1px solid #9D9DFF;
+  color: #D3D8ED;
+  background-color: #2E4255;
+  border: 1px solid #2E4255;
+}
+#header .exit-button:hover .exit-icon {
+  margin-right: 5px;
+  content: url('../icons/exit_logo_hover.png'); /* Path to the hover icon */
 }
 
 #header .exit-icon {
   width: 24px;
   height: 24px;
+  margin-right: 5px;
 }
+
+
 
 #header .user-info {
   display: flex;
