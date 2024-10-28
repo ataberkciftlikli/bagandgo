@@ -45,6 +45,9 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
             <Link to="/contact" className={`nav-link ${isActive('/contact') ? 'active' : ''}`}>
               Contact
             </Link>
+            <Link to="/profile" className={`nav-link ${isActive('/profile') ? 'active' : ''}`}>
+              Profile
+            </Link>
             {/* <button
               className={`nav-link ${isActive('/login') ? 'active' : ''}`}
               onClick={() => {
