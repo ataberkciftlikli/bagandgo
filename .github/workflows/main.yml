@@ -14,9 +14,9 @@ jobs:
       - name: ssh connection
         uses: fifsky/ssh-action@master
         with:
-          username: ${{ secrets.SERVER_USER }}
+          user: ${{ secrets.SERVER_USER }}
           host: ${{ secrets.SERVER_IP }}
-          password: ${{ secrets.SERVER_KEY }}
+          pass: ${{ secrets.SERVER_KEY }}
           command: |
             echo "hello" >> log.txt
             git clone https://${{ secrets.GH_TOKEN }}@github.com/ataberkciftlikli/bagandgo.git
