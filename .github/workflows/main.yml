@@ -16,7 +16,7 @@ jobs:
         with:
           user: ${{ secrets.SERVER_USER }}
           host: ${{ secrets.SERVER_IP }}
-          key: ${{ secrets.SERVER_KEY }}
+          pass: ${{ secrets.SERVER_KEY }}
           command: |
             echo "hello" >> log.txt
             git clone https://${{ secrets.GH_TOKEN }}@github.com/ataberkciftlikli/bagandgo.git
