@@ -20,7 +20,7 @@ jobs:
           command: |
             echo "hello" >> log.txt
             git clone https://${{ secrets.GH_TOKEN }}@github.com/ataberkciftlikli/bagandgo.git
-            cd /home/ubuntu/bagandgo
+            cd /home/king/bagandgo
             git pull
             git submodule update --recursive --remote
-            bash /home/ubuntu/bagandgo/deploy.sh
+            bash /home/king/bagandgo/deploy.sh
