@@ -1,7 +1,8 @@
-// src/components/Profile/Profile.tsx
 import React from 'react';
 import UserInfo from './UserInfo';
 import StorePreferences from './StorePreferences';
+import OrderHistory from './OrderHistory';
+import Favorites from './Favorites';
 import './Profile.css';
 
 const Profile: React.FC = () => {
@@ -10,6 +11,8 @@ const Profile: React.FC = () => {
             <h1>User Profile</h1>
             <UserInfo />
             <StorePreferences />
+            <OrderHistory />
+            <Favorites />
         </div>
     );
 };
