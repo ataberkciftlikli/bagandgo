@@ -1,7 +1,9 @@
 // components/Home/Home.tsx
 import React, { useState } from 'react';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
+import Sales from './Sales/Sales';
 import './home.css';
 
 const Home: React.FC = () => {
@@ -14,11 +16,20 @@ const Home: React.FC = () => {
   return (
     <div id="home-page">
       <Header toggleSidebar={toggleSidebar} />
-      <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-      <div className={`content ${isSidebarOpen ? 'sidebar-open' : 'sidebar-collapsed'}`}>
-        <div className="placeholder-content">
-          <h1>Welcome to the Home Page</h1>
-          <p>This is a placeholder text area for the homepage content.</p>
+      <div className="home-container">
+        <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+        <div className={`home-main ${isSidebarOpen ? 'sidebar-open' : 'sidebar-collapsed'}`}>
+          <Routes>
+            {/* Default navigation to /home/sales */}
+            <Route path="/" element={<Navigate to="home/sales" />} />
+            <Route path="home/sales" element={
+              <>
+                <Sales />
+                <div className="home-bottom">
+                </div>
+              </>
+            } />
+          </Routes>
         </div>
       </div>
     </div>
@@ -26,4 +37,3 @@ const Home: React.FC = () => {
 };
 
 export default Home;
-

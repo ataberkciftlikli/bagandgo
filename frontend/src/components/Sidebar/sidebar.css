@@ -158,6 +158,9 @@
   #sidebar.collapsed .sidebar-link {
     display: none; /* Completely hide links when sidebar is collapsed on mobile */
   }
+  #sidebar.collapsed {
+    z-index: -1; 
+  }
 
   #sidebar .sidebar-link {
     color: #333;

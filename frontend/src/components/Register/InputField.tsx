@@ -1,13 +1,16 @@
+// components/Register/InputField.tsx
 import React from 'react';
 import './InputField.css';
 import userIcon from '../icons/user.png';
 import emailIcon from '../icons/email.png';
 import passwordIcon from '../icons/password.png';
+import idIcon from '../icons/id.png'; // New icon for Turkish ID
 
 const iconMap: { [key: string]: string } = {
   user: userIcon,
   email: emailIcon,
   password: passwordIcon,
+  id: idIcon, // Map the new ID icon
 };
 
 interface InputFieldProps {
