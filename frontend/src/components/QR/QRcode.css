@@ -1,0 +1,36 @@
+.qr-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.qr-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.qr-reader {
+  width: 300px;
+  height: 300px;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.qr-output {
+  font-size: 16px;
+  color: #555;
+  text-align: center;
+}
+
+.qr-output p {
+  margin: 0;
+}
