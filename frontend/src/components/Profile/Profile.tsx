@@ -1,8 +1,11 @@
 import React from 'react';
 import UserInfo from './UserInfo';
-import StorePreferences from './StorePreferences';
 import OrderHistory from './OrderHistory';
 import Favorites from './Favorites';
+import Balance from './Balance';
+import NotificationSettings from './NotificationSettings';
+import PrivacySettings from './PrivacySettings';
+import HelpCenter from './HelpCenter';
 import './Profile.css';
 
 const Profile: React.FC = () => {
@@ -10,9 +13,12 @@ const Profile: React.FC = () => {
         <div className="profile-container">
             <h1>User Profile</h1>
             <UserInfo />
-            <StorePreferences />
             <OrderHistory />
             <Favorites />
+            <Balance />
+            <NotificationSettings />
+            <PrivacySettings />
+            <HelpCenter />
         </div>
     );
 };

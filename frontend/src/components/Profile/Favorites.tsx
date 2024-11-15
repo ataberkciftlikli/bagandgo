@@ -10,7 +10,6 @@ const Favorites: React.FC = () => {
                 <p><strong>Product Name:</strong> Sample Product</p>
                 <p><strong>Price:</strong> $50</p>
             </div>
-            {/* You can map through favorite items here to display more products */}
         </div>
     );
 };

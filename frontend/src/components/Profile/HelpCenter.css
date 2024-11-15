@@ -1,0 +1,50 @@
+/* src/components/Profile/HelpCenter.css */
+.help-center-container {
+    padding: 15px;
+    background-color: #CAD3F0; /* Background color */
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    color: #2E4255; /* Text color */
+}
+
+.help-center-container h2 {
+    color: #2E4255; /* Heading color */
+    margin-bottom: 10px;
+}
+
+.help-center-container p {
+    margin: 5px 0 15px;
+    font-size: 1rem;
+    color: #6C6C78; /* Text color */
+}
+
+.help-topics {
+    list-style-type: none;
+    padding: 0;
+    color: #6C6C78; /* Text color */
+}
+
+.help-topics li {
+    margin-bottom: 15px;
+}
+
+.help-topics h3 {
+    color: #2E4255; /* Sub-heading color */
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.contact-button {
+    padding: 10px 15px;
+    background-color: #A0A5CB; /* Button background color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contact-button:hover {
+    background-color: #6C6C78; /* Hover color */
+}
