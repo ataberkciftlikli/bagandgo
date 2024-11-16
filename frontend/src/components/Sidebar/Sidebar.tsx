@@ -9,6 +9,7 @@ import messageBoardIcon from '../icons/messageBoard.png';
 import calendarIcon from '../icons/calendar.png';
 import infoIcon from '../icons/info.png';
 import remindersIcon from '../icons/tasks.png';
+import starIcon from '../icons/star.png';
 
 interface SidebarProps {
   isSidebarOpen: boolean;
@@ -45,7 +46,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, toggleSidebar, onTasks
             <img src={menuIcon} alt="Menu" className="menu-icon" />
           </button>
         {isSidebarOpen && (
-          <button className="sidebar-title" onClick={() => (window.location.href = '/home')}>
+          <button className="sidebar-title" onClick={() => (window.location.href = '/')}>
             BagAndGo
           </button>
         )}
@@ -53,9 +54,9 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, toggleSidebar, onTasks
       <div className="sidebar-links">
         {isHomeSection ? (
           <>
-            <Link to="/home/news" className={`sidebar-link ${isActive('/home/news') ? 'active' : ''}`}>
+            <Link to="/home/sales" className={`sidebar-link ${isActive('/home/sales') ? 'active' : ''}`}>
               <img src={newsIcon} alt="News" className="sidebar-icon" />
-              {isSidebarOpen && <span>Sub-Menu-1</span>}
+              {isSidebarOpen && <span>Home</span>}
             </Link>
             <Link
               to="/home/tasks"
@@ -63,16 +64,16 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, toggleSidebar, onTasks
               onClick={onTasksClick}
             >
               <img src={tasksIcon} alt="Tasks" className="sidebar-icon" />
-              {isSidebarOpen && <span>Sub-Menu-2</span>}
+              {isSidebarOpen && <span>Sales</span>}
             </Link>
             <Link to="/home/message-board" className={`sidebar-link ${isActive('/home/message-board') ? 'active' : ''}`}>
               <img src={messageBoardIcon} alt="Message Board" className="sidebar-icon" />
-              {isSidebarOpen && <span>Sub-Menu-3</span>}
+              {isSidebarOpen && <span>Categories</span>}
             </Link>
-            <Link to="/home/calendar" className={`sidebar-link ${isActive('/home/calendar') ? 'active' : ''}`}>
+            {/*<Link to="/home/calendar" className={`sidebar-link ${isActive('/home/calendar') ? 'active' : ''}`}>
               <img src={calendarIcon} alt="Calendar" className="sidebar-icon" />
               {isSidebarOpen && <span>Sub-Menu-4</span>}
-            </Link>
+            </Link>*/}
           </>
         ) : (
           <>
@@ -80,9 +81,13 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, toggleSidebar, onTasks
               <img src={infoIcon} alt="Info" className="sidebar-icon" />
               {isSidebarOpen && <span>Info</span>}
             </Link>
-            <Link to="/profile/reminders" className={`sidebar-link ${isActive('/profile/reminders') ? 'active' : ''}`}>
-              <img src={remindersIcon} alt="Reminders" className="sidebar-icon" />
-              {isSidebarOpen && <span>Reminders</span>}
+            <Link to="/profile/history" className={`sidebar-link ${isActive('/profile/history') ? 'active' : ''}`}>
+              <img src={remindersIcon} alt="History" className="sidebar-icon" />
+              {isSidebarOpen && <span>History</span>}
+            </Link>
+            <Link to="/profile/favorites" className={`sidebar-link ${isActive('/profile/favorites') ? 'active' : ''}`}>
+              <img src={starIcon} alt="Star" className="sidebar-icon-star" />
+              {isSidebarOpen && <span>Favorites</span>}
             </Link>
           </>
         )}

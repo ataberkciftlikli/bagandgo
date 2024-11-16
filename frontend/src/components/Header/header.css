@@ -69,7 +69,7 @@
   background: none;
   border: none;
   white-space: nowrap;
-  padding: 10px 15px;
+  padding: 5px 15px;
   border-radius: 35px;
   transition: background-color 0.3s, border 0.3s;
 }
@@ -87,6 +87,7 @@
   color: #333;
   text-decoration: none;
   font-weight: bold;
+  font-size: 16px;
   border-radius: 35px;
   padding: 10px 15px;
   background: none;
@@ -123,6 +124,24 @@
   height: 30px;
   border-radius: 50%;
   margin-right: 10px;
+}
+#header .cart {
+  width: 30px;
+  height: 30px;
+  margin-right: 8px; /* Add space between icon and text */
+
+}
+#header .code {
+  width: 30px;
+  height: 30px;
+  margin-right: 8px; /* Add space between icon and text */
+
+}
+#header .info {
+  width: 10px;
+  height: 25px;
+  margin-right: 8px; /* Add space between icon and text */
+
 }
 
 #header .user-name {
@@ -192,6 +211,7 @@
   #header .exit-icon-mobile {
     width: 24px;
     height: 24px;
+    justify-content: end;
   }
 
 
@@ -206,6 +226,12 @@
     #header .exit-button {
       display: none;
     }
+    #header .info {
+      margin-left: 8px;
+      margin-right: 1.2rem;
+    }
+
+
   
 
   /* Stack the nav links under the search bar */

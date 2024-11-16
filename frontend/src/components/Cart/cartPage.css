@@ -1,0 +1,64 @@
+/* components/Cart/cartPage.css */
+
+#cart-page {
+
+    border-radius: 20px;
+    box-shadow: 0 0 2rem 5px rgba(0, 0, 0, 0.1);
+    width: 55%;
+    background: linear-gradient(to bottom, #cbcfdf, #e3e6f0);
+    height: 100%;
+    box-sizing: border-box;
+    margin-left: 25rem;
+    margin-top: 7rem;
+    padding-top: 20px;
+
+    
+  }
+  
+  
+  #cart-page .cart-main {
+    display: flex;
+    flex-grow: 1;
+    background: linear-gradient(to bottom, #cbcfdf, #e3e6f0);
+    height: 100%;
+    padding: 0px 20px 20px 20px;
+    
+    box-sizing: border-box;
+    overflow-x: auto; /* Enable scrolling horizontally if needed */
+    gap: 20px; /* Space between items and summary */
+  }
+  
+  #cart-page h1 {
+    font-size: 24px;
+    display: flex;
+    margin-top: 20px;
+    margin-left: 3%;
+
+  }
+  
+  #cart-page .cart-items {
+    flex: 2;
+    padding-right: 20px;
+  }
+  
+  #cart-page .cart-summary-container {
+    flex: 1;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    #cart-page .cart-main {
+      flex-direction: column;
+      padding: 10px;
+    }
+  
+    #cart-page .cart-items {
+      padding-right: 0;
+    }
+  
+    #cart-page .cart-summary-container {
+      width: 100%;
+      margin-top: 20px;
+    }
+  }
+  

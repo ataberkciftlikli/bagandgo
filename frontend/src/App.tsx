@@ -4,6 +4,8 @@ import Register from './components/Register/Register'; // Import the Register co
 import Login from './components/Login/Login'; // Import the Login component
 import Home from './components/Home/Home'; // Import Home component
 import Profile from './components/Profile/Profile'; // Import Profile component
+import User from './components/User/Profile'; // Import Profile component
+import Cart from './components/Cart/CartPage'; // Import Profile component
 
 function App() {
   return (
@@ -13,7 +15,9 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/profile" element={<Profile />} /> {/* Profile Route */}
+        <Route path="/profile/*" element={<Profile />} /> {/* Profile Route */}
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/user" element={<User />} />
       </Routes>
     </Router>
   );

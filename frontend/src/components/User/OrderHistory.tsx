@@ -12,7 +12,6 @@ const OrderHistory: React.FC = () => {
                 <p><strong>Price:</strong> $100</p>
                 <p><strong>Purchase Date:</strong> 2024-10-01</p>
             </div>
-            {/* You can map through orders here to display more items */}
         </div>
     );
 };

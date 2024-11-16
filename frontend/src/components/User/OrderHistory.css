@@ -1,0 +1,17 @@
+/* src/components/Profile/OrderHistory.css */
+.order-history-container {
+    padding: 15px;
+    background-color: #CAD3F0;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    color: #2E4255;
+}
+
+.order-item {
+    background-color: #D3D8ED;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    color: #6C6C78;
+}

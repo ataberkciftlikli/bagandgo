@@ -112,6 +112,11 @@
 #sidebar .sidebar-icon {
   margin-right: 10px;
 }
+#sidebar .sidebar-icon-star {
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+}
 
 #sidebar.collapsed .sidebar-icon {
   margin-right: 0;
