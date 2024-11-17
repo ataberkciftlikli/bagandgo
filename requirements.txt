@@ -5,7 +5,7 @@ django-taggit
 django-taggit-serializer
 django-cors-headers
 djangorestframework
-djangorestframework-authtoken
+djangorestframework-simplejwt
 django-filter
 pillow
 django-storages
