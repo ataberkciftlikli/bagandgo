@@ -202,10 +202,21 @@ def checkout(request):
     if not cart_items:
         return Response({'error': 'Your cart is empty.'}, status=status.HTTP_400_BAD_REQUEST)
 
+
+    total_price = sum(item.product.price for item in cart_items)
+    
+    if user.UserProfile.balance < total_price:
+        return Response({'error': 'Insufficient balance.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    user.UserProfile.balance -= total_price
+    user.UserProfile.save()
+
     order = Order.objects.create(user=user)
+
+
     for item in cart_items:
         order.products.add(item.product)
-        item.delete()  # Remove item from cart after adding to order
+        item.stock = item.stock - 1  # Remove item from cart after adding to order
     
     return Response({'message': 'Checkout successful. Your order has been placed.'}, status=status.HTTP_200_OK)
 
