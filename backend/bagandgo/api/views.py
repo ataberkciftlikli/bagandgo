@@ -24,7 +24,7 @@ import random
 import os
 
 from .models import AuthToken, UserProfile, ProductCategory, Product, Bag, Order
-from .serializer import UserSerializer, UserProfileSerializer, RegisterSerializer, LoginSerializer, ProductCategorySerializer, ProductSerializer
+from .serializer import UserSerializer, UserProfileSerializer, RegisterSerializer, LoginSerializer, ProductCategorySerializer, ProductSerializer, BagSerializer
 from django.http import FileResponse
 from django.conf import settings
 from django.urls import path
@@ -161,36 +161,66 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
         
 
 #View Cart
-@api_view(['GET'])
+@api_view(['POST'])
 @permission_classes([permissions.IsAuthenticated])
 def view_cart(request):
-    user = request.user
-    cart_items = Bag.objects.filter(user=user)
-    cart_data = [
-        {
-            'product': ProductSerializer(item.product).data,
-            'quantity': item.quantity
-        }
-        for item in cart_items
-    ]
-    return Response({'cart': cart_data}, status=status.HTTP_200_OK)
+    token = request.data.get('token')
+    if not token:
+        return Response({'error': 'Token is required.'}, status=status.HTTP_400_BAD_REQUEST)
+    try:
+        user = AuthToken.objects.get(token=token).user
+    except AuthToken.DoesNotExist:
+        return Response({'error': 'Invalid token.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    try:
+        cart_items = Bag.objects.filter(user=user)
+        serializer = BagSerializer(cart_items, many=True)
+        if not cart_items:
+            return Response({'error': 'Cart is empty.'}, status=status.HTTP_404_NOT_FOUND)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    except Bag.DoesNotExist:
+        return Response({'error': 'Cart is empty.'}, status=status.HTTP_404_NOT_FOUND)
+    
 
 #Add to Cart
 @api_view(['POST'])
 @permission_classes([permissions.IsAuthenticated])
 def add_to_cart(request):
     product_id = request.data.get('product_id')
-    quantity = request.data.get('quantity', 1)
-    user = request.user
+    quantity = int(request.data.get('quantity'))
+    user = request.data.get('token')
 
+    if not product_id:
+        return Response({'error': 'Product ID is required.'}, status=status.HTTP_400_BAD_REQUEST)
+    if not quantity:
+        return Response({'error': 'Quantity is required.'}, status=status.HTTP_400_BAD_REQUEST)
+    if not user:
+        return Response({'error': 'Token is required.'}, status=status.HTTP_400_BAD_REQUEST)
+    
     try:
         product = Product.objects.get(id=product_id)
-        bag, created = Bag.objects.get_or_create(user=user, product=product)
-        bag.quantity += quantity
-        bag.save()
-        return Response({'message': 'Product added to cart successfully.'}, status=status.HTTP_200_OK)
     except Product.DoesNotExist:
         return Response({'error': 'Product not found.'}, status=status.HTTP_404_NOT_FOUND)
+    
+    if product.stock < quantity:
+        return Response({'error': 'Not enough stock.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        user = AuthToken.objects.get(token=user).user
+    except AuthToken.DoesNotExist:
+        return Response({'error': 'Invalid token.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        cart_item = Bag.objects.get(user=user, product=product)
+        if int(cart_item.product.stock) < int(cart_item.quantity) + quantity:
+            return Response({'error': 'Not enough stock.'}, status=status.HTTP_400_BAD_REQUEST)
+        cart_item.quantity += quantity
+        cart_item.save()
+    except Bag.DoesNotExist:
+        cart_item = Bag.objects.create(user=user, product=product, quantity=quantity)
+
+    return Response({'message': 'Product added to cart successfully.'}, status=status.HTTP_200_OK)
+
     
 #Checkout
 @api_view(['POST'])

@@ -47,7 +47,8 @@ class Product(models.Model):
 
 class Bag(models.Model):
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
-    products = models.ManyToManyField(Product)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
