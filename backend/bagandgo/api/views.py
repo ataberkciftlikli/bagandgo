@@ -24,7 +24,7 @@ import random
 import os
 
 from .models import AuthToken, UserProfile, ProductCategory, Product, Bag, Order, LikedProduct
-from .serializer import UserSerializer, UserProfileSerializer, RegisterSerializer, LoginSerializer, ProductCategorySerializer, ProductSerializer, BagSerializer
+from .serializer import UserSerializer, UserProfileSerializer, RegisterSerializer, LoginSerializer, ProductCategorySerializer, ProductSerializer, BagSerializer, OrderSerializer
 from django.http import FileResponse
 from django.conf import settings
 from django.urls import path
@@ -226,29 +226,34 @@ def add_to_cart(request):
 @api_view(['POST'])
 @permission_classes([permissions.IsAuthenticated])
 def checkout(request):
-    user = request.user
+    user = request.data.get('token')
+    if not user:
+        return Response({'error': 'Token is required.'}, status=status.HTTP_400_BAD_REQUEST)
+    try:
+        user = AuthToken.objects.get(token=user).user
+    except AuthToken.DoesNotExist:
+        return Response({'error': 'Invalid token.'}, status=status.HTTP_400_BAD_REQUEST)
+    
     cart_items = Bag.objects.filter(user=user)
-
     if not cart_items:
-        return Response({'error': 'Your cart is empty.'}, status=status.HTTP_400_BAD_REQUEST)
-
-
-    total_price = sum(item.product.price for item in cart_items)
+        return Response({'error': 'Cart is empty.'}, status=status.HTTP_404_NOT_FOUND)
     
-    if user.UserProfile.balance < total_price:
-        return Response({'error': 'Insufficient balance.'}, status=status.HTTP_400_BAD_REQUEST)
+    total_price = 0
+    for cart_item in cart_items:
+        total_price += cart_item.product.price * cart_item.quantity
     
-    user.UserProfile.balance -= total_price
-    user.UserProfile.save()
-
-    order = Order.objects.create(user=user)
-
-
-    for item in cart_items:
-        order.products.add(item.product)
-        item.stock = item.stock - 1  # Remove item from cart after adding to order
+    if user.userprofile.balance < total_price:
+        return Response({'error': 'Not enough balance.'}, status=status.HTTP_400_BAD_REQUEST)
     
-    return Response({'message': 'Checkout successful. Your order has been placed.'}, status=status.HTTP_200_OK)
+    order = Order.objects.create(user=user, total_price=total_price)
+    for cart_item in cart_items:
+        order.products.add(cart_item.product)
+        cart_item.delete()
+    
+    user.userprofile.balance -= total_price
+    user.userprofile.save()
+    
+    return Response({'message': 'Order placed successfully.'}, status=status.HTTP_200_OK)
 
 
 # Serializer for updating user profile details
@@ -359,3 +364,51 @@ def like_product(request):
 
     LikedProduct.objects.create(user=user, product=product)
     return Response({'message': 'Product liked successfully.'}, status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+@permission_classes([permissions.IsAuthenticated])
+def get_orders(request):
+    user = request.data.get('token')
+    if not user:
+        return Response({'error': 'Token is required.'}, status=status.HTTP_400_BAD_REQUEST)
+    try:
+        user = AuthToken.objects.get(token=user).user
+    except AuthToken.DoesNotExist:
+        return Response({'error': 'Invalid token.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    orders = Order.objects.filter(user=user)
+    if not orders:
+        return Response({'error': 'No orders found.'}, status=status.HTTP_404_NOT_FOUND)
+    
+    serializer = OrderSerializer(orders, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+@permission_classes([permissions.IsAuthenticated])
+def check_order_confirmation(request):
+    confirmation_code = request.data.get('code')
+    user = request.data.get('token')
+
+    if not user:
+        return Response({'error': 'Token is required.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    try:
+        user = AuthToken.objects.get(token=user).user
+    except AuthToken.DoesNotExist:
+        return Response({'error': 'Invalid token.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    user_admin = user.is_superuser
+
+    if not user_admin:
+        return Response({'error': 'You are not authorized to access this endpoint.'}, status=status.HTTP_401_UNAUTHORIZED)
+
+    if not confirmation_code:
+        return Response({'error': 'Confirmation code is required.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    try:
+        order = Order.objects.get(confirmation_code=confirmation_code)
+    except Order.DoesNotExist:
+        return Response({'error': 'Order not found.'}, status=status.HTTP_404_NOT_FOUND)
+    
+    serializer = OrderSerializer(order)
+    return Response(serializer.data, status=status.HTTP_200_OK)

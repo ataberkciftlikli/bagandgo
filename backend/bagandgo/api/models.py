@@ -20,7 +20,7 @@ class UserProfile(models.Model):
     address = models.CharField(max_length=255, null=True, blank=True)
     birth_year = models.IntegerField(null=True, blank=True)
     balance = models.FloatField(default=0)
-
+    
     def __str__(self):
         return self.user.username
 

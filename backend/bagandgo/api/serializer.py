@@ -18,12 +18,11 @@ class UserSerializer(serializers.ModelSerializer):
 class UserProfileSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
     address = serializers.CharField(write_only=True, required=False)
-    balance = serializers.FloatField(write_only=True, required=False)
-
+    balance = serializers.FloatField(read_only=True, required=False)
     class Meta:
         model = UserProfile
         fields = ['user', 'address', 'balance']
-        read_only_fields = ['user']
+        read_only_fields = ['user', 'balance']
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -67,3 +66,10 @@ class BagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bag
         fields = ['id', 'user', 'product', 'product_id', 'quantity']
+
+class OrderSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+    products = ProductSerializer(many=True, read_only=True)
+    class Meta:
+        model = Order
+        fields = ['id', 'user', 'products', 'total_price']
