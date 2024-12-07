@@ -187,7 +187,7 @@ def view_cart(request):
 @permission_classes([permissions.IsAuthenticated])
 def add_to_cart(request):
     product_id = request.data.get('product_id')
-    quantity = int(request.data.get('quantity'))
+    quantity = request.data.get('quantity')
     user = request.data.get('token')
 
     if not product_id:
@@ -212,7 +212,7 @@ def add_to_cart(request):
 
     try:
         cart_item = Bag.objects.get(user=user, product=product)
-        if int(cart_item.product.stock) < int(cart_item.quantity) + quantity:
+        if cart_item.product.stock < cart_item.quantity + quantity:
             return Response({'error': 'Not enough stock.'}, status=status.HTTP_400_BAD_REQUEST)
         cart_item.quantity += quantity
         cart_item.save()
@@ -241,19 +241,24 @@ def checkout(request):
     total_price = 0
     for cart_item in cart_items:
         total_price += cart_item.product.price * cart_item.quantity
-    
-    if user.userprofile.balance < total_price:
+
+    user_profile = UserProfile.objects.get(user=user)
+
+    if user_profile.balance < total_price:
         return Response({'error': 'Not enough balance.'}, status=status.HTTP_400_BAD_REQUEST)
     
     order = Order.objects.create(user=user, total_price=total_price)
     for cart_item in cart_items:
         order.products.add(cart_item.product)
+        cart_item.product.stock -= cart_item.quantity
         cart_item.delete()
     
-    user.userprofile.balance -= total_price
-    user.userprofile.save()
+    user_profile.balance -= total_price
+    user_profile.save()
+
+    order_serialized = OrderSerializer(order).data
     
-    return Response({'message': 'Order placed successfully.'}, status=status.HTTP_200_OK)
+    return Response({'message': 'Order placed successfully.', 'order': order_serialized}, status=status.HTTP_200_OK)
 
 
 # Serializer for updating user profile details
