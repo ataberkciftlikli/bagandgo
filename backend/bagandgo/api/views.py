@@ -23,7 +23,7 @@ import io
 import random
 import os
 
-from .models import AuthToken, UserProfile, ProductCategory, Product, Bag, Order
+from .models import AuthToken, UserProfile, ProductCategory, Product, Bag, Order, LikedProduct
 from .serializer import UserSerializer, UserProfileSerializer, RegisterSerializer, LoginSerializer, ProductCategorySerializer, ProductSerializer, BagSerializer
 from django.http import FileResponse
 from django.conf import settings
@@ -292,3 +292,21 @@ def update_password(request):
         return Response({'message': 'Password updated successfully.'}, status=status.HTTP_200_OK)
     
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['POST'])
+@permission_classes([permissions.IsAuthenticated])
+def logout(request):
+    token = request.data.get('token')
+    if not token:
+        return Response({'error': 'Token is required.'}, status=status.HTTP_400_BAD_REQUEST)
+    try:
+        user = AuthToken.objects.get(token=token).user
+    except AuthToken.DoesNotExist:
+        return Response({'error': 'Invalid token.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    try:
+        Token.objects.get(user=user).delete()
+    except Exception:
+        pass
+    return Response({'message': 'Logged out successfully.'}, status=status.HTTP_200_OK)
+
