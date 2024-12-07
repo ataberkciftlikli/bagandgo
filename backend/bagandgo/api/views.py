@@ -310,3 +310,52 @@ def logout(request):
         pass
     return Response({'message': 'Logged out successfully.'}, status=status.HTTP_200_OK)
 
+@api_view(['POST'])
+@permission_classes([permissions.IsAuthenticated])
+def get_liked_products(request):
+    user = request.data.get('token')
+    if not user:
+        return Response({'error': 'Token is required.'}, status=status.HTTP_400_BAD_REQUEST)
+    try:
+        user = AuthToken.objects.get(token=user).user
+    except AuthToken.DoesNotExist:
+        return Response({'error': 'Invalid token.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    liked_products = LikedProduct.objects.filter(user=user)
+    if not liked_products:
+        return Response({'error': 'No liked products found.'}, status=status.HTTP_404_NOT_FOUND)
+    
+    products = [liked_product.product for liked_product in liked_products]
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+@permission_classes([permissions.IsAuthenticated])
+def like_product(request):
+    product_id = request.data.get('product_id')
+    user = request.data.get('token')
+
+    if not user:
+        return Response({'error': 'Token is required.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    try:
+        user = AuthToken.objects.get(token=user).user
+    except AuthToken.DoesNotExist:
+        return Response({'error': 'Invalid token.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    if not product_id:
+        return Response({'error': 'Product ID is required.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        product = Product.objects.get(id=product_id)
+    except Product.DoesNotExist:
+        return Response({'error': 'Product not found.'}, status=status.HTTP_404_NOT_FOUND)
+    
+    if LikedProduct.objects.filter(user=user, product=product).exists():
+        LikedProduct.objects.filter(user=user, product=product).delete()
+        return Response({'message': 'Product unliked successfully.'}, status=status.HTTP_200_OK)
+    
+
+    LikedProduct.objects.create(user=user, product=product)
+    return Response({'message': 'Product liked successfully.'}, status=status.HTTP_200_OK)
