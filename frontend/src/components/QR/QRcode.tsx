@@ -30,6 +30,7 @@ const QRcode: React.FC = () => {
   };
 
   return (
+    <div className="qr-wrapper">
     <div className="qr-container">
         <Header toggleSidebar={toggleSidebar} />
       <h1 className="qr-title">QR Code Scanner</h1>
@@ -45,6 +46,7 @@ const QRcode: React.FC = () => {
       <div className="qr-output">
         {data ? <p>Scanned Data: {data}</p> : <p>No QR code scanned yet.</p>}
       </div>
+    </div>
     </div>
   );
 };
