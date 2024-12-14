@@ -10,6 +10,8 @@ import calendarIcon from '../icons/calendar.png';
 import infoIcon from '../icons/info.png';
 import remindersIcon from '../icons/tasks.png';
 import starIcon from '../icons/star.png';
+import CategoryList from '../Category/CategoryList.tsx';
+import { categories } from '../Category/CategoriesData.ts';
 
 interface SidebarProps {
   isSidebarOpen: boolean;
@@ -20,6 +22,7 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, toggleSidebar, onTasksClick }) => {
   const location = useLocation();
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [showCategories, setShowCategories] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -29,6 +32,10 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, toggleSidebar, onTasks
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  const handleCategoriesClick = () => {
+    setShowCategories((prev) => !prev);
+  };
 
   useEffect(() => {
     if (isMobile) {
@@ -66,7 +73,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, toggleSidebar, onTasks
               <img src={tasksIcon} alt="Tasks" className="sidebar-icon" />
               {isSidebarOpen && <span>Sales</span>}
             </Link>
-            <Link to="/home/message-board" className={`sidebar-link ${isActive('/home/message-board') ? 'active' : ''}`}>
+            <Link to="/home/message-board" className={`sidebar-link ${isActive('/home/message-board') ? 'active' : ''}`} onClick={handleCategoriesClick}>
               <img src={messageBoardIcon} alt="Message Board" className="sidebar-icon" />
               {isSidebarOpen && <span>Categories</span>}
             </Link>
@@ -92,7 +99,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, toggleSidebar, onTasks
           </>
         )}
       </div>
-
+      {showCategories && <CategoryList categories={categories} />}
         {/* {isSidebarOpen && (
         <div className="sidebar-name">
           <span>Admin</span>
