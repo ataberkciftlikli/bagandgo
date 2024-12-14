@@ -1,28 +1,28 @@
-version: '3.8'
-
 services:
   frontend:
     build:
-      context: ./frontend
+      context: ./
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
     volumes:
-      - ./frontend:/app
+      - ./frontend:/app/frontend
     environment:
       - NODE_ENV=development
     restart: on-failure
 
   backend:
     build:
-      context: ./backend
-      dockerfile: Dockerfile
+      context: ./
+      dockerfile: Dockerfile #test
     ports:
       - "8000:8000"
     volumes:
-      - ./backend:/app
+      - ./backend:/app/backend
+      - ./manage.py:/app/manage.py
     environment:
       - DEBUG=1
+      - PYTHONPATH=/app/backend/bagandgo #test bagandgo ben ekledim
     depends_on:
       - db
     restart: on-failure
