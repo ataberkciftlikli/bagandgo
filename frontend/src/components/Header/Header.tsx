@@ -1,12 +1,11 @@
-// components/Header/Header.tsx
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './header.css';
 import exit_logo from '../icons/exit_logo.png';
 import user from '../icons/user2.png';
-import cart from '../icons/cart.png'; // Adjust the path if needed
-import code from '../icons/code.png'; // Adjust the path if needed
-import info from '../icons/info.png'; // Adjust the path if needed
+import cart from '../icons/cart.png';
+import code from '../icons/code.png';
+import info from '../icons/info.png';
 import menuIcon from '../icons/menu.png';
 import SearchBar from '../Searchbar/SearchBar';
 
@@ -17,15 +16,27 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [username, setUsername] = useState<string>('User'); // Default to "User"
 
   const isActive = (path: string) => location.pathname.startsWith(path);
 
+  useEffect(() => {
+    // Check if the user is logged in
+    const storedUsername = localStorage.getItem('username');
+    const token = localStorage.getItem('token');
+
+    if (token && storedUsername) {
+      setUsername(storedUsername);
+    }
+  }, []);
+
   const handleExitClick = () => {
-    // Redirect to the login page as a placeholder for the sign-out functionality
+    // Clear localStorage and redirect to login page
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
     navigate('/login');
     window.location.reload();
   };
-
 
   return (
     <header id="header" className="header p-3">
@@ -50,34 +61,15 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
             <Link to="/code" className={`nav-link ${isActive('/code') ? 'active' : ''}`}>
               <img src={code} alt="Cart Icon" className="code" /> Scan QR Code
             </Link>
-
             <Link to="/cart" className={`nav-link ${isActive('/cart') ? 'active' : ''}`}>
               <img src={cart} alt="Cart Icon" className="cart" /> Cart
             </Link>
-            <Link to="/user" className={`nav-link ${isActive('/user') ? 'active' : ''}`}>
-              <img src={user} alt="Cart Icon" className="exit-icon" /> User
-            </Link>
-            
-            {/* <button
-              className={`nav-link ${isActive('/login') ? 'active' : ''}`}
-              onClick={() => {
-                if (!sessionStorage.getItem('loginPageRefreshed')) {
-                  sessionStorage.setItem('loginPageRefreshed', 'true');
-                  navigate('/login');
-                  window.location.reload();
-                } else {
-                  sessionStorage.removeItem('loginPageRefreshed');
-                  navigate('/login');
-                }
-              }}
-            >
-              Sign In
-            </button> */}
+            <span className={`nav-link3`}>
+              <img src={user} alt="User Icon" className="user-icon" /> {username}
+            </span>
           </div>
         </div>
         <div className="user-info">
-          {/* Placeholder for user info */}
-
           <button onClick={handleExitClick} className="exit-button d-flex align-items-center">
             <img src={exit_logo} alt="Exit" className="exit-icon" />
             <span className="ml-1">Exit</span>
