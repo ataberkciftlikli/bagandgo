@@ -52,6 +52,7 @@ def login_view(request):
         token = AuthToken.objects.create(user=user, token=drf_token.key)
         return Response({
             'user': UserSerializer(user).data,
+            'enail': user.email,
             'token': token.token
             }, status=status.HTTP_200_OK)
     else:
