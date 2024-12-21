@@ -417,3 +417,18 @@ def check_order_confirmation(request):
     
     serializer = OrderSerializer(order)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+@permission_classes([permissions.IsAuthenticated])
+def get_user_profile(request):
+    user = request.data.get('token')
+    if not user:
+        return Response({'error': 'Token is required.'}, status=status.HTTP_400_BAD_REQUEST)
+    try:
+        user = AuthToken.objects.get(token=user).user
+    except AuthToken.DoesNotExist:
+        return Response({'error': 'Invalid token.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    user_profile = UserProfile.objects.get(user=user)
+    serializer = UserProfileSerializer(user_profile)
+    return Response(serializer.data, status=status.HTTP_200_OK)

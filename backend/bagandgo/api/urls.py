@@ -1,7 +1,7 @@
 from django.urls import path, include
 from rest_framework import routers
 
-from .views import register_view, login_view, ProductCategoryViewSet, ProductViewSet, add_to_cart, view_cart, checkout, update_profile, update_password, logout, get_liked_products, like_product, get_orders, check_order_confirmation
+from .views import register_view, login_view, ProductCategoryViewSet, ProductViewSet, add_to_cart, view_cart, checkout, update_profile, update_password, logout, get_liked_products, like_product, get_orders, check_order_confirmation, get_user_profile
 
 router = routers.DefaultRouter()
 
@@ -12,6 +12,7 @@ urlpatterns = [
     path('product/', include(router.urls)),
     path('register/', register_view, name='register-api'),
     path('login/', login_view, name = 'login-api'),
+    path('profile/', get_user_profile, name='get_user_profile'),
     path('logout/', logout, name='logout'),
     path('cart/add/', add_to_cart, name='add_to_cart'),
     path('cart/view/', view_cart, name='view_cart'),
