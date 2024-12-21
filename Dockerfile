@@ -1,9 +1,9 @@
 # Stage 1: Build React frontend
-FROM node:14 AS frontend
+FROM node:20 AS frontend
 
 WORKDIR /app/frontend
 
-COPY frontend/package.json frontend/yarn.lock ./
+COPY frontend/package.json ./
 RUN yarn install
 
 COPY frontend/ ./
@@ -11,16 +11,18 @@ RUN yarn build
 
 # Stage 2: Build Django backend
 FROM python:3.13 AS backend
+#test 
+WORKDIR /app 
 
-WORKDIR /app/backend
-
-COPY backend/requirements.txt ./
+COPY requirements.txt ./
 RUN pip install -r requirements.txt
-
-COPY backend/ ./
-
+#test
+COPY backend/ /app/backend/
+#test
+COPY manage.py /app/
+RUN rm -f /app/backend/manage.py
 # Copy built frontend to Django static files
-COPY --from=frontend /app/frontend/build /app/backend/static
+COPY --from=frontend /app/frontend/dist /app/backend/static
 
 # Expose port for Django
 EXPOSE 8000
