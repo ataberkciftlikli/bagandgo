@@ -163,7 +163,7 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
 
 #View Cart
 @api_view(['POST'])
-@permission_classes([permissions.IsAuthenticated])
+@permission_classes([AllowAny])
 def view_cart(request):
     token = request.data.get('token')
     if not token:
@@ -185,7 +185,7 @@ def view_cart(request):
 
 #Add to Cart
 @api_view(['POST'])
-@permission_classes([permissions.IsAuthenticated])
+@permission_classes([AllowAny])
 def add_to_cart(request):
     product_id = request.data.get('product_id')
     quantity = request.data.get('quantity')
@@ -225,7 +225,7 @@ def add_to_cart(request):
     
 #Checkout
 @api_view(['POST'])
-@permission_classes([permissions.IsAuthenticated])
+@permission_classes([AllowAny])
 def checkout(request):
     user = request.data.get('token')
     if not user:
@@ -275,7 +275,7 @@ class UpdatePasswordSerializer(serializers.Serializer):
 
 # View for updating profile details
 @api_view(['PUT'])
-@permission_classes([permissions.IsAuthenticated])
+@permission_classes([AllowAny])
 def update_profile(request):
     user = request.user
     serializer = UpdateUserProfileSerializer(user, data=request.data, partial=True)
@@ -287,7 +287,7 @@ def update_profile(request):
 
 # View for updating password
 @api_view(['PUT'])
-@permission_classes([permissions.IsAuthenticated])
+@permission_classes([AllowAny])
 def update_password(request):
     serializer = UpdatePasswordSerializer(data=request.data)
     
@@ -305,7 +305,7 @@ def update_password(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])
-@permission_classes([permissions.IsAuthenticated])
+@permission_classes([AllowAny])
 def logout(request):
     token = request.data.get('token')
     if not token:
@@ -322,7 +322,7 @@ def logout(request):
     return Response({'message': 'Logged out successfully.'}, status=status.HTTP_200_OK)
 
 @api_view(['POST'])
-@permission_classes([permissions.IsAuthenticated])
+@permission_classes([AllowAny])
 def get_liked_products(request):
     user = request.data.get('token')
     if not user:
@@ -342,7 +342,7 @@ def get_liked_products(request):
 
 
 @api_view(['POST'])
-@permission_classes([permissions.IsAuthenticated])
+@permission_classes([AllowAny])
 def like_product(request):
     product_id = request.data.get('product_id')
     user = request.data.get('token')
@@ -372,7 +372,7 @@ def like_product(request):
     return Response({'message': 'Product liked successfully.'}, status=status.HTTP_200_OK)
 
 @api_view(['POST'])
-@permission_classes([permissions.IsAuthenticated])
+@permission_classes([AllowAny])
 def get_orders(request):
     user = request.data.get('token')
     if not user:
@@ -390,7 +390,7 @@ def get_orders(request):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['POST'])
-@permission_classes([permissions.IsAuthenticated])
+@permission_classes([AllowAny])
 def check_order_confirmation(request):
     confirmation_code = request.data.get('code')
     user = request.data.get('token')
@@ -420,7 +420,7 @@ def check_order_confirmation(request):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['POST'])
-@permission_classes([permissions.IsAuthenticated])
+@permission_classes([AllowAny])
 def get_user_profile(request):
     user = request.data.get('token')
     if not user:
