@@ -261,29 +261,6 @@ def checkout(request):
     
     return Response({'message': 'Order placed successfully.', 'order': order_serialized}, status=status.HTTP_200_OK)
 
-class UpdatePasswordSerializer(serializers.Serializer):
-    old_password = serializers.CharField(required=True)
-    new_password = serializers.CharField(required=True)
-
-# View for updating password
-@api_view(['PUT'])
-@permission_classes([AllowAny])
-def update_password(request):
-    serializer = UpdatePasswordSerializer(data=request.data)
-    
-    if serializer.is_valid():
-        old_password = serializer.validated_data['old_password']
-        new_password = serializer.validated_data['new_password']
-        
-        if not request.user.check_password(old_password):
-            return Response({'error': 'Old password is incorrect.'}, status=status.HTTP_400_BAD_REQUEST)
-        
-        request.user.set_password(new_password)
-        request.user.save()
-        return Response({'message': 'Password updated successfully.'}, status=status.HTTP_200_OK)
-    
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def logout(request):
@@ -441,3 +418,28 @@ def update_user_profile(request):
     user_profile.save()
     serializer = UserProfileSerializer(user_profile)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def update_password(request):
+    user = request.data.get('token')
+    old_password = request.data.get('old_password')
+    new_password = request.data.get('new_password')
+
+    if not user:
+        return Response({'error': 'Token is required.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    try:
+        user = AuthToken.objects.get(token=user).user
+    except AuthToken.DoesNotExist:
+        return Response({'error': 'Invalid token.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    if not old_password or not new_password:
+        return Response({'error': 'Both old and new passwords are required.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    if not user.check_password(old_password):
+        return Response({'error': 'Invalid old password.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    user.set_password(new_password)
+    user.save()
+    return Response({'message': 'Password updated successfully.'}, status=status.HTTP_200_OK)
