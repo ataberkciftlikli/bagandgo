@@ -261,29 +261,9 @@ def checkout(request):
     
     return Response({'message': 'Order placed successfully.', 'order': order_serialized}, status=status.HTTP_200_OK)
 
-
-# Serializer for updating user profile details
-class UpdateUserProfileSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ['username', 'email']  # Basic fields; add more if needed
-        extra_kwargs = {'username': {'required': False}, 'email': {'required': False}}
-
 class UpdatePasswordSerializer(serializers.Serializer):
     old_password = serializers.CharField(required=True)
     new_password = serializers.CharField(required=True)
-
-# View for updating profile details
-@api_view(['PUT'])
-@permission_classes([AllowAny])
-def update_profile(request):
-    user = request.user
-    serializer = UpdateUserProfileSerializer(user, data=request.data, partial=True)
-
-    if serializer.is_valid():
-        serializer.save()
-        return Response({'message': 'Profile updated successfully.'}, status=status.HTTP_200_OK)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 # View for updating password
 @api_view(['PUT'])
@@ -431,5 +411,33 @@ def get_user_profile(request):
         return Response({'error': 'Invalid token.'}, status=status.HTTP_400_BAD_REQUEST)
     
     user_profile = UserProfile.objects.get(user=user)
+    serializer = UserProfileSerializer(user_profile)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def update_user_profile(request):
+    user = request.data.get('token')
+    address = request.data.get('address')
+    tc = request.data.get('tc')
+    birth_year = request.data.get('birth_year')
+
+    if not user:
+        return Response({'error': 'Token is required.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    try:
+        user = AuthToken.objects.get(token=user).user
+    except AuthToken.DoesNotExist:
+        return Response({'error': 'Invalid token.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    user_profile = UserProfile.objects.get(user=user)
+    if address:
+        user_profile.address = address
+    if tc:
+        user_profile.tc = tc
+    if birth_year:
+        user_profile.birth_year = birth_year
+
+    user_profile.save()
     serializer = UserProfileSerializer(user_profile)
     return Response(serializer.data, status=status.HTTP_200_OK)
