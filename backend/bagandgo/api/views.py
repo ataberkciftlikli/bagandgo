@@ -222,6 +222,35 @@ def add_to_cart(request):
 
     return Response({'message': 'Product added to cart successfully.'}, status=status.HTTP_200_OK)
 
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def remove_from_cart(request):
+    product_id = request.data.get('product_id')
+    user = request.data.get('token')
+
+    if not product_id:
+        return Response({'error': 'Product ID is required.'}, status=status.HTTP_400_BAD_REQUEST)
+    if not user:
+        return Response({'error': 'Token is required.'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    try:
+        product = Product.objects.get(id=product_id)
+    except Product.DoesNotExist:
+        return Response({'error': 'Product not found.'}, status=status.HTTP_404_NOT_FOUND)
+    
+    try:
+        user = AuthToken.objects.get(token=user).user
+    except AuthToken.DoesNotExist:
+        return Response({'error': 'Invalid token.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        cart_item = Bag.objects.get(user=user, product=product)
+        cart_item.delete()
+    except Bag.DoesNotExist:
+        return Response({'error': 'Product not found in cart.'}, status=status.HTTP_404_NOT_FOUND)
+    
+    return Response({'message': 'Product removed from cart successfully.'}, status=status.HTTP_200_OK)
+
     
 #Checkout
 @api_view(['POST'])
