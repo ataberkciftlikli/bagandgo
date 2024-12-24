@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { Category } from './types.ts';
 
 interface CategoryItemProps {
@@ -6,27 +7,11 @@ interface CategoryItemProps {
 }
 
 const CategoryItem: React.FC<CategoryItemProps> = ({ category }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  const toggleExpand = () => {
-    setIsExpanded(!isExpanded);
-  };
-
   return (
     <li className="category-item">
-      <div className="category-header" onClick={toggleExpand}>
+      <Link to={`/category/${category.slug}`} className="category-link">
         {category.name}
-        {category.subcategories && (
-          <span className="toggle-icon"></span>
-        )}
-      </div>
-      {isExpanded && category.subcategories && (
-        <ul className="subcategory-list">
-          {category.subcategories.map((sub) => (
-            <CategoryItem key={sub.id} category={sub} />
-          ))}
-        </ul>
-      )}
+      </Link>
     </li>
   );
 };

@@ -7,6 +7,8 @@ import Profile from './components/Profile/Profile'; // Import Profile component
 import User from './components/User/Profile'; // Import Profile component
 import Cart from './components/Cart/CartPage'; // Import CartPage component
 import QRcode from './components/QR/QRcode'; //IMport QR component
+import CategoryPage from './components/Category/CategoryPage'; //IMport QR component
+
 function App() {
   return (
     <Router>
@@ -19,6 +21,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/user" element={<User />} />
         <Route path="/code" element={<QRcode />} />
+        <Route path="/category/:slug" element={<CategoryPage />} />
       </Routes>
     </Router>
   );

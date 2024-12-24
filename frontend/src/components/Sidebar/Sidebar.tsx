@@ -73,7 +73,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, toggleSidebar, onTasks
               <img src={tasksIcon} alt="Tasks" className="sidebar-icon" />
               {isSidebarOpen && <span>Sales</span>}
             </Link>
-            <Link to="/home/message-board" className={`sidebar-link ${isActive('/home/message-board') ? 'active' : ''}`} onClick={handleCategoriesClick}>
+  
+            <Link to={useLocation().pathname} className={`sidebar-link ${isActive('/home/message-board') ? 'active' : ''}`} onClick={handleCategoriesClick}>
               <img src={messageBoardIcon} alt="Message Board" className="sidebar-icon" />
               {isSidebarOpen && <span>Categories</span>}
             </Link>

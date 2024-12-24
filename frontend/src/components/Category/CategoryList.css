@@ -16,12 +16,13 @@
     background: linear-gradient(to left, #CAD3F0, #D3D8ED);
   }
   
-  .category-header {
+  .category-link {
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size: 15px;
     color: #333;
+    text-decoration: none;
   }
   
   .toggle-icon {
