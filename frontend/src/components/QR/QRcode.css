@@ -109,7 +109,7 @@
 
 .modal-unique {
   position: relative; /* Allows the close button to position itself relative to the modal */
-  background: white;
+  background:#D3D8ED;
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
@@ -117,6 +117,26 @@
   max-width: 90%;
   text-align: center;
   z-index: 1001; /* Ensure it's above the overlay */
+}
+
+.quantity-input-area {
+  background-color:#CAD3F0; 
+  border-radius: 0px;
+  border-color:#CAD3F0;
+}
+
+.add-to-cart-button {
+  margin-top: 10px;
+  background-color:#CAD3F0; 
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+.remove-from-favorites-button {
+  margin-top: 10px;
+  background-color:#CAD3F0;
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25); 
 }
 
 .close-button-unique {

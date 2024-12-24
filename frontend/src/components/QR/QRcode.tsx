@@ -213,16 +213,17 @@ const QRcode: React.FC = () => {
               <strong>Barcode:</strong> {modalData.barcode}
             </p>
             <div>
-              <label htmlFor="quantity-input">Quantity:</label>
+              <label className="quantity-input">Quantity:</label>
               <input
+               className="quantity-input-area"
                 id="quantity-input"
                 type="number"
                 min="1"
                 value={quantity}
                 onChange={handleQuantityChange}
               />
-              <button onClick={handleAddToCart}>Add to Cart</button>
-              <button onClick={handleAddToFavorites}>Add to Favorites</button>
+              <button className="add-to-cart-button" onClick={handleAddToCart}>Add to Cart</button>
+              <button className="remove-from-favorites-button" onClick={handleAddToFavorites}>Add to Favorites</button>
             </div>
           </div>
         </div>
