@@ -16,11 +16,11 @@ jobs:
         with:
           user: ${{ secrets.SERVER_USER }}
           host: ${{ secrets.SERVER_IP }}
-          pass: ${{ secrets.SERVER_KEY }}
+          key: ${{ secrets.SERVER_KEY }}
           command: |
             echo "hello" >> log.txt
             git clone https://${{ secrets.GH_TOKEN }}@github.com/ataberkciftlikli/bagandgo.git
-            cd /home/king/bagandgo
+            cd /home/ubuntu/bagandgo
             git pull
             git submodule update --recursive --remote
-            bash /home/king/bagandgo/deploy.sh
+            bash /home/ubuntu/bagandgo/deploy.sh

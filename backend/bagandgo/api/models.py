@@ -16,11 +16,9 @@ class AuthToken(models.Model):
 
 class UserProfile(models.Model):
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
-    tc = models.CharField(max_length=11, null=True, blank=True)
-    address = models.CharField(max_length=255, null=True, blank=True)
-    birth_year = models.IntegerField(null=True, blank=True)
+    address = models.CharField(max_length=255)
     balance = models.FloatField(default=0)
-    
+
     def __str__(self):
         return self.user.username
 
@@ -34,8 +32,6 @@ class Product(models.Model):
     name = models.CharField(max_length=255)
     category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE)
     price = models.FloatField()
-    old_price = models.FloatField(default=0)
-    is_discounted = models.BooleanField(default=False)
     image = models.ImageField(upload_to='product_images/')
     stock = models.IntegerField()
     barcode = models.CharField(max_length=255)
@@ -47,8 +43,7 @@ class Product(models.Model):
 
 class Bag(models.Model):
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.IntegerField()
+    products = models.ManyToManyField(Product)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -64,11 +59,3 @@ class Order(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.confirmation_code}"
-
-class LikedProduct(models.Model):
-    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"{self.user.username} - {self.product.name}"
