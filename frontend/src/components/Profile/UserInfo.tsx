@@ -1,95 +1,102 @@
 // components/UserInfo/UserInfo.tsx
 import React, { useState } from 'react';
 import './userInfo.css';
-import placeholderProfilePicture from '../icons/profile.png'; // Add a placeholder image
 
 const UserInfo: React.FC = () => {
-  const [profilePicture, setProfilePicture] = useState<string>(placeholderProfilePicture); // Set dummy profile picture
-  const [name, setName] = useState<string>('John Doe'); // Dummy name
-  const [email, setEmail] = useState<string>('johndoe@example.com'); // Dummy email
-  const [phoneNumber, setPhoneNumber] = useState<string>('123-456-7890'); // Dummy phone number
-  const [password, setPassword] = useState<string>(''); // Placeholder for password input
-  const [successMessage, setSuccessMessage] = useState<string | null>(null); // Success message
+  // User information from local storage
+  const username = localStorage.getItem('username') || 'Unknown';
+  const firstName = localStorage.getItem('first_name') || 'Unknown';
+  const lastName = localStorage.getItem('last_name') || 'Unknown';
+  const email = localStorage.getItem('email') || 'Unknown';
 
-  // Handle profile picture change (no actual upload, just set a local URL)
-  const handlePictureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setProfilePicture(reader.result as string); // Set the new picture locally
-      };
-      reader.readAsDataURL(file);
+  // State for old and new passwords
+  const [oldPassword, setOldPassword] = useState<string>('');
+  const [newPassword, setNewPassword] = useState<string>('');
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const handleChangePassword = async () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      setErrorMessage('User not logged in.');
+      return;
     }
-  };
 
-  // Handle form submission (just a dummy function to display success message)
-  const handleUpdate = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setSuccessMessage('Your information has been updated successfully!');
-    setTimeout(() => setSuccessMessage(null), 3000); // Clear message after 3 seconds
+    if (!oldPassword || !newPassword) {
+      setErrorMessage('Please fill in both fields.');
+      return;
+    }
+
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/profile/update-password/`, {
+        method: 'POST', // Changed from PUT to POST
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          token, // Include the token as part of the request body
+          old_password: oldPassword,
+          new_password: newPassword,
+        }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        setSuccessMessage(data.message || 'Password updated successfully.');
+        setOldPassword('');
+        setNewPassword('');
+        setErrorMessage(null);
+      } else {
+        setErrorMessage(data.error || 'Failed to update password.');
+      }
+    } catch (error) {
+      console.error('Error during password update:', error);
+      setErrorMessage('Something went wrong. Please try again.');
+    }
   };
 
   return (
     <div id="info-section" className="info-section">
       <div className="info-container">
-        <div className="picture-container">
-          <img src={profilePicture} alt="Profile" className="profile-picture" />
-          <label htmlFor="change-picture" className="change-picture-button">
-            Change Picture
-          </label>
-          <input
-            type="file"
-            id="change-picture"
-            accept="image/*"
-            onChange={handlePictureChange}
-            style={{ display: 'none' }}
-          />
+        <h2>User Information</h2>
+        <div className="user-info-display">
+          <p><strong>Username:</strong> {username}</p>
+          <p><strong>First Name:</strong> {firstName}</p>
+          <p><strong>Last Name:</strong> {lastName}</p>
+          <p><strong>Email:</strong> {email}</p>
         </div>
+
         {successMessage && <div className="success-message">{successMessage}</div>}
-        <form className="info-form" onSubmit={handleUpdate}>
+        {errorMessage && <div className="error-message">{errorMessage}</div>}
+
+        <div className="password-change-form">
+          <h3>Change Password</h3>
           <div className="form-group">
-            <label>Name</label>
-            <input
-              type="text"
-              className="form-control"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Name"
-            />
-          </div>
-          <div className="form-group">
-            <label>Email</label>
-            <input
-              type="email"
-              className="form-control"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Email"
-            />
-          </div>
-          <div className="form-group">
-            <label>Phone Number</label>
-            <input
-              type="tel"
-              className="form-control"
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
-              placeholder="Phone Number"
-            />
-          </div>
-          <div className="form-group">
-            <label>Password</label>
+            <label htmlFor="old-password">Old Password</label>
             <input
               type="password"
+              id="old-password"
               className="form-control"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password"
+              value={oldPassword}
+              onChange={(e) => setOldPassword(e.target.value)}
+              placeholder="Enter old password"
             />
           </div>
-          <button type="submit" className="btn btn-primary">Update</button>
-        </form>
+          <div className="form-group">
+            <label htmlFor="new-password">New Password</label>
+            <input
+              type="password"
+              id="new-password"
+              className="form-control"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              placeholder="Enter new password"
+            />
+          </div>
+          <button onClick={handleChangePassword} className="btn btn-primary">
+            Change Password
+          </button>
+        </div>
       </div>
     </div>
   );

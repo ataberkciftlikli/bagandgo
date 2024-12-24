@@ -97,12 +97,12 @@ const CartPage: React.FC = () => {
 
   const handleCheckout = async () => {
     const token = localStorage.getItem('token');
-  
+
     if (!token) {
       alert('User not logged in.');
       return;
     }
-  
+
     try {
       const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/cart/checkout/`, {
         method: 'POST',
@@ -111,14 +111,13 @@ const CartPage: React.FC = () => {
         },
         body: JSON.stringify({ token }),
       });
-  
+
       const data = await response.json();
-  
+
       if (response.ok) {
         alert(data.message || 'Order placed successfully.');
         setCheckoutModalOpen(false); // Close modal
-        // Refresh cart and user balance after successful checkout
-        await fetchCartItems();
+        await fetchCartItems(); // Refresh cart items after checkout
         await fetchUserProfile();
         setCartItems([]); // Ensure the cart visually clears
         setTotalAmount(0); // Reset the total amount
@@ -130,8 +129,7 @@ const CartPage: React.FC = () => {
       alert('Something went wrong. Please try again.');
     }
   };
-  
-  // Define the handleAddToFavorites function
+
   const handleAddToFavorites = async (productId: number) => {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -162,6 +160,37 @@ const CartPage: React.FC = () => {
     }
   };
 
+  const handleRemoveFromCart = async (productId: number) => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert('User not logged in.');
+      return;
+    }
+
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/cart/remove/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          token,
+          product_id: productId,
+        }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        alert(data.message || 'Item removed from cart successfully.');
+        fetchCartItems(); // Refresh cart items after removal
+      } else {
+        alert(data.error || 'Failed to remove item from cart.');
+      }
+    } catch (error) {
+      alert('Something went wrong. Please try again.');
+    }
+  };
+
   useEffect(() => {
     fetchCartItems();
     fetchUserProfile();
@@ -177,19 +206,20 @@ const CartPage: React.FC = () => {
       <h1>My Cart</h1>
       <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
       <div className="cart-main">
-      <div className="cart-items">
-  {cartItems.length === 0 ? (
-    <p>Your cart is empty.</p>
-  ) : (
-    cartItems.map((item) => (
-      <CartItem
-        key={item.id}
-        item={item}
-        onAddToFavorites={handleAddToFavorites} // Pass the function here
-      />
-    ))
-  )}
-</div>
+        <div className="cart-items">
+          {cartItems.length === 0 ? (
+            <p>Your cart is empty.</p>
+          ) : (
+            cartItems.map((item) => (
+              <CartItem
+                key={item.id}
+                item={item}
+                onAddToFavorites={handleAddToFavorites}
+                onRemoveFromCart={handleRemoveFromCart}
+              />
+            ))
+          )}
+        </div>
         <div className="cart-summary-container">
           <div className="balance-info">
             <h3>My Balance: {userBalance.toFixed(2)} TL</h3>

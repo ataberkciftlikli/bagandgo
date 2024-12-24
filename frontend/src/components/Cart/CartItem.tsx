@@ -9,16 +9,20 @@ interface CartItemProps {
     quantity: number;
     image: string;
   };
-  onAddToFavorites: (productId: number) => void; // Add function prop for adding to favorites
+  onAddToFavorites: (productId: number) => void;
+  onRemoveFromCart: (productId: number) => void; // Add prop for removing from cart
 }
 
-const CartItem: React.FC<CartItemProps> = ({ item, onAddToFavorites }) => {
-  // Fallback values for undefined data
+const CartItem: React.FC<CartItemProps> = ({ item, onAddToFavorites, onRemoveFromCart }) => {
   const price = item.price ?? 0;
   const quantity = item.quantity ?? 1;
 
   const handleAddToFavorites = () => {
     onAddToFavorites(item.id);
+  };
+
+  const handleRemoveFromCart = () => {
+    onRemoveFromCart(item.id);
   };
 
   return (
@@ -31,6 +35,9 @@ const CartItem: React.FC<CartItemProps> = ({ item, onAddToFavorites }) => {
         <p>Total: {(price * quantity).toFixed(2)} TL</p>
         <button onClick={handleAddToFavorites} className="add-to-favorites-button">
           Add to Favorites
+        </button>
+        <button onClick={handleRemoveFromCart} className="remove-from-cart-button">
+          Remove from Cart
         </button>
       </div>
     </div>
