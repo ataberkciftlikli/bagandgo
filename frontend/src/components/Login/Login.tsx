@@ -6,7 +6,7 @@ import './Login.css';
 
 const Login: React.FC = () => {
   const [formData, setFormData] = useState({
-    username: '', // Updated to match API field name
+    username: '',
     password: ''
   });
 
@@ -15,7 +15,7 @@ const Login: React.FC = () => {
     username: '',
     password: ''
   });
-  const [errorMessage, setErrorMessage] = useState<string | null>(null); // For backend error
+  const [errorMessage] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -54,12 +54,16 @@ const Login: React.FC = () => {
         });
 
         const data = await response.json();
+        console.log("Server Response:", data);
 
         if (response.ok) {
-          // Store username and token in localStorage
+          // Store user details and token in localStorage
           localStorage.setItem('token', data.token);
           localStorage.setItem('username', data.user.username);
-  
+          localStorage.setItem('email', data.enail); // Access the typo "enail"
+          localStorage.setItem('first_name', data.user.first_name || ''); // Handle missing first name
+          localStorage.setItem('last_name', data.user.last_name || ''); // Handle missing last name
+          
           navigate('/'); // Redirect to home page
           window.location.reload();
         } else {

@@ -1,20 +1,35 @@
-// components/Profile/ShoppingHistory/TransactionItem.tsx
 import React, { useState } from 'react';
 import ProductItem from './ProductItem';
 import './transactionItem.css';
 import receipt from '../../icons/receipt.png';
 
 interface Product {
+  id: number;
   name: string;
-  price: string;
+  category: {
+    id: number;
+    name: string;
+  };
+  price: number; // Price as a number from the API
+  old_price: number;
+  is_discounted: boolean;
+  image: string;
+  stock: number;
+  barcode: string;
 }
 
 interface Transaction {
-  id: string;
-  date: string;
-  receiptNo: string;
-  amount: string;
+  id: number;
+  user: {
+    id: number;
+    username: string;
+    first_name: string;
+    last_name: string;
+  };
   products: Product[];
+  total_price: number;
+  confirmation_code: string;
+  created_at: string;
 }
 
 interface TransactionItemProps {
@@ -31,19 +46,30 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ transaction }) => {
       <div className="transaction-summary" onClick={toggleExpand}>
         <img src={receipt} alt="Product thumbnail" className="thumbnail" />
         <div>
-          <p>Receipt No: <strong>{transaction.receiptNo}</strong></p>
+          <p>
+            Receipt No: <strong>{transaction.confirmation_code}</strong>
+          </p>
           <p>Transaction Completed</p>
+          <p>
+            <strong>Order Date:</strong>{' '}
+            {new Date(transaction.created_at).toLocaleString()}
+          </p>
         </div>
         <div>
-          <p>{transaction.date}</p>
-          <p className="amount">{transaction.amount}</p>
+          <p>Total Amount: {transaction.total_price} TL</p>
         </div>
         <button className="expand-button">{isExpanded ? '▲' : '▼'}</button>
       </div>
       {isExpanded && (
         <div className="product-list">
           {transaction.products.map((product, index) => (
-            <ProductItem key={index} product={product} />
+            <ProductItem
+              key={index}
+              product={{
+                ...product,
+                price: product.price.toString(), // Convert price to string
+              }}
+            />
           ))}
         </div>
       )}

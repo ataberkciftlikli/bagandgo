@@ -1,80 +1,232 @@
-// components/Cart/CartPage.tsx
-import React, { useState } from 'react';
-import { Route, Routes, Navigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
 import CartItem from './CartItem';
 import CartSummary from './CartSummary';
 import './cartPage.css';
-import tadim from '../icons/tadim.jpg';
-import gazoz from '../../icons/gazoz.jpg';
-import tadim2 from '../../icons/tadim2.jpg';
-import sens from '../icons/sens.jpg';
-import ariel from '../../icons/ariel.jpg';
-import omo from '../icons/omo.jpg';
-import filiz from '../../icons/filiz.jpg';
-import nesfit from '../../icons/nesfit.jpg';
-import borek from '../../icons/borek.jpg';
-import kodak from '../icons/kodak.jpg';
-// Dummy data for cart items
-const cartItems = [
-  {
-    id: '1',
-    name: 'Kodak Çinko Karbon Kalem Pil Blister Aa 4\'lü',
-    price: 42.95,
-    quantity: 1,
-    image: kodak,
-  },
-  {
-    id: '2',
-    name: 'Omo Express Fresh Kötü Koku Karşıtı 1.480 Ml',
-    price: 249.95,
-    quantity: 1,
-    image: omo,
-  },
-  {
-    id: '3',
-    name: 'Sensodyne Çok Yönlü Koruma + Geliştirilmiş Beyaz Diş Macunu 50Ml',
-    price: 149.95,
-    quantity: 1,
-    image: sens,
-  },
-  {
-    id: '4',
-    name: 'Tadım Kavrulmuş Siyah Ayçekirdeği 180 G',
-    price: 32.95,
-    quantity: 1,
-    image: tadim,
-  },
-];
 
 const CartPage: React.FC = () => {
-  // Calculate total amount for CartSummary
-  const totalAmount = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+  const [cartItems, setCartItems] = useState<any[]>([]);
+  const [totalAmount, setTotalAmount] = useState<number>(0);
+  const [userBalance, setUserBalance] = useState<number>(0);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [checkoutModalOpen, setCheckoutModalOpen] = useState(false);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  const fetchCartItems = async () => {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      setError('User not logged in. Please log in to view your cart.');
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/cart/view/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ token }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        const validItems = data.map((item: any) => ({
+          id: item.product.id,
+          name: item.product.name,
+          price: item.product.price,
+          quantity: item.quantity,
+          image: `${import.meta.env.VITE_BASE_URL}${item.product.image}`,
+        }));
+
+        setCartItems(validItems);
+
+        const total = validItems.reduce(
+          (sum: number, item: any) => sum + item.price * item.quantity,
+          0
+        );
+        setTotalAmount(total);
+      } else {
+        setError(data.error || 'Failed to fetch cart items.');
+      }
+    } catch (error) {
+      console.error('Error fetching cart items:', error);
+      setError('An error occurred while fetching cart items. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchUserProfile = async () => {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      setError('User not logged in. Please log in to view your profile.');
+      return;
+    }
+
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/profile/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ token }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setUserBalance(data.balance);
+      } else {
+        setError(data.error || 'Failed to fetch user profile.');
+      }
+    } catch (error) {
+      console.error('Error fetching user profile:', error);
+      setError('An error occurred while fetching user profile. Please try again.');
+    }
+  };
+
+  const handleCheckout = async () => {
+    const token = localStorage.getItem('token');
+  
+    if (!token) {
+      alert('User not logged in.');
+      return;
+    }
+  
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/cart/checkout/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ token }),
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        alert(data.message || 'Order placed successfully.');
+        setCheckoutModalOpen(false); // Close modal
+        // Refresh cart and user balance after successful checkout
+        await fetchCartItems();
+        await fetchUserProfile();
+        setCartItems([]); // Ensure the cart visually clears
+        setTotalAmount(0); // Reset the total amount
+      } else {
+        alert(data.error || 'Failed to place the order.');
+      }
+    } catch (error) {
+      console.error('Error during checkout:', error);
+      alert('Something went wrong. Please try again.');
+    }
+  };
+  
+  // Define the handleAddToFavorites function
+  const handleAddToFavorites = async (productId: number) => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert('User not logged in.');
+      return;
+    }
+
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/like-product/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          product_id: productId,
+          token,
+        }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        alert(data.message || 'Action completed successfully.');
+      } else {
+        alert(data.error || 'Failed to update favorite status.');
+      }
+    } catch (error) {
+      alert('Something went wrong. Please try again.');
+    }
+  };
+
+  useEffect(() => {
+    fetchCartItems();
+    fetchUserProfile();
+  }, []);
+
+  if (loading) {
+    return <p>Loading your cart...</p>;
+  }
+
   return (
     <div id="cart-page">
       <Header toggleSidebar={toggleSidebar} />
-
-
-      <h1>Sepetim</h1>
-        <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-        <div className="cart-main">
-          <div className="cart-items">
-            {cartItems.map((item) => (
-              <CartItem key={item.id} item={item} />
-            ))}
+      <h1>My Cart</h1>
+      <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+      <div className="cart-main">
+      <div className="cart-items">
+  {cartItems.length === 0 ? (
+    <p>Your cart is empty.</p>
+  ) : (
+    cartItems.map((item) => (
+      <CartItem
+        key={item.id}
+        item={item}
+        onAddToFavorites={handleAddToFavorites} // Pass the function here
+      />
+    ))
+  )}
+</div>
+        <div className="cart-summary-container">
+          <div className="balance-info">
+            <h3>My Balance: {userBalance.toFixed(2)} TL</h3>
           </div>
-          <div className="cart-summary-container">
-            <CartSummary totalAmount={totalAmount} />
-          </div>
-        
+          <CartSummary totalAmount={totalAmount} onCheckout={() => setCheckoutModalOpen(true)} />
+        </div>
       </div>
+
+      {checkoutModalOpen && (
+        <div className="modal-overlay-unique">
+          <div className="modal-unique">
+            <h2>Checkout</h2>
+            <p>My Balance: {userBalance.toFixed(2)} TL</p>
+            <p>Subtotal: {totalAmount.toFixed(2)} TL</p>
+            {userBalance >= totalAmount ? (
+              <p>Remaining Balance: {(userBalance - totalAmount).toFixed(2)} TL</p>
+            ) : (
+              <p style={{ color: 'red' }}>You don't have enough balance! Please use the ATM.</p>
+            )}
+            <div className="modal-buttons">
+              <button
+                className="modal-button red"
+                onClick={() => setCheckoutModalOpen(false)}
+              >
+                Go back to shopping
+              </button>
+              <button
+                className="modal-button green"
+                onClick={handleCheckout}
+                disabled={userBalance < totalAmount}
+              >
+                Finish payment
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

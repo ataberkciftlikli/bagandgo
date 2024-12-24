@@ -30,10 +30,39 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
     }
   }, []);
 
-  const handleExitClick = () => {
+  const handleExitClick = async () => {
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      try {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/logout/`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ token }),
+        });
+
+        const data = await response.json();
+        console.log('Logout Response:', data);
+
+        if (response.ok) {
+          alert(data.message || 'Logged out successfully.');
+        } else {
+          alert(data.error || 'Failed to log out.');
+        }
+      } catch (error) {
+        console.error('Logout API Error:', error);
+        alert('An error occurred while logging out. Please try again.');
+      }
+    }
+
     // Clear localStorage and redirect to login page
     localStorage.removeItem('token');
     localStorage.removeItem('username');
+    localStorage.removeItem('email');
+    localStorage.removeItem('first_name');
+    localStorage.removeItem('last_name');
     navigate('/login');
     window.location.reload();
   };

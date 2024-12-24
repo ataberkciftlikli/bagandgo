@@ -1,4 +1,3 @@
-// components/Profile/Favorites/FavoriteItem.tsx
 import React from 'react';
 import './favoriteItem.css';
 
@@ -6,23 +5,22 @@ interface FavoriteItemProps {
   item: {
     id: string;
     name: string;
-    price: string;
-    rating: number;
-    reviewCount: number;
-    image: string;
+    price: number; // Ensure price is a number
+    image: string; // Relative URL from the API
   };
 }
+
+const BASE_URL = import.meta.env.VITE_BASE_URL; // Fetch the base URL from .env
+
 
 const FavoriteItem: React.FC<FavoriteItemProps> = ({ item }) => {
   return (
     <div className="favorite-item">
-      <img src={item.image} alt={item.name} className="favorite-item-image" />
+      {/* Prepend BASE_URL to the relative image URL */}
+      <img src={`${BASE_URL}${item.image}`} alt={item.name} className="favorite-item-image" />
       <div className="favorite-item-details">
         <h3>{item.name}</h3>
-        <p>{item.price}</p>
-        <div className="favorite-item-rating">
-          <span>⭐ {item.rating}</span> ({item.reviewCount} reviews)
-        </div>
+        <p>{item.price} TL</p>
       </div>
     </div>
   );

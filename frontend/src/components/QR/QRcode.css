@@ -1,52 +1,148 @@
-.qr-wrapper {
+/* Wrapper for the QR Code page */
+.qr-wrapper-unique {
   background-color: #e4e7f2; 
   height: 100vh; 
   display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-}
-.qr-container {
-  display: center;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 10rem;
-  width: 500px; 
-  height: 500px; 
-  padding: 50px;
-  background-color: rgba(220, 225, 253, 0.716);
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  position: fixed;
-  top: 10%;
-  left: 35%;
+  margin: 0;
+  padding: 20px; /* Added padding for better spacing */
+  box-sizing: border-box;
 }
 
-.qr-title {
+/* Container for the QR Code scanner */
+.qr-container-unique {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90%; 
+  max-width: 500px; /* Ensure it doesn’t stretch too much on larger screens */
+  background-color: rgba(220, 225, 253, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  position: relative;
+}
+
+/* QR Code Page Title */
+.qr-title-unique {
   font-size: 24px;
   font-weight: bold;
   color: #2e4255;
   margin-bottom: 20px;
-  margin-left: 90px;
+  text-align: center;
 }
 
-.qr-reader {
-  width: 300px;
-  height: 300px;
+/* Styling for the QR Scanner area */
+.qr-reader-unique {
+  width: 100%;
+  max-width: 300px; 
+  aspect-ratio: 4 / 3; /* Maintains a 4:3 aspect ratio */
   border: 2px solid #6c6c78;
   border-radius: 10px;
   overflow: hidden;
   margin-bottom: 20px;
-  margin-left: 50px;
 }
 
-.qr-output {
+/* Styling for QR Output */
+.qr-output-unique {
   font-size: 16px;
   color: #6c6c78;
   text-align: center;
+  margin-top: 10px;
 }
 
-.qr-output p {
-  margin: 0;
+/* Styling for manual input area */
+.qr-manual-input-unique {
+  width: 100%;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.qr-manual-input-unique label {
+  font-size: 16px;
+  color: #2e4255;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.qr-manual-input-unique input {
+  width: calc(100% - 20px); /* Leave space for padding */
+  max-width: 300px;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #6c6c78;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+.qr-manual-input-unique button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  background-color: #2e4255;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.qr-manual-input-unique button:hover {
+  background-color: #1f2f3b;
+}
+
+/* Modal Overlay */
+.modal-overlay-unique {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-unique {
+  position: relative; /* Allows the close button to position itself relative to the modal */
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  width: 400px;
+  max-width: 90%;
+  text-align: center;
+  z-index: 1001; /* Ensure it's above the overlay */
+}
+
+.close-button-unique {
+  position: absolute;
+  top: 10px; /* Position it inside the modal at the top-right corner */
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #2e4255; /* Adjust color */
+}
+
+.close-button-unique:hover {
+  color: #ff0000; /* Change color when hovered */
+}
+
+.modal-content-unique {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.product-image-unique {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
 }

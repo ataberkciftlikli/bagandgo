@@ -1,29 +1,71 @@
-// components/Profile/ShoppingHistory/ShoppingHistory.tsx
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import TransactionItem from './TransactionItem';
 import './shoppingHistory.css';
 
-const transactions = [
-  { id: '1', date: '03 November 2024', receiptNo: '442 185 017 3', amount: '338,90 TL', products: [{ name: 'Product A', price: '100 TL' }, { name: 'Product B', price: '238,90 TL' }] },
-  { id: '2', date: '02 September 2024', receiptNo: '420 535 187 4', amount: '338,89 TL', products: [{ name: 'Product C', price: '99,00 TL' }, { name: 'Product D', price: '113,99 TL' }, { name: 'Product E', price: '125,90 TL' }] },
-  { id: '3', date: '21 August 2024', receiptNo: '251 881 534 7', amount: '75,84 TL', products: [{ name: 'Product F', price: '75,84 TL' }] },
-  { id: '4', date: '12 August 2024', receiptNo: '651 842 213 4', amount: '423,99 TL', products: [{ name: 'Product A', price: '100 TL' }, { name: 'Product B', price: '238,90 TL' }] },
-  { id: '5', date: '24 July 2024', receiptNo: '723 451 431 3', amount: '134,59 TL', products: [{ name: 'Product C', price: '99,00 TL' }, { name: 'Product D', price: '113,99 TL' }, { name: 'Product E', price: '125,90 TL' }] },
-  { id: '6', date: '16 June 2024', receiptNo: '147 731 575 2', amount: '634,54 TL', products: [{ name: 'Product F', price: '75,84 TL' }] },
-  // Add more transactions here
-];
-
 const ShoppingHistory: React.FC = () => {
+  const [transactions, setTransactions] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      const token = localStorage.getItem('token'); // Retrieve the user token from localStorage
+
+      if (!token) {
+        setError('User not logged in. Please log in to view shopping history.');
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/orders/`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ token }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          // Sort transactions by `created_at` in descending order (newest first)
+          const sortedData = data.sort(
+            (a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+          );
+          setTransactions(sortedData);
+        } else {
+          setError(data.error || 'Failed to fetch shopping history.');
+        }
+      } catch (error) {
+        console.error('Error fetching orders:', error);
+        setError('An error occurred while fetching shopping history. Please try again.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchOrders();
+  }, []);
+
+  if (loading) {
+    return <p>Loading your shopping history...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
+
   return (
     <div id="history-page">
-    <div className="shopping-history">
-      <h2>Shopping History</h2>
-      <div className="transactions">
-        {transactions.map(transaction => (
-          <TransactionItem key={transaction.id} transaction={transaction} />
-        ))}
+      <div className="shopping-history">
+        <h2>Shopping History</h2>
+        <div className="transactions">
+          {transactions.map((transaction: any) => (
+            <TransactionItem key={transaction.id} transaction={transaction} />
+          ))}
+        </div>
       </div>
-    </div>
     </div>
   );
 };

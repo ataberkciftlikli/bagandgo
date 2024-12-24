@@ -1,44 +1,208 @@
-// components/Profile/Favorites/Favorites.tsx
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import FavoriteItem from './FavoriteItem';
 import './favorites.css';
-import tadim from '../../icons/tadim.jpg';
-import gazoz from '../../icons/gazoz.jpg';
-import tadim2 from '../../icons/tadim2.jpg';
-import sens from '../../icons/sens.jpg';
-import ariel from '../../icons/ariel.jpg';
-import omo from '../../icons/omo.jpg';
-import filiz from '../../icons/filiz.jpg';
-import nesfit from '../../icons/nesfit.jpg';
-import borek from '../../icons/borek.jpg';
-import kodak from '../../icons/kodak.jpg';
-
-
-const favoriteItems = [
-  { id: '1', name: 'Tadım Kavrulmuş Siyah Ayçekirdeği 180 G', price: '32,95 TL', rating: 4.5, reviewCount: 8, image: tadim },
-  { id: '2', name: 'Çamlıca Limon Aromalı Gazoz 1 L', price: '31,50 TL', rating: 4.8, reviewCount: 1459, image: gazoz },
-  { id: '3', name: 'Tadım Kavrulmuş Kaju Fıstığı', price: '109,95 TL', rating: 4.9, reviewCount: 205, image: tadim2 },
-  { id: '4', name: 'Sensodyne Eksta Beyazlatıcı Diş Macunu 75 Ml', price: '117,95 TL', rating: 4.7, reviewCount: 839, image: sens },
-  { id: '5', name: 'Ariel Dağ Esintisi 3 Kg AquaPudra Toz Çamaşır Deterjanı', price: '219,95 TL', rating: 4.7, reviewCount: 839, image: ariel },
-  { id: '6', name: 'Omo Sıvı Active Cold Power Beyazlar ve Renkliler İçin Çamaşır Deterjanı 1690 Ml', price: '235,95 TL', rating: 4.5, reviewCount: 8, image: omo },
-  { id: '7', name: 'Filiz Fiyonk Makarna 500 G', price: '22,75 TL', rating: 4.8, reviewCount: 1459, image: filiz },
-  { id: '8', name: 'Nestlé Nesfit Çikolatalı Tam Tahıl ve Pirinç Gevreği 400g', price: '145,95 TL', rating: 4.9, reviewCount: 205, image: nesfit },
-  { id: '9', name: 'Superfresh Patatesli Rulo Börek 500 G', price: '99,95 TL', rating: 4.7, reviewCount: 839, image: borek },
-  { id: '10', name: 'Kodak Çinko Karbon Kalem Pil Blister Aa 4lü', price: '42,95 TL', rating: 4.7, reviewCount: 839, image: kodak },
-  // Add more favorite items here
-];
 
 const Favorites: React.FC = () => {
+  const [favoriteItems, setFavoriteItems] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalData, setModalData] = useState<any | null>(null);
+  const [quantity, setQuantity] = useState<number>(1);
+
+  useEffect(() => {
+    const fetchLikedProducts = async () => {
+      const token = localStorage.getItem('token');
+
+      if (!token) {
+        setError('User not logged in. Please log in to view liked products.');
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const response = await fetch(import.meta.env.VITE_LIKED_PRODUCTS_API_URL as string, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ token }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          setFavoriteItems(data);
+        } else {
+          setError(data.error || 'Failed to fetch liked products.');
+        }
+      } catch (error) {
+        console.error('Error fetching liked products:', error);
+        setError('An error occurred while fetching liked products. Please try again.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchLikedProducts();
+  }, []);
+
+  const handleItemClick = (item: any) => {
+    setModalData(item);
+    setModalOpen(true);
+  };
+
+  const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuantity(parseInt(e.target.value, 10) || 1);
+  };
+
+  const handleAddToCart = async () => {
+    if (!modalData || !modalData.id) {
+      alert('Invalid product data.');
+      return;
+    }
+
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert('User not logged in.');
+      return;
+    }
+
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/cart/add/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          product_id: modalData.id,
+          quantity,
+          token,
+        }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        alert(data.message || 'Product added to cart successfully.');
+      } else {
+        alert(data.error || 'Failed to add product to cart.');
+      }
+    } catch (error) {
+      alert('Something went wrong. Please try again.');
+    }
+  };
+
+  const handleRemoveFromFavorites = async () => {
+    if (!modalData || !modalData.id) {
+      alert('Invalid product data.');
+      return;
+    }
+
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert('User not logged in.');
+      return;
+    }
+
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/like-product/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          product_id: modalData.id,
+          token,
+        }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        alert(data.message || 'Action completed successfully.');
+        // Refresh the favorites list after removal
+        setFavoriteItems((prevItems) =>
+          prevItems.filter((item) => item.id !== modalData.id)
+        );
+        closeModal();
+      } else {
+        alert(data.error || 'Failed to update favorite status.');
+      }
+    } catch (error) {
+      alert('Something went wrong. Please try again.');
+    }
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+    setModalData(null);
+    setQuantity(1); // Reset quantity when closing the modal
+  };
+
+  if (loading) {
+    return <p>Loading your favorite products...</p>;
+  }
+
+  if (error) {
+    return <p className="error-message">{error}</p>;
+  }
+
   return (
     <div id="favorites-section" className="favorites-section">
-    <div className="favorites-container">
-      <h2>Favorites</h2>
-      <div className="favorites-list">
-        {favoriteItems.map(item => (
-          <FavoriteItem key={item.id} item={item} />
-        ))}
+      <div className="favorites-container">
+        <h2>Favorites</h2>
+        <div className="favorites-list">
+          {favoriteItems.map((item) => (
+            <div key={item.id} onClick={() => handleItemClick(item)}>
+              <FavoriteItem item={item} />
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+
+      {/* Modal */}
+      {modalOpen && modalData && (
+        <div className="modal-overlay-unique">
+          <div className="modal-unique">
+            <button className="close-button-unique" onClick={closeModal}>
+              ×
+            </button>
+            <h2>Product Information</h2>
+            {modalData.image && (
+              <img
+                src={`${import.meta.env.VITE_BASE_URL}${modalData.image}`}
+                alt={modalData.name}
+                className="product-image-unique"
+              />
+            )}
+            <p>
+              <strong>Name:</strong> {modalData.name}
+            </p>
+            <p>
+              <strong>Price:</strong> {modalData.price} TL
+            </p>
+            <p>
+              <strong>Stock:</strong> {modalData.stock}
+            </p>
+            <p>
+              <strong>Barcode:</strong> {modalData.barcode}
+            </p>
+            <div>
+              <label htmlFor="quantity-input">Quantity:</label>
+              <input
+                id="quantity-input"
+                type="number"
+                min="1"
+                value={quantity}
+                onChange={handleQuantityChange}
+              />
+              <button onClick={handleAddToCart}>Add to Cart</button>
+              <button onClick={handleRemoveFromFavorites} className="remove-from-favorites-button">
+                Remove from Favorites
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
