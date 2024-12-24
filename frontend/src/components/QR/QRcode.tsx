@@ -17,11 +17,26 @@ const QRcode: React.FC = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  const handleScan = (result: string | null) => {
+  const handleScan = (result: string | { text: string } | null) => {
     if (result) {
-      setScannedData(result);
+      let extractedText = '';
+  
+      // Check if result is an object with a 'text' property or a string
+      if (typeof result === 'string') {
+        extractedText = result.trim(); // If result is just a string, use it directly
+      } else if (result.text) {
+        extractedText = result.text.trim(); // If result is an object, use the 'text' property
+      }
+  
+      console.log("Scanned QR Code Text: ", extractedText); // Debugging log for the scanned data
+  
+      // Set the extracted text as barcode
+      setScannedData(extractedText); // Save scanned data for display
+      setBarcode(extractedText); // Update barcode with scanned data
+      checkBarcode(extractedText); // Trigger barcode validation and submission
     }
   };
+
 
   const handleError = (error: Error) => {
     console.warn("QR Scanner Error: ", error.message);
@@ -29,15 +44,14 @@ const QRcode: React.FC = () => {
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setBarcode(e.target.value); // Update the barcode state
+    setBarcode(e.target.value); // Update the barcode state manually
   };
 
   const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuantity(parseInt(e.target.value, 10) || 1); // Update quantity state
   };
 
-  const handleSubmit = async () => {
-    const query = scannedData || barcode;
+  const checkBarcode = async (query: string) => {
     if (!query) {
       alert("Please enter or scan a barcode!");
       return;
@@ -50,8 +64,8 @@ const QRcode: React.FC = () => {
       if (response.ok) {
         const data = await response.json();
         if (data.length > 0) {
-          setModalData(data[0]);
-          setModalOpen(true);
+          setModalData(data[0]); // Use the first matching product
+          setModalOpen(true); // Open the modal
         } else {
           alert("Product not found!");
         }
@@ -59,8 +73,13 @@ const QRcode: React.FC = () => {
         alert("Failed to fetch product information.");
       }
     } catch (error) {
+      console.error("Error fetching product:", error);
       alert("Something went wrong. Please try again.");
     }
+  };
+
+  const handleSubmit = () => {
+    checkBarcode(barcode); // Check the barcode when manually submitted
   };
 
   const handleAddToCart = async () => {
@@ -95,6 +114,7 @@ const QRcode: React.FC = () => {
         alert(data.error || "Failed to add product to cart.");
       }
     } catch (error) {
+      console.error("Error adding to cart:", error);
       alert("Something went wrong. Please try again.");
     }
   };
@@ -130,6 +150,7 @@ const QRcode: React.FC = () => {
         alert(data.error || "Failed to update favorite status.");
       }
     } catch (error) {
+      console.error("Error adding to favorites:", error);
       alert("Something went wrong. Please try again.");
     }
   };
@@ -215,15 +236,22 @@ const QRcode: React.FC = () => {
             <div>
               <label className="quantity-input">Quantity:</label>
               <input
-               className="quantity-input-area"
+                className="quantity-input-area"
                 id="quantity-input"
                 type="number"
                 min="1"
                 value={quantity}
                 onChange={handleQuantityChange}
               />
-              <button className="add-to-cart-button" onClick={handleAddToCart}>Add to Cart</button>
-              <button className="remove-from-favorites-button" onClick={handleAddToFavorites}>Add to Favorites</button>
+              <button className="add-to-cart-button" onClick={handleAddToCart}>
+                Add to Cart
+              </button>
+              <button
+                className="remove-from-favorites-button"
+                onClick={handleAddToFavorites}
+              >
+                Add to Favorites
+              </button>
             </div>
           </div>
         </div>
