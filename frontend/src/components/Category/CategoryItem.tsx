@@ -1,18 +1,24 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Category } from './types.ts';
+import './categoryItem.css';
 
 interface CategoryItemProps {
-  category: Category;
+  item: {
+    id: string;
+    name: string;
+    price: number;
+    image: string;
+  };
 }
 
-const CategoryItem: React.FC<CategoryItemProps> = ({ category }) => {
+const CategoryItem: React.FC<CategoryItemProps> = ({ item }) => {
   return (
-    <li className="category-item">
-      <Link to={`/category/${category.slug}`} className="category-link">
-        {category.name}
-      </Link>
-    </li>
+    <div className="category-item">
+      <img src={item.image} alt={item.name} className="category-item-image" />
+      <div className="category-item-details">
+        <h3>{item.name}</h3>
+        <p>{item.price} TL</p>
+      </div>
+    </div>
   );
 };
 

@@ -1,6 +1,6 @@
 // components/Sales/Sales.tsx
 import React, { useState } from 'react';
-import './sales.css';
+import './main.css';
 // Import local images
 import hotSaleImage1 from '../../icons/Slide_Placeholder.png';
 import hotSaleImage2 from '../../icons/Slide_Placeholder.png';

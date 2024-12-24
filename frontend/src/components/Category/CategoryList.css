@@ -1,44 +1,44 @@
-.category-list {
+#category-list .category-list {
     list-style: none;
     padding: 0;
     margin: 0;
   }
   
-  .category-item {
+  #category-list .category-item {
     margin-bottom: 10px;
     cursor: pointer;
     padding: 10px;
     border-radius: 35px 0px 0px 35px;
   }
   
-  .category-item:hover {
+  #category-list .category-item:hover {
     color: #000000;
     background: linear-gradient(to left, #CAD3F0, #D3D8ED);
   }
   
-  .category-link {
+  #category-list .category-link {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: left;
     font-size: 15px;
     color: #333;
     text-decoration: none;
   }
   
-  .toggle-icon {
+  #category-list .toggle-icon {
     font-size: 14px;
     color: #666;
     margin-left: 10px;
   }
   
   /* In case subcategory is needed */
-  .subcategory-list {
+  #category-list .subcategory-list {
     list-style: none;
     padding: 0 0 0 20px;
     margin: 5px 0 0 0;
   }
   
-  .subcategory-list .category-item {
+  #category-list .subcategory-list .category-item {
     margin-bottom: 5px;
     padding: 8px;
     background-color: #ffffff;
@@ -46,7 +46,7 @@
     border-radius: 3px;
   }
   
-  .subcategory-list .category-item:hover {
+  #category-list .subcategory-list .category-item:hover {
     background-color: #f7f7f7;
   }
   

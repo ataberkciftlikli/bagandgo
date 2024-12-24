@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
-import Sales from './Sales/Sales';
+import Sales from './Main/Main';
 import './home.css';
 
 const Home: React.FC = () => {
@@ -21,8 +21,8 @@ const Home: React.FC = () => {
         <div className={`home-main ${isSidebarOpen ? 'sidebar-open' : 'sidebar-collapsed'}`}>
           <Routes>
             {/* Default navigation to /home/sales */}
-            <Route path="/" element={<Navigate to="home/sales" />} />
-            <Route path="home/sales" element={
+            <Route path="/" element={<Navigate to="home/main" />} />
+            <Route path="home/main" element={
               <>
                 <Sales />
                 <div className="home-bottom">

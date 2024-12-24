@@ -1,0 +1,88 @@
+#category-page {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .category-page-content {
+    background: linear-gradient(to bottom, #cbcfdf, #e3e6f0);
+    padding: 1rem;
+    border-radius: 20px;
+    box-shadow: 0 0 2rem 5px rgba(0, 0, 0, 0.1);
+    width: 55%;
+    height: 90%;
+    box-sizing: border-box;
+    margin-left: 27rem;
+    margin-top: 7rem;
+  }
+  
+  .category-items-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  /* Modal Overlay */
+#category-page .modal-overlay-category {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  #category-page .modal-category {
+    position: relative; /* Allows the close button to position itself relative to the modal */
+    background: #D3D8ED;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    width: 400px;
+    max-width: 90%;
+    text-align: center;
+    z-index: 1001; /* Ensure it's above the overlay */
+  }
+  
+  #category-page .quantity-input-category {
+    background-color: #CAD3F0; 
+    border-radius: 0px;
+    border-color: #CAD3F0;
+  }
+  
+  #category-page .add-to-cart-button-category {
+    margin-top: 10px;
+    background-color: #CAD3F0; 
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  }
+  
+  #category-page .close-button-category {
+    position: absolute;
+    top: 10px; /* Position it inside the modal at the top-right corner */
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #2e4255; /* Adjust color */
+  }
+  
+  #category-page .close-button-category:hover {
+    color: #ff0000; /* Change color when hovered */
+  }
+  
+  #category-page .modal-content-category {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  #category-page .product-image-category {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }

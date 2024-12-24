@@ -1,4 +1,3 @@
-// components/Sidebar/Sidebar.tsx
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './sidebar.css';
@@ -6,7 +5,6 @@ import menuIcon from '../icons/menu.png';
 import newsIcon from '../icons/news.png';
 import tasksIcon from '../icons/tasks.png';
 import messageBoardIcon from '../icons/messageBoard.png';
-import calendarIcon from '../icons/calendar.png';
 import infoIcon from '../icons/info.png';
 import remindersIcon from '../icons/tasks.png';
 import starIcon from '../icons/star.png';
@@ -44,14 +42,17 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, toggleSidebar, onTasks
   }, [isMobile]);
 
   const isActive = (path: string) => location.pathname === path;
-  const isHomeSection = location.pathname.startsWith('/home');
+
+  // Adjust logic to include category routes as part of the "home" section.
+  const isHomeSection =
+    location.pathname.startsWith('/home') || location.pathname.startsWith('/category');
 
   return (
     <div id="sidebar" className={`sidebar ${isSidebarOpen ? '' : 'collapsed'} ${isMobile ? 'mobile-sidebar' : ''}`}>
       <div className="sidebar-header">
-      <button className="menu-button" id="menuButton" onClick={toggleSidebar}>
-            <img src={menuIcon} alt="Menu" className="menu-icon" />
-          </button>
+        <button className="menu-button" id="menuButton" onClick={toggleSidebar}>
+          <img src={menuIcon} alt="Menu" className="menu-icon" />
+        </button>
         {isSidebarOpen && (
           <button className="sidebar-title" onClick={() => (window.location.href = '/')}>
             BagAndGo
@@ -61,27 +62,26 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, toggleSidebar, onTasks
       <div className="sidebar-links">
         {isHomeSection ? (
           <>
-            <Link to="/home/sales" className={`sidebar-link ${isActive('/home/sales') ? 'active' : ''}`}>
+            <Link to="/home/main" className={`sidebar-link ${isActive('/home/main') ? 'active' : ''}`}>
               <img src={newsIcon} alt="News" className="sidebar-icon" />
               {isSidebarOpen && <span>Home</span>}
             </Link>
             <Link
-              to="/home/tasks"
-              className={`sidebar-link ${isActive('/home/tasks') || isActive('/home/admin-tasks') ? 'active' : ''}`}
+              to="/home/sales"
+              className={`sidebar-link ${isActive('/home/sales') || isActive('/home/admin-sales') ? 'active' : ''}`}
               onClick={onTasksClick}
             >
               <img src={tasksIcon} alt="Tasks" className="sidebar-icon" />
               {isSidebarOpen && <span>Sales</span>}
             </Link>
-  
-            <Link to={useLocation().pathname} className={`sidebar-link ${isActive('/home/message-board') ? 'active' : ''}`} onClick={handleCategoriesClick}>
+            <Link
+              to={useLocation().pathname}
+              className={`sidebar-link ${isActive('/home/message-board') ? 'active' : ''}`}
+              onClick={handleCategoriesClick}
+            >
               <img src={messageBoardIcon} alt="Message Board" className="sidebar-icon" />
               {isSidebarOpen && <span>Categories</span>}
             </Link>
-            {/*<Link to="/home/calendar" className={`sidebar-link ${isActive('/home/calendar') ? 'active' : ''}`}>
-              <img src={calendarIcon} alt="Calendar" className="sidebar-icon" />
-              {isSidebarOpen && <span>Sub-Menu-4</span>}
-            </Link>*/}
           </>
         ) : (
           <>
@@ -101,23 +101,6 @@ const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, toggleSidebar, onTasks
         )}
       </div>
       {showCategories && <CategoryList categories={categories} />}
-        {/* {isSidebarOpen && (
-        <div className="sidebar-name">
-          <span>Admin</span>
-        </div>
-      )}
-
-      <div className="sidebar-social-media">
-        <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
-          <img src={linkedinIcon} alt="LinkedIn" className="social-icon" />
-        </a>
-        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
-          <img src={instagramIcon} alt="Instagram" className="social-icon" />
-        </a>
-        <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer">
-          <img src={twitterIcon} alt="Twitter" className="social-icon" />
-        </a>
-      </div>*/}
     </div>
   );
 };
