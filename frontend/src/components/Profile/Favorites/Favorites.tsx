@@ -187,15 +187,15 @@ const Favorites: React.FC = () => {
               <strong>Barcode:</strong> {modalData.barcode}
             </p>
             <div>
-              <label htmlFor="quantity-input">Quantity:</label>
-              <input
+              <label className="quantity-input"><strong>Quantity:</strong> </label>
+              <input className="quantity-input-area"
                 id="quantity-input"
                 type="number"
                 min="1"
                 value={quantity}
                 onChange={handleQuantityChange}
               />
-              <button onClick={handleAddToCart}>Add to Cart</button>
+              <button  onClick={handleAddToCart} className="add-to-cart-button">Add to Cart</button>
               <button onClick={handleRemoveFromFavorites} className="remove-from-favorites-button">
                 Remove from Favorites
               </button>
