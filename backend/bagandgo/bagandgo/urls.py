@@ -17,7 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from api.views import ProductViewSet
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
+    path('product_images/<str:filename>/', ProductViewSet.as_view({'get': 'image'}), name='image'),
 ]
