@@ -19,7 +19,7 @@ const SearchBar: React.FC = () => {
         return;
       }
       try {
-        const response = await fetch(`http://20.199.80.252:8000/api/product/products/?search=${query}`);
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/?search=${query}`);
         const data = await response.json();
         if (response.ok) {
           setProductResults(data);
