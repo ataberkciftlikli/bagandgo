@@ -44,6 +44,104 @@
   #cart-page .cart-summary-container {
     flex: 1;
   }
+
+  
+
+/* Modal Overlay */
+#cart-page .modal-overlay-unique {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+#cart-page .modal-unique {
+  position: relative; /* Allows the close button to position itself relative to the modal */
+  background:#D3D8ED;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  width: 400px;
+  max-width: 90%;
+  text-align: center;
+  z-index: 1001; /* Ensure it's above the overlay */
+}
+
+#cart-page .quantity-input-area {
+  background-color:#CAD3F0; 
+  border-radius: 0px;
+  border-color:#CAD3F0;
+}
+
+#cart-page .modal-button-green {
+  margin-top: 10px;
+  margin-right: 3%;
+  background-color:#2E4255;
+  color: white;
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+#cart-page .modal-button-green:disabled {
+  margin-top: 10px;
+  background-color:#95aec5;
+  color: white;
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+#cart-page .modal-button-green:hover:active {
+  color: black;
+  background-color: #31c244;
+  border: 2px solid #688aaa;
+}
+
+#cart-page .modal-button-red {
+  margin-top: 10px;
+  margin-left: 3%;
+  background-color:#2E4255;
+  color: white;
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25); 
+}
+#cart-page .modal-button-red:hover {
+  color: black;
+  background-color: #c23131;
+  border: 2px solid #688aaa;
+}
+
+#cart-page .close-button-unique {
+  position: absolute;
+  top: 10px; /* Position it inside the modal at the top-right corner */
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #2e4255; /* Adjust color */
+}
+
+#cart-page .close-button-unique:hover {
+  color: #ff0000; /* Change color when hovered */
+}
+
+#cart-page .modal-content-unique {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+#cart-page .product-image-unique {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
   
   /* Responsive Styles */
   @media (max-width: 768px) {

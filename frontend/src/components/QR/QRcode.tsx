@@ -166,6 +166,7 @@ const QRcode: React.FC = () => {
   };
 
   return (
+    <div id="qrcode">
     <div className="qr-wrapper-unique">
       <div className="qr-container-unique">
         <Header toggleSidebar={toggleSidebar} />
@@ -257,6 +258,7 @@ const QRcode: React.FC = () => {
         </div>
       )}
     </div>
+  </div>
   );
 };
 

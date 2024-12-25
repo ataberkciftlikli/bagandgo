@@ -1,13 +1,13 @@
 // components/Sales/Main.tsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './main.css';
 // Import local images
-import hotSaleImage1 from '../../icons/Slide_Placeholder.png';
-import hotSaleImage2 from '../../icons/Slide_Placeholder.png';
-import hotSaleImage3 from '../../icons/Slide_Placeholder.png';
+import hotSaleImage1 from '../../icons/home-1.png';
+import hotSaleImage2 from '../../icons/home-2.png';
+import hotSaleImage3 from '../../icons/home-3.png';
 import otherSaleImage1 from '../../icons/dairy.png';
-import otherSaleImage2 from '../../icons/food.png';
+import otherSaleImage2 from '../../icons/vegetables.jpg';
 import otherSaleImage3 from '../../icons/cleaning.png';
 
 const Sales: React.FC = () => {
@@ -15,21 +15,29 @@ const Sales: React.FC = () => {
 
   // Separate arrays for hot sale and other sales items
   const hotSaleItems = [
-    { title: 'Great Sales at our shop!', date: 'Today', source: 'Our Store', url: '#', image: hotSaleImage1 },
-    { title: 'Hot Sale Image 2', date: 'Today', source: 'Our Store', url: '#', image: hotSaleImage2 },
-    { title: 'Hot Sale Image 3', date: 'Today', source: 'Our Store', url: '#', image: hotSaleImage3 },
+    { title: 'Sales at Snacks category!', date: 'Today', source: 'Our Store', url: '/category/snacks', image: hotSaleImage1 },
+    { title: 'Sales at Beverages category!', date: 'Today', source: 'Our Store', url: '/category/beverages', image: hotSaleImage2 },
+    { title: 'Sales at Meat category!', date: 'Today', source: 'Our Store', url: '/category/meat-products', image: hotSaleImage3 },
   ];
 
   const otherSalesItems = [
     { title: 'Dairy Products', date: 'Today', source: 'Our Store', url: '/category/dairy', image: otherSaleImage1 },
-    { title: 'Meat Products', date: 'Today', source: 'Our Store', url: '/category/meat-products', image: otherSaleImage2 },
+    { title: 'Vegetables and Fruits', date: 'Today', source: 'Our Store', url: '/category/vegetables-and-fruits', image: otherSaleImage2 },
     { title: 'Cleaning Products', date: 'Today', source: 'Our Store', url: '/category/cleaning-products', image: otherSaleImage3 },
   ];
 
   // State to track the current index for hot sale images
   const [currentHotSaleIndex, setCurrentHotSaleIndex] = useState(0);
 
-  // Functions to handle navigation for hot sale images
+  // Auto-slide timer
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentHotSaleIndex((prevIndex) => (prevIndex + 1) % hotSaleItems.length);
+    }, 5000); // Change slide every 5 seconds
+
+    return () => clearInterval(interval); // Cleanup interval on unmount
+  }, [hotSaleItems.length]);
+
   const handleNextHotSale = () => {
     setCurrentHotSaleIndex((prevIndex) => (prevIndex + 1) % hotSaleItems.length);
   };

@@ -1,5 +1,5 @@
 /* Wrapper for the QR Code page */
-.qr-wrapper-unique {
+#qrcode .qr-wrapper-unique {
   background-color: #e4e7f2; 
   height: 100vh; 
   display: flex;
@@ -12,7 +12,7 @@
 }
 
 /* Container for the QR Code scanner */
-.qr-container-unique {
+#qrcode .qr-container-unique {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,7 +27,7 @@
 }
 
 /* QR Code Page Title */
-.qr-title-unique {
+#qrcode .qr-title-unique {
   font-size: 24px;
   font-weight: bold;
   color: #2e4255;
@@ -36,7 +36,7 @@
 }
 
 /* Styling for the QR Scanner area */
-.qr-reader-unique {
+#qrcode .qr-reader-unique {
   width: 100%;
   max-width: 300px; 
   aspect-ratio: 4 / 3; /* Maintains a 4:3 aspect ratio */
@@ -47,7 +47,7 @@
 }
 
 /* Styling for QR Output */
-.qr-output-unique {
+#qrcode .qr-output-unique {
   font-size: 16px;
   color: #6c6c78;
   text-align: center;
@@ -55,20 +55,20 @@
 }
 
 /* Styling for manual input area */
-.qr-manual-input-unique {
+#qrcode .qr-manual-input-unique {
   width: 100%;
   margin-top: 20px;
   text-align: center;
 }
 
-.qr-manual-input-unique label {
+#qrcode .qr-manual-input-unique label {
   font-size: 16px;
   color: #2e4255;
   margin-bottom: 5px;
   display: block;
 }
 
-.qr-manual-input-unique input {
+#qrcode .qr-manual-input-unique input {
   width: calc(100% - 20px); /* Leave space for padding */
   max-width: 300px;
   padding: 10px;
@@ -78,7 +78,7 @@
   margin-top: 5px;
 }
 
-.qr-manual-input-unique button {
+#qrcode .qr-manual-input-unique button {
   margin-top: 10px;
   padding: 10px 20px;
   font-size: 16px;
@@ -89,12 +89,12 @@
   cursor: pointer;
 }
 
-.qr-manual-input-unique button:hover {
+#qrcode .qr-manual-input-unique button:hover {
   background-color: #1f2f3b;
 }
 
 /* Modal Overlay */
-.modal-overlay-unique {
+#qrcode .modal-overlay-unique {
   position: fixed;
   top: 0;
   left: 0;
@@ -107,7 +107,7 @@
   z-index: 1000;
 }
 
-.modal-unique {
+#qrcode .modal-unique {
   position: relative; /* Allows the close button to position itself relative to the modal */
   background:#D3D8ED;
   border-radius: 10px;
@@ -119,27 +119,40 @@
   z-index: 1001; /* Ensure it's above the overlay */
 }
 
-.quantity-input-area {
-  background-color:#CAD3F0; 
+#qrcode .quantity-input-area {
+  background-color:#ffffff; 
   border-radius: 0px;
-  border-color:#CAD3F0;
+  border-color:#ffffff;
 }
 
-.add-to-cart-button {
+#qrcode .add-to-cart-button {
   margin-top: 10px;
-  background-color:#CAD3F0; 
+  background-color:#2E4255;
+  color: white;
   border-radius: 5px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
 }
 
-.remove-from-favorites-button {
+#qrcode .add-to-cart-button:hover {
+  color: black;
+  background-color: #688aaa;
+  border: 2px solid #688aaa;
+}
+
+#qrcode .remove-from-favorites-button {
   margin-top: 10px;
-  background-color:#CAD3F0;
+  background-color:#2E4255;
+  color: white;
   border-radius: 5px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25); 
 }
+#qrcode .remove-from-favorites-button:hover {
+  color: black;
+  background-color: #688aaa;
+  border: 2px solid #688aaa;
+}
 
-.close-button-unique {
+#qrcode .close-button-unique {
   position: absolute;
   top: 10px; /* Position it inside the modal at the top-right corner */
   right: 10px;
@@ -150,18 +163,18 @@
   color: #2e4255; /* Adjust color */
 }
 
-.close-button-unique:hover {
+#qrcode .close-button-unique:hover {
   color: #ff0000; /* Change color when hovered */
 }
 
-.modal-content-unique {
+#qrcode .modal-content-unique {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
 }
 
-.product-image-unique {
+#qrcode .product-image-unique {
   max-width: 100%;
   height: auto;
   border-radius: 5px;

@@ -240,19 +240,20 @@ const CartPage: React.FC = () => {
               <p style={{ color: 'red' }}>You don't have enough balance! Please use the ATM.</p>
             )}
             <div className="modal-buttons">
-              <button
-                className="modal-button red"
-                onClick={() => setCheckoutModalOpen(false)}
-              >
-                Go back to shopping
-              </button>
-              <button
-                className="modal-button green"
+            <button
+                className="modal-button-green"
                 onClick={handleCheckout}
                 disabled={userBalance < totalAmount}
               >
                 Finish payment
               </button>
+              <button
+                className="modal-button-red"
+                onClick={() => setCheckoutModalOpen(false)}
+              >
+                Go back to shopping
+              </button>
+              
             </div>
           </div>
         </div>
