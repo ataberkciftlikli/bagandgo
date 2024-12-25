@@ -8,6 +8,7 @@ import User from './components/User/Profile'; // Import Profile component
 import Cart from './components/Cart/CartPage'; // Import CartPage component
 import QRcode from './components/QR/QRcode'; //IMport QR component
 import CategoryPage from './components/Category/CategoryPage'; //IMport QR component
+import Sales from './components/Home/Sales/Sales';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/user" element={<User />} />
         <Route path="/code" element={<QRcode />} />
         <Route path="/category/:slug" element={<CategoryPage />} />
+        <Route path="/home/sales" element={<Sales />} />
       </Routes>
     </Router>
   );

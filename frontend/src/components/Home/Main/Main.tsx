@@ -1,15 +1,18 @@
-// components/Sales/Sales.tsx
+// components/Sales/Main.tsx
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './main.css';
 // Import local images
 import hotSaleImage1 from '../../icons/Slide_Placeholder.png';
 import hotSaleImage2 from '../../icons/Slide_Placeholder.png';
 import hotSaleImage3 from '../../icons/Slide_Placeholder.png';
-import otherSaleImage1 from '../../icons/tech.jpg';
+import otherSaleImage1 from '../../icons/dairy.png';
 import otherSaleImage2 from '../../icons/food.png';
 import otherSaleImage3 from '../../icons/cleaning.png';
 
 const Sales: React.FC = () => {
+  const navigate = useNavigate();
+
   // Separate arrays for hot sale and other sales items
   const hotSaleItems = [
     { title: 'Great Sales at our shop!', date: 'Today', source: 'Our Store', url: '#', image: hotSaleImage1 },
@@ -18,9 +21,9 @@ const Sales: React.FC = () => {
   ];
 
   const otherSalesItems = [
-    { title: 'Other Sale Item 1', date: 'Today', source: 'Our Store', url: '#', image: otherSaleImage1 },
-    { title: 'Other Sale Item 2', date: 'Today', source: 'Our Store', url: '#', image: otherSaleImage2 },
-    { title: 'Other Sale Item 3', date: 'Today', source: 'Our Store', url: '#', image: otherSaleImage3 },
+    { title: 'Dairy Products', date: 'Today', source: 'Our Store', url: '/category/dairy', image: otherSaleImage1 },
+    { title: 'Meat Products', date: 'Today', source: 'Our Store', url: '/category/meat-products', image: otherSaleImage2 },
+    { title: 'Cleaning Products', date: 'Today', source: 'Our Store', url: '/category/cleaning-products', image: otherSaleImage3 },
   ];
 
   // State to track the current index for hot sale images
@@ -38,7 +41,11 @@ const Sales: React.FC = () => {
   };
 
   const handleSaleClick = (url: string) => {
-    window.open(url, '_blank');
+    if (url.startsWith('/')) {
+      navigate(url); // Use React Router for internal navigation
+    } else {
+      window.open(url, '_blank'); // Use window.open for external URLs
+    }
   };
 
   return (
@@ -78,7 +85,7 @@ const Sales: React.FC = () => {
             className="other-sales-item"
             onClick={() => handleSaleClick(item.url)}
           >
-            <img src={item.image} alt="Other Sale" className="other-sales-image" />
+            <img src={item.image} alt={item.title} className="other-sales-image" />
             <p>{item.title}</p>
           </div>
         ))}

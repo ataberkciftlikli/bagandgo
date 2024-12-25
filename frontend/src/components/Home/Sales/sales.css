@@ -1,0 +1,62 @@
+/* sales.css */
+
+#sales-page {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .sales-page-content {
+    background: linear-gradient(to bottom, #cbcfdf, #e3e6f0);
+    padding: 1rem;
+    border-radius: 20px;
+    box-shadow: 0 0 2rem 5px rgba(0, 0, 0, 0.1);
+    width: 55%;
+    height: 90%;
+    box-sizing: border-box;
+    margin-left: 24rem;
+    margin-top: 10rem;
+  }
+  
+  .sales-items-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .sales-item {
+    width: 150px;
+    padding: 10px;
+    border: 1px solid #ffffff;
+    border-radius: 8px;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .sales-item:hover {
+    transform: scale(1.05);
+  }
+  
+  .sales-item-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 10px;
+  }
+  
+  .sales-item-details h3 {
+    font-size: 16px;
+    margin: 5px 0;
+  }
+  
+  .sales-item-old-price {
+    font-size: 14px;
+    color: #ff0000;
+    text-decoration: line-through;
+  }
+  
+  .sales-item-new-price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #2e4255;
+  }
+  

@@ -1,27 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import Header from '../Header/Header';
-import Sidebar from '../Sidebar/Sidebar';
-import CategoryItem from './CategoryItem'; // Renamed component to avoid conflicts
-import './CategoryPage.css';
-import { categories } from './CategoriesData';
+import Header from '../../Header/Header';
+import Sidebar from '../../Sidebar/Sidebar';
+import './sales.css';
 
-const CategoryPage: React.FC = () => {
-  const { slug } = useParams();
-  const [categoryProducts, setCategoryProducts] = useState<any[]>([]);
+const Sales: React.FC = () => {
+  const [saleProducts, setSaleProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalData, setModalData] = useState<any | null>(null);
   const [quantity, setQuantity] = useState<number>(1);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
   useEffect(() => {
-    const fetchCategoryProducts = async () => {
+    const fetchDiscountedProducts = async () => {
       try {
         const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/product/products/`, {
           method: 'GET',
@@ -33,33 +29,31 @@ const CategoryPage: React.FC = () => {
         const data = await response.json();
 
         if (response.ok) {
-          // Match the category based on slug
-          const category = categories.find((cat) => cat.slug === slug);
-          if (category) {
-            const filteredProducts = data.filter(
-              (product: any) => product.category.name.toLowerCase().replace(/\s+/g, '-') === slug
-            );
-            setCategoryProducts(filteredProducts);
-          } else {
-            setError('Category not found.');
-          }
+          const discountedProducts = data.filter((product: any) => product.is_discounted);
+          setSaleProducts(discountedProducts);
         } else {
-          setError(data.error || 'Failed to fetch category products.');
+          setError('Failed to fetch products.');
         }
       } catch (error) {
-        console.error('Error fetching category products:', error);
-        setError('An error occurred while fetching category products. Please try again.');
+        console.error('Error fetching discounted products:', error);
+        setError('An error occurred while fetching products. Please try again.');
       } finally {
         setLoading(false);
       }
     };
 
-    fetchCategoryProducts();
-  }, [slug]);
+    fetchDiscountedProducts();
+  }, []);
 
   const handleItemClick = (item: any) => {
     setModalData(item);
     setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+    setModalData(null);
+    setQuantity(1); // Reset quantity when closing the modal
   };
 
   const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -137,14 +131,8 @@ const CategoryPage: React.FC = () => {
     }
   };
 
-  const closeModal = () => {
-    setModalOpen(false);
-    setModalData(null);
-    setQuantity(1);
-  };
-
   if (loading) {
-    return <p>Loading products...</p>;
+    return <p>Loading discounted products...</p>;
   }
 
   if (error) {
@@ -152,18 +140,25 @@ const CategoryPage: React.FC = () => {
   }
 
   return (
-    <div id="category-page">
+    <div id="sales-page">
       <Header toggleSidebar={toggleSidebar} />
       <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-      <div className="category-page-content">
-        <h1>{slug?.replace(/-/g, ' ').toUpperCase()}</h1>
-        <div className="category-items-container">
-          {categoryProducts.length === 0 ? (
-            <p>No products found for this category.</p>
+      <div className="sales-page-content">
+        <h1>DISCOUNTED PRODUCTS</h1>
+        <div className="sales-items-container">
+          {saleProducts.length === 0 ? (
+            <p>No discounted products found.</p>
           ) : (
-            categoryProducts.map((product) => (
-              <div key={product.id} onClick={() => handleItemClick(product)}>
-                <CategoryItem item={product} />
+            saleProducts.map((product) => (
+              <div key={product.id} className="sales-item" onClick={() => handleItemClick(product)}>
+                <img src={product.image} alt={product.name} className="sales-item-image" />
+                <div className="sales-item-details">
+                  <h3>{product.name}</h3>
+                  <p className="sales-item-old-price">
+                    <del>{product.old_price > 0 ? `${product.old_price.toFixed(2)} TL` : ''}</del>
+                  </p>
+                  <p className="sales-item-new-price">{product.price.toFixed(2)} TL</p>
+                </div>
               </div>
             ))
           )}
@@ -171,9 +166,9 @@ const CategoryPage: React.FC = () => {
       </div>
 
       {modalOpen && modalData && (
-        <div className="modal-overlay-category">
-          <div className="modal-category">
-            <button className="close-button-category" onClick={closeModal}>
+        <div className="modal-overlay-unique">
+          <div className="modal-unique">
+            <button className="close-button-unique" onClick={closeModal}>
               ×
             </button>
             <h2>Product Information</h2>
@@ -181,7 +176,7 @@ const CategoryPage: React.FC = () => {
               <img
                 src={modalData.image}
                 alt={modalData.name}
-                className="product-image-category"
+                className="product-image-unique"
               />
             )}
             <p>
@@ -222,4 +217,4 @@ const CategoryPage: React.FC = () => {
   );
 };
 
-export default CategoryPage;
+export default Sales;

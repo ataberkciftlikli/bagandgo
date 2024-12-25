@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
-import Sales from './Main/Main';
+import Main from './Main/Main'; // Main home content
+import Sales from './Sales/Sales'; // Sales content
 import './home.css';
 
 const Home: React.FC = () => {
@@ -20,15 +21,14 @@ const Home: React.FC = () => {
         <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
         <div className={`home-main ${isSidebarOpen ? 'sidebar-open' : 'sidebar-collapsed'}`}>
           <Routes>
-            {/* Default navigation to /home/sales */}
+            {/* Default navigation to home/main */}
             <Route path="/" element={<Navigate to="home/main" />} />
-            <Route path="home/main" element={
-              <>
-                <Sales />
-                <div className="home-bottom">
-                </div>
-              </>
-            } />
+            
+            {/* Main Home Page */}
+            <Route path="home/main" element={<Main />} />
+
+            {/* Sales Submenu */}
+            <Route path="sales" element={<Sales />} />
           </Routes>
         </div>
       </div>
