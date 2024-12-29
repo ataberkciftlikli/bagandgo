@@ -1,34 +1,62 @@
-.category-item {
+#categoryItem .category-item {
   width: 150px;
+  height: 250px; /* Ensure consistent height */
   padding: 10px;
-  border: 1px solid #ffffff;
+  border: 1px solid #bebaba;
   border-radius: 8px;
-  text-align:center;
+  text-align: center;
   transition: transform 0.3s ease-in-out;
+  background-color: #ffffff; /* Ensure white background */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Properly distribute content */
+  align-items: center;
+  overflow: hidden; /* Prevent content overflow */
 }
 
-.category-item:hover {
+#categoryItem .category-item:hover {
   transform: scale(1.05);
 }
 
-.category-item-image {
-  width: 100px;
+#categoryItem .category-item-image {
+  width: 140px;
   height: 100px;
-  object-fit: cover;
-  margin-bottom: 10px;
+  display: block; /* Ensure the image behaves as a block element */
+  object-fit: contain; /* Keep the aspect ratio and fit the image inside the box */
+  object-position: center; /* Center the image within the container */
+  border-bottom: 2px solid #e0e0e0; /* Add a border only under the image */
+  box-sizing: border-box; /* Ensure padding and border are included in dimensions */
+  background-color: #ffffff; /* Set the image background to white */
 }
 
-.category-item-details h3 {
-  font-size: 16px;
+#categoryItem .category-item-details {
+  background-color: #ffffff; /* Different background color for details section */
+  padding: 10px;
+  width: 110%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Ensure even spacing */
+  align-items: center;
+}
+#categoryItem .category-item-details h3 {
+  font-size: 14px; /* Adjust font size for better fit */
   margin: 5px 0;
+  word-wrap: break-word; /* Wrap long words if necessary */
 }
 
-.category-item-details p {
+#categoryItem .category-item-details p {
   font-weight: bold;
   color: #2e4255;
 }
 
-.category-item-rating {
+#categoryItem .category-item-rating {
   font-size: 14px;
-  color: #555;
+  color: #2e4255;;
+}
+
+#categoryItem .category-item-price {
+  font-weight: bold;
+  color: #2e4255;
+  margin-top: auto; /* Push price to the bottom */
 }

@@ -12,15 +12,21 @@ interface FavoriteItemProps {
 
 const BASE_URL = import.meta.env.VITE_BASE_URL; // Fetch the base URL from .env
 
-
 const FavoriteItem: React.FC<FavoriteItemProps> = ({ item }) => {
   return (
-    <div className="favorite-item">
-      {/* Prepend BASE_URL to the relative image URL */}
-      <img src={`${BASE_URL}${item.image}`} alt={item.name} className="favorite-item-image" />
-      <div className="favorite-item-details">
-        <h3>{item.name}</h3>
-        <p>{item.price} TL</p>
+    <div id="favoriteItem">
+      <div className="favorite-item">
+        {/* Image Section */}
+        <img
+          src={`${BASE_URL}${item.image}`}
+          alt={item.name}
+          className="favorite-item-image"
+        />
+        {/* Details Section */}
+        <div className="favorite-item-details">
+          <h3>{item.name}</h3>
+          <p className="favorite-item-price">{item.price} TL</p>
+        </div>
       </div>
     </div>
   );

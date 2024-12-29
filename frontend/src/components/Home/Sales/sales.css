@@ -1,150 +1,183 @@
-/* sales.css */
-
 #sales-page {
-    display: flex;
-    flex-direction: column;
-  }
-  
-#sales-page .sales-page-content {
-    background: linear-gradient(to bottom, #cbcfdf, #e3e6f0);
-    padding: 1rem;
-    border-radius: 20px;
-    box-shadow: 0 0 2rem 5px rgba(0, 0, 0, 0.1);
-    width: 55%;
-    height: 90%;
-    box-sizing: border-box;
-    margin-left: 24rem;
-    margin-top: 10rem;
-  }
-  
-  #sales-page .sales-items-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-  
-  #sales-page .sales-item {
-    width: 150px;
-    padding: 10px;
-    border: 1px solid #ffffff;
-    border-radius: 8px;
-    text-align: center;
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  #sales-page .sales-item:hover {
-    transform: scale(1.05);
-  }
-  
-  #sales-page .sales-item-image {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    margin-bottom: 10px;
-  }
-  
-  #sales-page .sales-item-details h3 {
-    font-size: 16px;
-    margin: 5px 0;
-  }
-  
-  #sales-page .sales-item-old-price {
-    font-size: 14px;
-    color: #ff0000;
-    text-decoration: line-through;
-  }
-  
-  #sales-page .sales-item-new-price {
-    font-size: 16px;
-    font-weight: bold;
-    color: #2e4255;
-  }
-  
-
-
-/* Modal Overlay */
-#sales-page .modal-overlay-unique {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-#sales-page .modal-unique {
-  position: relative; /* Allows the close button to position itself relative to the modal */
-  background:#D3D8ED;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-  width: 400px;
-  max-width: 90%;
-  text-align: center;
-  z-index: 1001; /* Ensure it's above the overlay */
-}
-
-#sales-page .quantity-input-area {
-  background-color:#CAD3F0; 
-  border-radius: 0px;
-  border-color:#CAD3F0;
-}
-
-#sales-page .add-to-cart-button {
-  margin-top: 10px;
-  background-color:#2E4255;
-  color: white;
-  border-radius: 5px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-}
-
-#sales-page .add-to-cart-button:hover {
-  color: black;
-  background-color: #688aaa;
-  border: 2px solid #688aaa;
-}
-
-#sales-page .add-to-favorites-button {
-  margin-top: 10px;
-  background-color:#2E4255;
-  color: white;
-  border-radius: 5px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25); 
-}
-#sales-page .add-to-favorites-button:hover {
-  color: black;
-  background-color: #688aaa;
-  border: 2px solid #688aaa;
-}
-
-#sales-page .close-button-unique {
-  position: absolute;
-  top: 10px; /* Position it inside the modal at the top-right corner */
-  right: 10px;
-  background: transparent;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-  color: #2e4255; /* Adjust color */
-}
-
-#sales-page .close-button-unique:hover {
-  color: #ff0000; /* Change color when hovered */
-}
-
-#sales-page .modal-content-unique {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 10px;
 }
 
-#sales-page .product-image-unique {
-  max-width: 100%;
-  height: auto;
-  border-radius: 5px;
+#sales-page .sales-page-content {
+  background: linear-gradient(to bottom, #cbcfdf, #e3e6f0);
+  padding: 1rem;
+  border-radius: 20px;
+  box-shadow: 0 0 2rem 5px rgba(0, 0, 0, 0.1);
+  width: 55%;
+  height: 90%;
+  box-sizing: border-box;
+  margin-left: 24rem;
+  margin-top: 10rem;
 }
+
+#sales-page .sales-items-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+#sales-page .sales-item {
+  width: 150px;
+  height: 250px; /* Ensure consistent height */
+  padding: 10px;
+  border: 1px solid #bebaba;
+  border-radius: 8px;
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+  background-color: #ffffff; /* Ensure white background */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Properly distribute content */
+  align-items: center;
+  overflow: hidden; /* Prevent content overflow */
+}
+
+#sales-page .sales-item:hover {
+  transform: scale(1.05);
+}
+
+#sales-page .sales-item-image {
+  width: 140px;
+  height: 100px;
+  display: block; /* Ensure the image behaves as a block element */
+  object-fit: contain; /* Maintain aspect ratio */
+  object-position: center; /* Center the image within the container */
+  border-bottom: 2px solid #e0e0e0; /* Add a border only under the image */
+  box-sizing: border-box; /* Include padding and border in dimensions */
+  background-color: #ffffff; /* Set the image background to white */
+}
+
+#sales-page .sales-item-details {
+  background-color: #ffffff; /* Set a white background for the details section */
+  padding: 10px;
+  width: 110%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Align content to the top */
+  align-items: center;
+  text-align: center; /* Ensure text alignment */
+  box-sizing: border-box; /* Ensure padding is accounted for */
+}
+
+#sales-page .sales-item-details h3 {
+  font-size: 14px; /* Adjust font size for better fit */
+  margin: 5px 0;
+  word-wrap: break-word; /* Wrap long words if necessary */
+}
+#sales-page .sales-item-prices {
+  margin-top: auto; /* Push price to the bottom */
+}
+#sales-page .sales-item-old-price {
+  font-size: 12px;
+  color: #ff0000;
+  text-decoration: line-through;
+}
+
+#sales-page .sales-item-new-price {
+  font-size: 16px;
+  font-weight: bold;
+  color: #2e4255;
+  margin-top: 5px; /* Add spacing between old and new prices */
+}
+
+  /* Modal Overlay */
+  #sales-page .modal-overlay-unique {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  #sales-page .modal-unique {
+    position: relative;
+    background: #f5f5f5;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    width: 600px; /* Increased width to accommodate the layout */
+    height: 400px;
+    display: flex; /* Use flexbox to align items side by side */
+    gap: 20px; /* Add spacing between image and details */
+    align-items: center; /* Vertically align image and details */
+  }
+  
+  
+  #sales-page .quantity-input-area {
+    background-color: #ffffff; 
+    width: 30%;
+    border-radius: 10px;
+    border-color: #ffffff;
+  }
+  
+  #sales-page .add-to-cart-button {
+    margin-top: 10px;
+    background-color: #2E4255;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    padding: 10px 20px;
+  }
+  
+  #sales-page .add-to-cart-button:hover {
+    color: black;
+    background-color: #688aaa;
+    border: 2px solid #688aaa;
+  }
+  #sales-page .remove-from-favorites-button {
+    margin-top: 10px;
+    background-color: #2E4255;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    padding: 10px 20px;
+  }
+  
+  #sales-page .remove-from-favorites-button:hover {
+    color: black;
+    background-color: #688aaa;
+    border: 2px solid #688aaa;
+  }
+  
+  #sales-page .close-button-unique {
+    position: absolute;
+    top: 10px; /* Position it inside the modal at the top-right corner */
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #2e4255; /* Adjust color */
+  }
+  
+  #sales-page .close-button-unique:hover {
+    color: #ff0000; /* Change color when hovered */
+  }
+  #sales-page .modal-details-unique h2{
+    font-size: 24px;
+  }
+  
+  #sales-page .modal-content-unique {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  #sales-page .product-image-unique {
+    max-width: 50%; /* Adjust width for the image */
+    height: auto;
+    border-radius: 5px;
+  }
+    

@@ -166,7 +166,6 @@ const Favorites: React.FC = () => {
             <button className="close-button-unique" onClick={closeModal}>
               ×
             </button>
-            <h2>Product Information</h2>
             {modalData.image && (
               <img
                 src={`${import.meta.env.VITE_BASE_URL}${modalData.image}`}
@@ -174,34 +173,37 @@ const Favorites: React.FC = () => {
                 className="product-image-unique"
               />
             )}
-            <p>
-              <strong>Name:</strong> {modalData.name}
-            </p>
-            <p>
-              <strong>Price:</strong> {modalData.price} TL
-            </p>
-            <p>
-              <strong>Stock:</strong> {modalData.stock}
-            </p>
-            <p>
-              <strong>Barcode:</strong> {modalData.barcode}
-            </p>
-            <div>
-              <label className="quantity-input"><strong>Quantity:</strong> </label>
-              <input className="quantity-input-area"
-                id="quantity-input"
-                type="number"
-                min="1"
-                value={quantity}
-                onChange={handleQuantityChange}
-              />
-              <button  onClick={handleAddToCart} className="add-to-cart-button">Add to Cart</button>
-              <button onClick={handleRemoveFromFavorites} className="remove-from-favorites-button">
-                Remove from Favorites
-              </button>
+            <div className="modal-details-unique">
+              <h2>
+                {modalData.name}
+              </h2>
+              <h2>
+                <strong>{modalData.price} TL</strong> 
+              </h2>
+              <p>
+                <strong>Stock:</strong> {modalData.stock}
+              </p>
+              <p>
+                <strong>Barcode:</strong> {modalData.barcode}
+              </p>
+                <div className="quantity-section">
+                    <label className="quantity-input"><strong>Quantity:</strong> </label>
+                    <input className="quantity-input-area"
+                      id="quantity-input"
+                      type="number"
+                      min="1"
+                      value={quantity}
+                      onChange={handleQuantityChange}
+                    />
+                </div>
+                <button  onClick={handleAddToCart} className="add-to-cart-button">Add to Cart</button>
+                <button onClick={handleRemoveFromFavorites} className="remove-from-favorites-button">
+                  Remove from Favorites
+                </button>
+              </div>
+              
             </div>
           </div>
-        </div>
       )}
     </div>
   );

@@ -39,6 +39,7 @@
   #cart-page .cart-items {
     flex: 2;
     padding-right: 20px;
+    border: #2E4255;
   }
   
   #cart-page .cart-summary-container {
@@ -54,87 +55,107 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  background-color: rgba(0, 0, 0, 0.6); /* Darker semi-transparent overlay */
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
 }
 
+/* Modal Container */
 #cart-page .modal-unique {
-  position: relative; /* Allows the close button to position itself relative to the modal */
-  background:#D3D8ED;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-  width: 400px;
+  position: relative;
+  background: linear-gradient(145deg, #ffffff, #f0f0f5);
+  padding: 30px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  width: 500px;
   max-width: 90%;
   text-align: center;
-  z-index: 1001; /* Ensure it's above the overlay */
+  z-index: 1001;
 }
 
-#cart-page .quantity-input-area {
-  background-color:#CAD3F0; 
-  border-radius: 0px;
-  border-color:#CAD3F0;
+/* Modal Title */
+#cart-page .modal-unique h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #2e4255;
+}
+
+/* Modal Text */
+#cart-page .modal-unique p {
+  font-size: 16px;
+  margin: 10px 0;
+  color: #555;
+}
+
+#cart-page .modal-unique p.warning {
+  color: #ff4d4d; /* Warning message in red */
+  font-weight: bold;
+}
+
+/* Buttons Container */
+#cart-page .modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+/* Button Styles */
+#cart-page .modal-button-green,
+#cart-page .modal-button-red {
+  flex: 1;
+  padding: 12px 20px;
+  margin: 0 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 #cart-page .modal-button-green {
-  margin-top: 10px;
-  margin-right: 3%;
-  background-color:#2E4255;
-  color: white;
-  border-radius: 5px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  background-color: #2e4255;
+}
+
+#cart-page .modal-button-green:hover {
+  background-color: #31c244; /* Green on hover */
+  color: black;
 }
 
 #cart-page .modal-button-green:disabled {
-  margin-top: 10px;
-  background-color:#95aec5;
-  color: white;
-  border-radius: 5px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-}
-#cart-page .modal-button-green:hover:active {
-  color: black;
-  background-color: #31c244;
-  border: 2px solid #688aaa;
+  background-color: #95aec5;
+  cursor: not-allowed;
 }
 
 #cart-page .modal-button-red {
-  margin-top: 10px;
-  margin-left: 3%;
-  background-color:#2E4255;
-  color: white;
-  border-radius: 5px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25); 
-}
-#cart-page .modal-button-red:hover {
-  color: black;
   background-color: #c23131;
-  border: 2px solid #688aaa;
 }
 
+#cart-page .modal-button-red:hover {
+  background-color: #a02424; /* Darker red on hover */
+  color: white;
+}
+
+/* Close Button */
 #cart-page .close-button-unique {
   position: absolute;
-  top: 10px; /* Position it inside the modal at the top-right corner */
-  right: 10px;
+  top: 15px;
+  right: 15px;
   background: transparent;
   border: none;
   font-size: 20px;
+  font-weight: bold;
+  color: #555;
   cursor: pointer;
-  color: #2e4255; /* Adjust color */
+  transition: color 0.2s ease-in-out;
 }
 
 #cart-page .close-button-unique:hover {
-  color: #ff0000; /* Change color when hovered */
-}
-
-#cart-page .modal-content-unique {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
+  color: #ff4d4d; /* Red on hover */
 }
 
 #cart-page .product-image-unique {

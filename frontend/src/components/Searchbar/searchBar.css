@@ -64,89 +64,99 @@
   font-weight: bold;
 }
 
-/* Modal Overlay */
-#searchbar .modal-overlay-unique {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-#searchbar .modal-unique {
-  position: relative; /* Allows the close button to position itself relative to the modal */
-  background:#D3D8ED;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-  width: 400px;
-  max-width: 90%;
-  text-align: center;
-  z-index: 1001; /* Ensure it's above the overlay */
-}
-
-#searchbar .quantity-input-area {
-  background-color:#ffffff; 
-  border-radius: 0px;
-  border-color:#ffffff;
-}
-
-#searchbar .add-to-cart-button {
-  margin-top: 10px;
-  background-color:#2E4255;
-  color: white;
-  border-radius: 5px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-}
-
-#searchbar .add-to-cart-button:hover {
-  color: black;
-  background-color: #688aaa;
-  border: 2px solid #688aaa;
-}
-
-#searchbar .add-to-favorites-button {
-  margin-top: 10px;
-  background-color:#2E4255;
-  color: white;
-  border-radius: 5px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25); 
-}
-#searchbar .add-to-favorites-button:hover {
-  color: black;
-  background-color: #688aaa;
-  border: 2px solid #688aaa;
-}
-
-#searchbar .close-button-unique {
-  position: absolute;
-  top: 10px; /* Position it inside the modal at the top-right corner */
-  right: 10px;
-  background: transparent;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-  color: #2e4255; /* Adjust color */
-}
-
-#searchbar .close-button-unique:hover {
-  color: #ff0000; /* Change color when hovered */
-}
-
-#searchbar .modal-content-unique {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-#searchbar .product-image-unique {
-  max-width: 100%;
-  height: auto;
-  border-radius: 5px;
-}
+ 
+  /* Modal Overlay */
+  #searchbar .modal-overlay-unique {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  #searchbar .modal-unique {
+    position: relative;
+    background: #f5f5f5;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    width: 600px; /* Increased width to accommodate the layout */
+    height: 400px;
+    display: flex; /* Use flexbox to align items side by side */
+    gap: 20px; /* Add spacing between image and details */
+    align-items: center; /* Vertically align image and details */
+  }
+  
+  
+  #searchbar .quantity-input-area {
+    background-color: #ffffff; 
+    width: 30%;
+    border-radius: 10px;
+    border-color: #ffffff;
+  }
+  
+  #searchbar .add-to-cart-button {
+    margin-top: 10px;
+    background-color: #2E4255;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    padding: 10px 20px;
+  }
+  
+  #searchbar .add-to-cart-button:hover {
+    color: black;
+    background-color: #688aaa;
+    border: 2px solid #688aaa;
+  }
+  #searchbar .remove-from-favorites-button {
+    margin-top: 10px;
+    background-color: #2E4255;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    padding: 10px 20px;
+  }
+  
+  #searchbar .remove-from-favorites-button:hover {
+    color: black;
+    background-color: #688aaa;
+    border: 2px solid #688aaa;
+  }
+  
+  #searchbar .close-button-unique {
+    position: absolute;
+    top: 10px; /* Position it inside the modal at the top-right corner */
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #2e4255; /* Adjust color */
+  }
+  
+  #searchbar .close-button-unique:hover {
+    color: #ff0000; /* Change color when hovered */
+  }
+  #searchbar .modal-details-unique h2{
+    font-size: 24px;
+  }
+  
+  #searchbar .modal-content-unique {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  #searchbar .product-image-unique {
+    max-width: 50%; /* Adjust width for the image */
+    height: auto;
+    border-radius: 5px;
+  }
+    

@@ -26,6 +26,7 @@ const CartItem: React.FC<CartItemProps> = ({ item, onAddToFavorites, onRemoveFro
   };
 
   return (
+    <div id="cartItem">
     <div className="cart-item">
       <img src={item.image} alt={item.name} className="cart-item-image" />
       <div className="cart-item-details">
@@ -33,13 +34,16 @@ const CartItem: React.FC<CartItemProps> = ({ item, onAddToFavorites, onRemoveFro
         <p>Price: {price.toFixed(2)} TL</p>
         <p>Quantity: {quantity}</p>
         <p>Total: {(price * quantity).toFixed(2)} TL</p>
+        <div className='buttons'>
         <button onClick={handleAddToFavorites} className="add-to-favorites-button">
           Add to Favorites
         </button>
         <button onClick={handleRemoveFromCart} className="remove-from-cart-button">
           Remove from Cart
         </button>
+        </div>
       </div>
+    </div>
     </div>
   );
 };

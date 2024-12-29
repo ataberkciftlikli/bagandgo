@@ -171,53 +171,56 @@ const CategoryPage: React.FC = () => {
       </div>
 
       {modalOpen && modalData && (
-        <div className="modal-overlay-category">
-          <div className="modal-category">
-            <button className="close-button-category" onClick={closeModal}>
-              ×
-            </button>
-            <h2>Product Information</h2>
-            {modalData.image && (
-              <img
-                src={modalData.image}
-                alt={modalData.name}
-                className="product-image-category"
-              />
-            )}
-            <p>
-              <strong>Name:</strong> {modalData.name}
-            </p>
-            <p>
-              <strong>Price:</strong> {modalData.price} TL
-            </p>
-            <p>
-              <strong>Stock:</strong> {modalData.stock}
-            </p>
-            <p>
-              <strong>Barcode:</strong> {modalData.barcode}
-            </p>
-            <div>
-              <label className="quantity-input">
-                <strong>Quantity:</strong>{' '}
-              </label>
-              <input
-                className="quantity-input-area"
-                id="quantity-input"
-                type="number"
-                min="1"
-                value={quantity}
-                onChange={handleQuantityChange}
-              />
-              <button onClick={handleAddToCart} className="add-to-cart-button">
-                Add to Cart
-              </button>
-              <button onClick={handleAddToFavorites} className="add-to-favorites-button">
-                Add to Favorites
-              </button>
-            </div>
-          </div>
+  <div className="modal-overlay-category">
+    <div className="modal-category">
+      <button className="close-button-category" onClick={closeModal}>
+        ×
+      </button>
+      <img
+        src={modalData.image}
+        alt={modalData.name}
+        className="product-image-category"
+      />
+      <div className="modal-details-category">
+     
+        <h2>
+          {modalData.name}
+        </h2>
+        <h2>
+        <strong>{modalData.price} TL</strong>
+        </h2>
+        <p>
+          <strong>Stock:</strong> {modalData.stock}
+        </p>
+        <p>
+          <strong>Barcode:</strong> {modalData.barcode}
+        </p>
+        <div className="quantity-section">
+          <label className="quantity-input">
+            <strong>Quantity:</strong>
+          </label>
+          <input
+            className="quantity-input-area"
+            id="quantity-input"
+            type="number"
+            min="1"
+            value={quantity}
+            onChange={handleQuantityChange}
+          />
         </div>
-      )}
+        <button onClick={handleAddToCart} className="add-to-cart-button">
+          Add to Cart
+        </button>
+        <button
+          onClick={handleAddToFavorites}
+          className="add-to-favorites-button"
+        >
+          Add to Favorites
+        </button>
+      </div>
+    </div>
+  </div>
+)}
     </div>
   );
 };

@@ -38,30 +38,33 @@
 }
 
 #favorites-section .modal-unique {
-  position: relative; /* Allows the close button to position itself relative to the modal */
-  background:#D3D8ED;
+  position: relative;
+  background: #D3D8ED;
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-  width: 400px;
-  max-width: 90%;
-  text-align: center;
-  z-index: 1001; /* Ensure it's above the overlay */
+  width: 600px; /* Increased width to accommodate the layout */
+  height: 400px;
+  display: flex; /* Use flexbox to align items side by side */
+  gap: 20px; /* Add spacing between image and details */
+  align-items: center; /* Vertically align image and details */
 }
 
 
 #favorites-section .quantity-input-area {
-  background-color:#ffffff; 
-  border-radius: 0px;
-  border-color:#CAD3F0;
+  background-color: #ffffff; 
+  width: 30%;
+  border-radius: 10px;
+  border-color: #ffffff;
 }
 
 #favorites-section .add-to-cart-button {
   margin-top: 10px;
-  background-color:#2E4255; 
+  background-color: #2E4255;
   color: white;
   border-radius: 5px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  padding: 10px 20px;
 }
 
 #favorites-section .add-to-cart-button:hover {
@@ -71,10 +74,11 @@
 }
 #favorites-section .remove-from-favorites-button {
   margin-top: 10px;
-  background-color:#2E4255;
+  background-color: #2E4255;
   color: white;
   border-radius: 5px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25); 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  padding: 10px 20px;
 }
 
 #favorites-section .remove-from-favorites-button:hover {
@@ -97,6 +101,9 @@
 #favorites-section .close-button-unique:hover {
   color: #ff0000; /* Change color when hovered */
 }
+#favorites-section .modal-details-unique h2{
+  font-size: 24px;
+}
 
 #favorites-section .modal-content-unique {
   display: flex;
@@ -106,7 +113,7 @@
 }
 
 #favorites-section .product-image-unique {
-  max-width: 100%;
+  max-width: 50%; /* Adjust width for the image */
   height: auto;
   border-radius: 5px;
 }

@@ -19,7 +19,7 @@ const SearchBar: React.FC = () => {
         return;
       }
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/?search=${query}`);
+        const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/product/products/?search=${query}`);
         const data = await response.json();
         if (response.ok) {
           setProductResults(data);
@@ -167,7 +167,6 @@ const SearchBar: React.FC = () => {
             <button className="close-button-unique" onClick={closeModal}>
               ×
             </button>
-            <h2>Product Information</h2>
             {modalData.image && (
               <img
                 src={modalData.image}
@@ -175,43 +174,37 @@ const SearchBar: React.FC = () => {
                 className="product-image-unique"
               />
             )}
-            <p>
-              <strong>Name:</strong> {modalData.name}
-            </p>
-            <p>
-              <strong>Price:</strong> {modalData.price} TL
-            </p>
-            <p>
-              <strong>Stock:</strong> {modalData.stock}
-            </p>
-            <p>
-              <strong>Barcode:</strong> {modalData.barcode}
-            </p>
-            <div>
-              <label className="quantity-input">
-                <strong>Quantity:</strong>
-              </label>
-              <input
-                className="quantity-input-area"
-                id="quantity-input"
-                type="number"
-                min="1"
-                value={quantity}
-                onChange={handleQuantityChange}
-              />
-              <button onClick={handleAddToCart} className="add-to-cart-button">
-                Add to Cart
-              </button>
-              <button
-                className="add-to-favorites-button"
-                onClick={handleAddToFavorites}
-              >
-                Add to Favorites
-              </button>
+            <div className="modal-details-unique">
+              <h2>
+                {modalData.name}
+              </h2>
+              <h2>
+                <strong>{modalData.price} TL</strong> 
+              </h2>
+              <p>
+                <strong>Stock:</strong> {modalData.stock}
+              </p>
+              <p>
+                <strong>Barcode:</strong> {modalData.barcode}
+              </p>
+                <div className="quantity-section">
+                    <label className="quantity-input"><strong>Quantity:</strong> </label>
+                    <input className="quantity-input-area"
+                      id="quantity-input"
+                      type="number"
+                      min="1"
+                      value={quantity}
+                      onChange={handleQuantityChange}
+                    />
+                </div>
+                <button  onClick={handleAddToCart} className="add-to-cart-button">Add to Cart</button>
+                <button onClick={handleAddToFavorites} className="remove-from-favorites-button">
+                  Add To Favorites
+                </button>
+              </div>
+              
             </div>
           </div>
-        </div>
-
       )}
     </div>
     </div>

@@ -154,10 +154,12 @@ const Sales: React.FC = () => {
                 <img src={product.image} alt={product.name} className="sales-item-image" />
                 <div className="sales-item-details">
                   <h3>{product.name}</h3>
-                  <p className="sales-item-old-price">
-                    <del>{product.old_price > 0 ? `${product.old_price.toFixed(2)} TL` : ''}</del>
-                  </p>
-                  <p className="sales-item-new-price">{product.price.toFixed(2)} TL</p>
+                  <div className="sales-item-prices">
+                    <p className="sales-item-old-price">
+                      <del>{product.old_price > 0 ? `${product.old_price.toFixed(2)} TL` : ''}</del>
+                    </p>
+                    <p className="sales-item-new-price">{product.price.toFixed(2)} TL</p>
+                  </div>
                 </div>
               </div>
             ))
@@ -165,13 +167,13 @@ const Sales: React.FC = () => {
         </div>
       </div>
 
+      {/* Modal */}
       {modalOpen && modalData && (
         <div className="modal-overlay-unique">
           <div className="modal-unique">
             <button className="close-button-unique" onClick={closeModal}>
               ×
             </button>
-            <h2>Product Information</h2>
             {modalData.image && (
               <img
                 src={modalData.image}
@@ -179,39 +181,37 @@ const Sales: React.FC = () => {
                 className="product-image-unique"
               />
             )}
-            <p>
-              <strong>Name:</strong> {modalData.name}
-            </p>
-            <p>
-              <strong>Price:</strong> {modalData.price} TL
-            </p>
-            <p>
-              <strong>Stock:</strong> {modalData.stock}
-            </p>
-            <p>
-              <strong>Barcode:</strong> {modalData.barcode}
-            </p>
-            <div>
-              <label className="quantity-input">
-                <strong>Quantity:</strong>{' '}
-              </label>
-              <input
-                className="quantity-input-area"
-                id="quantity-input"
-                type="number"
-                min="1"
-                value={quantity}
-                onChange={handleQuantityChange}
-              />
-              <button onClick={handleAddToCart} className="add-to-cart-button">
-                Add to Cart
-              </button>
-              <button onClick={handleAddToFavorites} className="add-to-favorites-button">
-                Add to Favorites
-              </button>
+            <div className="modal-details-unique">
+              <h2>
+                {modalData.name}
+              </h2>
+              <h2>
+                <strong>{modalData.price} TL</strong> 
+              </h2>
+              <p>
+                <strong>Stock:</strong> {modalData.stock}
+              </p>
+              <p>
+                <strong>Barcode:</strong> {modalData.barcode}
+              </p>
+                <div className="quantity-section">
+                    <label className="quantity-input"><strong>Quantity:</strong> </label>
+                    <input className="quantity-input-area"
+                      id="quantity-input"
+                      type="number"
+                      min="1"
+                      value={quantity}
+                      onChange={handleQuantityChange}
+                    />
+                </div>
+                <button  onClick={handleAddToCart} className="add-to-cart-button">Add to Cart</button>
+                <button onClick={handleAddToFavorites} className="remove-from-favorites-button">
+                  Add To Favorites
+                </button>
+              </div>
+              
             </div>
           </div>
-        </div>
       )}
     </div>
   );
