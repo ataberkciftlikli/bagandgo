@@ -12,36 +12,8 @@
     margin-top: 6rem;
   }
   
-  #info-section .picture-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px; /* Space below the picture container */
-  }
-  
-  #info-section .profile-picture {
-    width: 100px; /* Adjust the size as needed */
-    height: 100px;
-    border-radius: 50%;
-    background-color: #ccc; /* Placeholder background color */
-    margin-bottom: 10px; /* Space below the picture */
-    object-fit: cover; /* Ensure the image covers the container */
-  }
-  
-  #info-section .change-picture-button {
-    background-color: #2c3e50;
-    color: #DEE2FF;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 35px;
-    cursor: pointer;
-  }
-  
-  #info-section .change-picture-button:hover {
-    color: #000000;
-    background-color: #a25ff450;
-    border: 2px solid #a25ff450;
-  }
+
+
   
   #info-section .success-message {
     color: green;

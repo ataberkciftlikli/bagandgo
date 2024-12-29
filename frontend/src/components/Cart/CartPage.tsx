@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
 import CartItem from './CartItem';
@@ -13,6 +14,8 @@ const CartPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [checkoutModalOpen, setCheckoutModalOpen] = useState(false);
+
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -121,6 +124,8 @@ const CartPage: React.FC = () => {
         await fetchUserProfile();
         setCartItems([]); // Ensure the cart visually clears
         setTotalAmount(0); // Reset the total amount
+
+        navigate('/profile/history'); // Redirect to the order history page
       } else {
         alert(data.error || 'Failed to place the order.');
       }

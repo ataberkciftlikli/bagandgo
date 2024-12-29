@@ -58,8 +58,9 @@ const UserInfo: React.FC = () => {
   return (
     <div id="info-section" className="info-section">
       <div className="info-container">
-        <h2>User Information</h2>
+        
         <div className="user-info-display">
+        <h2>User Information</h2>
           <p><strong>Username:</strong> {username}</p>
           <p><strong>First Name:</strong> {firstName}</p>
           <p><strong>Last Name:</strong> {lastName}</p>
