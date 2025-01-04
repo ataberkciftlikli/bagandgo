@@ -1,0 +1,284 @@
+
+#header {
+  background: linear-gradient(to left, #CAD3F0, #D3D8ED);
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed; 
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+#header .general {
+  padding-top: 0.8%;
+  padding-left: 0.8%;
+  padding-bottom: 0.28%;
+}
+
+#header .menu-button {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  outline: none;
+}
+
+#header .button.nav-link {
+  background: none;
+  border: none;
+}
+
+#header .menu-button img {
+  width: 24px;
+  height: 24px;
+}
+
+#header .header-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-left: 0.5rem;
+  color: #333;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+#header .navbar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+#header .guest-links {
+  display: flex;
+  gap: 1rem;
+}
+
+#header .nav-link {
+  color: #2E4255;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  background: none;
+  border: none;
+  white-space: nowrap;
+  padding: 5px 15px;
+  border-radius: 35px;
+  transition: background-color 0.3s, border 0.3s;
+}
+
+#header .nav-link.active,
+#header .nav-link:hover {
+  color: #D3D8ED;
+  background-color: #2E4255;
+  border: 2px solid #2E4255;
+}
+
+#header .nav-link3 {
+  color: #2E4255;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  background: none;
+  border: none;
+  white-space: nowrap;
+  padding: 5px 15px;
+  border-radius: 35px;
+  transition: background-color 0.3s, border 0.3s;
+}
+
+#header .exit-button {
+  display: flex;
+  align-items: center;
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 35px;
+  padding: 10px 15px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+#header .exit-button.active,
+#header .exit-button:hover {
+  color: #D3D8ED;
+  background-color: #2E4255;
+  border: 1px solid #2E4255;
+}
+#header .exit-button:hover .exit-icon {
+  margin-right: 5px;
+  content: url('../icons/exit_logo_hover.png'); /* Path to the hover icon */
+}
+
+#header .exit-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 5px;
+}
+
+
+
+#header .user-info {
+  display: flex;
+  align-items: center;
+}
+
+#header .user-profile-picture {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+#header .cart {
+  width: 30px;
+  height: 30px;
+  margin-right: 8px; 
+
+}
+#header .code {
+  width: 30px;
+  height: 30px;
+  margin-right: 8px;
+
+}
+#header .info {
+  width: 10px;
+  height: 25px;
+  margin-right: 8px; 
+
+}
+
+#header .user-name {
+  font-size: 16px;
+  color: #333;
+}
+
+#header .general {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start; 
+  width: 100%;
+}
+
+#header .navbar2 {
+  display: flex;
+  justify-content: end;
+  align-items:center;
+  flex-grow: 1;
+}
+/* Desktop Styles */
+#header .exit-button-mobile {
+  display: none;
+}
+
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  #header {
+    position: relative;
+    flex-direction: column;
+    align-items: flex-start; 
+    padding: 10px;
+    width: 100%;
+  }
+  #header .general{
+    flex-direction: column;
+    margin-top: 4%;
+  }
+  #header .d-flex{
+    margin-left: 2%;
+  }
+  #header .header-title{
+    margin-left: 10px;
+    padding-left: 6px;
+  }
+
+  #header .navbar2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  #header .exit-button-mobile {
+    display: block; 
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin-left: 80%; 
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+  }
+
+  #header .exit-icon-mobile {
+    width: 24px;
+    height: 24px;
+    justify-content: end;
+  }
+
+
+  /* Ensure the search bar remains full width */
+  #header .search-bar-container {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+    /* Hide unnecessary elements on mobile */
+    #header .user-info,
+    #header .exit-button {
+      display: none;
+    }
+    #header .info {
+      margin-left: 8px;
+      margin-right: 1.2rem;
+    }
+
+
+  
+
+  /* Stack the nav links under the search bar */
+  #header .guest-links {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column; 
+    flex-wrap: nowrap;
+    gap: 10px;
+    width: 100%;
+  }
+
+  #header .nav-link {
+    display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+    font-size: 14px;
+    justify-content: flex-start;
+    padding: 8px 10px;
+    flex: 0;
+  }
+
+  /* Ensure active/hover states still work */
+  #header .nav-link:active,
+  #header .nav-link.active {
+    background-color: #8C52CC;
+     justify-content: flex-start;
+    color: #fff;
+    align-items: flex-start;
+    width: 100%;
+    white-space: nowrap;
+    border: solid #8C52CC;
+    padding-right:90% ;
+    padding-top: 8px;
+    border-radius: 0%;
+  }
+}

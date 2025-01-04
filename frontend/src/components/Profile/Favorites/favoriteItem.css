@@ -1,0 +1,60 @@
+#favoriteItem .favorite-item {
+  width: 150px;
+  height: 250px; 
+  padding: 10px;
+  border: 1px solid #bebaba;
+  border-radius: 8px;
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+  background-color: #ffffff; /* Ensure white background */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Distribute content evenly */
+  align-items: center; /* Center-align content */
+}
+
+#favoriteItem .favorite-item:hover {
+  transform: scale(1.05);
+}
+
+#favoriteItem .favorite-item-image {
+  width: 140px;
+  height: 100px;
+  display: block; 
+  object-fit: contain; 
+  object-position: center; 
+  border-bottom: 2px solid #e0e0e0; /* Add a border only under the image */
+  box-sizing: border-box; 
+  background-color: #ffffff; /* Set the image background to white */
+}
+
+#favoriteItem .favorite-item-details {
+  background-color: #ffffff; /* Different background color for details section */
+  padding: 10px;
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Ensure even spacing */
+  align-items: center;
+}
+#favoriteItem .favorite-item-details h3 {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+#favoriteItem .favorite-item-details p {
+  font-weight: bold;
+  color: #2e4255;
+}
+
+#favoriteItem .favorite-item-rating {
+  font-size: 14px;
+  color: #555;
+}
+
+#favoriteItem .favorite-item-price {
+  font-weight: bold;
+  color: #2e4255;
+  margin-top: auto; /* Push price to the bottom */
+}

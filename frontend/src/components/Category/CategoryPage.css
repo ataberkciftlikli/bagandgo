@@ -1,0 +1,120 @@
+#category-page {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .category-page-content {
+    background: linear-gradient(to bottom, #cbcfdf, #e3e6f0);
+    padding: 1rem;
+    border-radius: 20px;
+    box-shadow: 0 0 2rem 5px rgba(0, 0, 0, 0.1);
+    width: 55%;
+    height: 90%;
+    box-sizing: border-box;
+    margin-left: 27rem;
+    margin-top: 7rem;
+  }
+  
+  .category-items-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  /* Modal Overlay */
+#category-page .modal-overlay-category {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  #category-page .modal-category {
+    position: relative;
+    background: #f5f5f5;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    width: 600px; 
+    height: 400px;
+    display: flex;
+    gap: 20px; 
+    align-items: center; 
+  }
+  
+  #category-page .product-image-category {
+    max-width: 50%; 
+    height: auto;
+    border-radius: 5px;
+  }
+  
+  #category-page .modal-details-category {
+    flex-grow: 1; 
+    text-align: left; 
+  }
+  #category-page .modal-details-category h2{
+    font-size: 24px;
+  }
+  
+  #category-page .modal-details-category p {
+    margin: 5px 0; 
+  }
+  
+  #category-page .modal-details-category .quantity-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  #category-page .add-to-cart-button,
+  #category-page .add-to-favorites-button {
+    margin-top: 10px;
+    background-color: #2E4255;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    padding: 10px 20px;
+  }
+  
+  #category-page .add-to-cart-button:hover,
+  #category-page .add-to-favorites-button:hover {
+    color: black;
+    background-color: #688aaa;
+    border: 2px solid #688aaa;
+  }
+
+  #category-page .quantity-input-area {
+    background-color: #ffffff; 
+    width: 30%;
+    border-radius: 10px;
+    border-color: #ffffff;
+  }
+  
+  #category-page .close-button-category {
+    position: absolute;
+    top: 10px; /* Position it inside the modal at the top-right corner */
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #2e4255; /* Adjust color */
+  }
+  
+  #category-page .close-button-category:hover {
+    color: #ff0000; /* Change color when hovered */
+  }
+  
+  #category-page .modal-content-category {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  

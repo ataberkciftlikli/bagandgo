@@ -1,0 +1,103 @@
+/* profileInfo.css */
+
+#info-section {
+    background: linear-gradient(to bottom, #cbcfdf, #e3e6f0);
+    padding: 10rem;
+    border-radius: 20px;
+    box-shadow: 0 0 2rem 5px rgba(0, 0, 0, 0.1);
+    width: 55%;
+    height: 90%;
+    box-sizing: border-box;
+    margin-left: 20rem;
+    margin-top: 6rem;
+  }
+  
+
+
+  
+  #info-section .success-message {
+    color: green;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  #info-section .Header {
+    text-align: center;
+  }
+  
+  #info-section .info-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #info-section .form-group {
+    margin-bottom: 15px;
+  }
+  
+  #info-section .form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  #info-section .form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  #info-section .btn-primary {
+    background-color: #2c3e50;
+    color: #DEE2FF;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    #info-section {
+      padding: 10%; 
+      margin: 2rem auto; 
+      width: 100%;
+      height: auto; 
+    }
+  
+    #info-section .picture-container {
+      margin-bottom: 15px; 
+    }
+  
+    #info-section .profile-picture {
+      width: 80px; 
+      height: 80px;
+    }
+  
+    #info-section .change-picture-button {
+      padding: 8px 15px; 
+    }
+  
+    #info-section .Header {
+      font-size: 24px; 
+    }
+  
+    #info-section .info-form {
+      padding: 0;
+    }
+  
+    #info-section .form-group {
+      margin-bottom: 10px; 
+    }
+  
+    #info-section .form-control {
+      font-size: 14px;
+      padding: 8px; 
+    }
+  
+    #info-section .btn-primary {
+      width: 100%; 
+      padding: 12px; 
+    }
+  }
+  

@@ -1,18 +1,14 @@
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(to bottom, #cad3f0, #e9ebf1) !important;
-  }
+
   
   #login-page {
     width: 100%;
-    min-height: 100vh;
+    min-height: 101vh;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 0;
     box-sizing: border-box;
+    background: linear-gradient(to bottom, #cad3f0, #e9ebf1) !important;
   }
   
   #login-page .login-form {
@@ -30,7 +26,7 @@ html, body {
     font-weight: bold;
     line-height: 40px;
     text-align: center;
-    color: #6dd5fa;
+    color: #DEE2FF;
     margin-bottom: 10px;
     margin-top: 0;
     letter-spacing: 1px;
@@ -75,8 +71,8 @@ html, body {
     padding: 0.8rem;
     border: none;
     border-radius: 50px;
-    background-color: #e74c3c;
-    color: #ffffff;
+    background-color: #DEE2FF;
+    color: #2c3e50;
     font-size: 1.1rem;
     font-weight: 600;
     cursor: pointer;
@@ -84,7 +80,7 @@ html, body {
   }
   
   #login-page .btn-primary:hover {
-    background-color: #c0392b;
+    background-color: #a0a5cb;
     transform: scale(1.05);
   }
   

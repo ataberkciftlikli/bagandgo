@@ -1,0 +1,162 @@
+.search-bar-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin-right: 20rem; 
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 10px 10px 40px;
+  border: 1px solid #ccc;
+  border-radius: 35px;
+  box-sizing: border-box;
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  pointer-events: none; 
+}
+
+.search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 5px;
+  z-index: 1000;
+  list-style-type: none;
+  padding: 0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-result-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.search-result-item:hover {
+  background: #f0f0f0;
+}
+
+.product-name {
+  flex-grow: 1;
+  text-align: left;
+}
+
+.product-price {
+  flex-shrink: 0;
+  color: #2e4255;
+  font-weight: bold;
+}
+
+ 
+  /* Modal Overlay */
+  #searchbar .modal-overlay-unique {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  #searchbar .modal-unique {
+    position: relative;
+    background: #f5f5f5;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    width: 600px;
+    height: 400px;
+    display: flex; 
+    gap: 20px; 
+    align-items: center; 
+  }
+  
+  
+  #searchbar .quantity-input-area {
+    background-color: #ffffff; 
+    width: 30%;
+    border-radius: 10px;
+    border-color: #ffffff;
+  }
+  
+  #searchbar .add-to-cart-button {
+    margin-top: 10px;
+    background-color: #2E4255;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    padding: 10px 20px;
+  }
+  
+  #searchbar .add-to-cart-button:hover {
+    color: black;
+    background-color: #688aaa;
+    border: 2px solid #688aaa;
+  }
+  #searchbar .remove-from-favorites-button {
+    margin-top: 10px;
+    background-color: #2E4255;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    padding: 10px 20px;
+  }
+  
+  #searchbar .remove-from-favorites-button:hover {
+    color: black;
+    background-color: #688aaa;
+    border: 2px solid #688aaa;
+  }
+  
+  #searchbar .close-button-unique {
+    position: absolute;
+    top: 10px; 
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #2e4255; 
+  }
+  
+  #searchbar .close-button-unique:hover {
+    color: #ff0000; /* Change color when hovered */
+  }
+  #searchbar .modal-details-unique h2{
+    font-size: 24px;
+  }
+  
+  #searchbar .modal-content-unique {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  #searchbar .product-image-unique {
+    max-width: 50%; 
+    height: auto;
+    border-radius: 5px;
+  }
+    

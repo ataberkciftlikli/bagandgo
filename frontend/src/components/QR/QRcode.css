@@ -1,0 +1,190 @@
+/* Wrapper for the QR Code page */
+#qrcode .qr-wrapper-unique {
+  background-color: #e4e7f2; 
+  height: 100vh; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 20px; /* Added padding for better spacing */
+  box-sizing: border-box;
+}
+
+/* Container for the QR Code scanner */
+#qrcode .qr-container-unique {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90%; 
+  max-width: 500px; /* Ensure it doesn’t stretch too much on larger screens */
+  background-color: rgba(220, 225, 253, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  position: relative;
+}
+
+/* QR Code Page Title */
+#qrcode .qr-title-unique {
+  font-size: 24px;
+  font-weight: bold;
+  color: #2e4255;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Styling for the QR Scanner area */
+#qrcode .qr-reader-unique {
+  width: 100%;
+  max-width: 300px; 
+  aspect-ratio: 4 / 3; /* Maintains a 4:3 aspect ratio */
+  border: 2px solid #6c6c78;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+/* Styling for QR Output */
+#qrcode .qr-output-unique {
+  font-size: 16px;
+  color: #6c6c78;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* Styling for manual input area */
+#qrcode .qr-manual-input-unique {
+  width: 100%;
+  margin-top: 20px;
+  text-align: center;
+}
+
+#qrcode .qr-manual-input-unique label {
+  font-size: 16px;
+  color: #2e4255;
+  margin-bottom: 5px;
+  display: block;
+}
+
+#qrcode .qr-manual-input-unique input {
+  width: calc(100% - 20px); 
+  max-width: 300px;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #6c6c78;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+#qrcode .qr-manual-input-unique button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  background-color: #2e4255;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#qrcode .qr-manual-input-unique button:hover {
+  background-color: #1f2f3b;
+}
+
+  /* Modal Overlay */
+  #qrcode .modal-overlay-unique {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  #qrcode .modal-unique {
+    position: relative;
+    background: #f5f5f5;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    width: 600px; /* Increased width to accommodate the layout */
+    height: 400px;
+    display: flex; 
+    gap: 20px; 
+    align-items: center; 
+  }
+  
+  
+  #qrcode .quantity-input-area {
+    background-color: #ffffff; 
+    width: 30%;
+    border-radius: 10px;
+    border-color: #ffffff;
+  }
+  
+  #qrcode .add-to-cart-button {
+    margin-top: 10px;
+    background-color: #2E4255;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    padding: 10px 20px;
+  }
+  
+  #qrcode .add-to-cart-button:hover {
+    color: black;
+    background-color: #688aaa;
+    border: 2px solid #688aaa;
+  }
+  #qrcode .remove-from-favorites-button {
+    margin-top: 10px;
+    background-color: #2E4255;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    padding: 10px 20px;
+  }
+  
+  #qrcode .remove-from-favorites-button:hover {
+    color: black;
+    background-color: #688aaa;
+    border: 2px solid #688aaa;
+  }
+  
+  #qrcode .close-button-unique {
+    position: absolute;
+    top: 10px; 
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #2e4255;
+  }
+  
+  #qrcode .close-button-unique:hover {
+    color: #ff0000; /* Change color when hovered */
+  }
+  #qrcode .modal-details-unique h2{
+    font-size: 24px;
+  }
+  
+  #qrcode .modal-content-unique {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  #qrcode .product-image-unique {
+    max-width: 50%; /* Adjust width for the image */
+    height: auto;
+    border-radius: 5px;
+  }
+    

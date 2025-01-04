@@ -1,0 +1,27 @@
+/* shoppingHistory.css */
+
+#history-page {
+    background: linear-gradient(to bottom, #cbcfdf, #e3e6f0);
+    padding: 1rem;
+    border-radius: 20px;
+    box-shadow: 0 0 2rem 5px rgba(0, 0, 0, 0.1);
+    width: 55%;
+    height: 90%;
+    box-sizing: border-box;
+    margin-left: 20rem;
+    margin-top: 6rem;
+  }
+.shopping-history {
+    padding: 20px;
+  }
+  
+  .transactions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+
+  
+
+  

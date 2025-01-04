@@ -1,0 +1,135 @@
+/* sales.css */
+
+#sales-section {
+  width: 100%;
+  margin-top: 2%;
+}
+
+#sales-section h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Hot Sale Section with Navigation Buttons */
+#sales-section .hot-sale-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  width: 80%;
+  height: auto;
+}
+
+
+
+#sales-section .nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 2rem;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  z-index: 10;
+}
+
+#sales-section .nav-button:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+#sales-section .left-button {
+  left: 10px;
+}
+
+#sales-section .right-button {
+  right: 10px;
+}
+
+#sales-section .hot-sale {
+  width: 100%;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+#sales-section .hot-sale:hover {
+  transform: scale(1.02);
+}
+
+#sales-section .hot-sale-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+#sales-section .hot-sale-details {
+  position: absolute;
+  bottom: 10px;
+  left: 20px;
+  background-color: rgba(255, 255, 255, 0.6);
+  padding: 10px;
+  border-radius: 8px;
+  color: rgb(0, 0, 0);
+}
+
+/* Other Sales Section */
+#sales-section .other-sales-list {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+}
+
+#sales-section .other-sales-item {
+  flex: 1;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+#sales-section .other-sales-item:last-child {
+  margin-right: 0;
+}
+
+#sales-section .other-sales-item:hover {
+  transform: scale(1.05);
+}
+
+#sales-section .other-sales-image {
+  width: 100%;
+  height: auto;
+  max-height: 150px;
+  border-radius: 10px;
+  object-fit: cover;
+  margin-bottom: 5px;
+}
+
+#sales-section p {
+  font-size: 14px;
+  color: #333;
+  margin: 0;
+}
+
+
+@media (max-width: 768px) {
+  /* Make sections stack on top of each other in smaller screens */
+  #sales-section .other-sales-list {
+    width: 100%;
+  }
+  #sales-section .other-sales-image {
+    width: 100%;
+    height: 4rem;
+
+  }
+  #sales-section .hot-sale-container {
+    width: 100%;
+  }
+}
+
+  

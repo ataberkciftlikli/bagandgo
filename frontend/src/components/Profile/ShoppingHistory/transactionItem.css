@@ -1,0 +1,88 @@
+#transactionItem .transaction-item {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  #transactionItem .transaction-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  #transactionItem .transaction-summary img.thumbnail {
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
+  }
+  
+  #transactionItem .transaction-summary .expand-button {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  
+  #transactionItem .amount {
+    color: green;
+    font-weight: bold;
+  }
+  
+  #transactionItem .product-list {
+    margin-top: 10px;
+    padding-left: 20px;
+    border-top: 1px solid #e0e0e0;
+  }
+  /* Clickable Receipt */
+  #transactionItem .transaction-summary .clickable-receipt {
+  color: #007bff;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+#transactionItem .transaction-summary .clickable-receipt:hover {
+  color: #0056b3;
+}
+
+/* Modal Overlay */
+#transactionItem .modal-overlay-transaction {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal Container */
+#transactionItem .modal-transaction {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  width: 300px;
+  text-align: center;
+  position: relative;
+}
+
+/* Close Button */
+#transactionItem .close-button-transaction {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #555;
+}
+
+#transactionItem .close-button-transaction:hover {
+  color: #ff0000;
+}
+
