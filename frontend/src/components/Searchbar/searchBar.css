@@ -2,12 +2,12 @@
   position: relative;
   width: 100%;
   max-width: 400px;
-  margin-right: 20rem; /* Add some space between the search bar and the Profile button */
+  margin-right: 20rem; 
 }
 
 .search-input {
   width: 100%;
-  padding: 10px 10px 10px 40px; /* Adjust padding to make room for the icon */
+  padding: 10px 10px 10px 40px;
   border: 1px solid #ccc;
   border-radius: 35px;
   box-sizing: border-box;
@@ -20,7 +20,7 @@
   transform: translateY(-50%);
   width: 20px;
   height: 20px;
-  pointer-events: none; /* Allow clicks to pass through the icon */
+  pointer-events: none; 
 }
 
 .search-results {
@@ -72,7 +72,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    background-color: rgba(0, 0, 0, 0.5); 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -85,11 +85,11 @@
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-    width: 600px; /* Increased width to accommodate the layout */
+    width: 600px;
     height: 400px;
-    display: flex; /* Use flexbox to align items side by side */
-    gap: 20px; /* Add spacing between image and details */
-    align-items: center; /* Vertically align image and details */
+    display: flex; 
+    gap: 20px; 
+    align-items: center; 
   }
   
   
@@ -131,13 +131,13 @@
   
   #searchbar .close-button-unique {
     position: absolute;
-    top: 10px; /* Position it inside the modal at the top-right corner */
+    top: 10px; 
     right: 10px;
     background: transparent;
     border: none;
     font-size: 20px;
     cursor: pointer;
-    color: #2e4255; /* Adjust color */
+    color: #2e4255; 
   }
   
   #searchbar .close-button-unique:hover {
@@ -155,7 +155,7 @@
   }
   
   #searchbar .product-image-unique {
-    max-width: 50%; /* Adjust width for the image */
+    max-width: 50%; 
     height: auto;
     border-radius: 5px;
   }

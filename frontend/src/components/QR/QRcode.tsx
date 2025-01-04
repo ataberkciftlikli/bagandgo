@@ -23,17 +23,17 @@ const QRcode: React.FC = () => {
   
       // Check if result is an object with a 'text' property or a string
       if (typeof result === 'string') {
-        extractedText = result.trim(); // If result is just a string, use it directly
+        extractedText = result.trim(); 
       } else if (result.text) {
-        extractedText = result.text.trim(); // If result is an object, use the 'text' property
+        extractedText = result.text.trim(); 
       }
   
-      console.log("Scanned QR Code Text: ", extractedText); // Debugging log for the scanned data
+      console.log("Scanned QR Code Text: ", extractedText); 
   
       // Set the extracted text as barcode
-      setScannedData(extractedText); // Save scanned data for display
-      setBarcode(extractedText); // Update barcode with scanned data
-      checkBarcode(extractedText); // Trigger barcode validation and submission
+      setScannedData(extractedText); 
+      setBarcode(extractedText);
+      checkBarcode(extractedText); 
     }
   };
 

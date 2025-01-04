@@ -10,7 +10,7 @@ const iconMap: { [key: string]: string } = {
   user: userIcon,
   email: emailIcon,
   password: passwordIcon,
-  id: idIcon, // Map the new ID icon
+  id: idIcon, 
 };
 
 interface InputFieldProps {

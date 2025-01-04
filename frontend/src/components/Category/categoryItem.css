@@ -1,15 +1,15 @@
 #categoryItem .category-item {
   width: 150px;
-  height: 250px; /* Ensure consistent height */
+  height: 250px; 
   padding: 10px;
   border: 1px solid #bebaba;
   border-radius: 8px;
   text-align: center;
   transition: transform 0.3s ease-in-out;
-  background-color: #ffffff; /* Ensure white background */
+  background-color: #ffffff; /* White background */
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Properly distribute content */
+  justify-content: space-between;
   align-items: center;
   overflow: hidden; /* Prevent content overflow */
 }
@@ -21,11 +21,11 @@
 #categoryItem .category-item-image {
   width: 140px;
   height: 100px;
-  display: block; /* Ensure the image behaves as a block element */
-  object-fit: contain; /* Keep the aspect ratio and fit the image inside the box */
-  object-position: center; /* Center the image within the container */
+  display: block; 
+  object-fit: contain; 
+  object-position: center; 
   border-bottom: 2px solid #e0e0e0; /* Add a border only under the image */
-  box-sizing: border-box; /* Ensure padding and border are included in dimensions */
+  box-sizing: border-box; 
   background-color: #ffffff; /* Set the image background to white */
 }
 
@@ -36,13 +36,13 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Ensure even spacing */
+  justify-content: space-between; 
   align-items: center;
 }
 #categoryItem .category-item-details h3 {
-  font-size: 14px; /* Adjust font size for better fit */
+  font-size: 14px; 
   margin: 5px 0;
-  word-wrap: break-word; /* Wrap long words if necessary */
+  word-wrap: break-word; /* Wrap long words */
 }
 
 #categoryItem .category-item-details p {

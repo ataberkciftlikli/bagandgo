@@ -16,12 +16,12 @@
   
   #profile-page .profile-main {
     flex-grow: 1;
-    margin-left: 220px; /* Adjust this based on the sidebar width */
+    margin-left: 220px; 
     padding: 20px;
-    background: white; /* Add background to ensure visibility */
-    min-height: 100vh; /* Ensure full height of the viewport */
+    background: white; 
+    min-height: 100vh; 
     box-sizing: border-box;
-    overflow-x: auto; /* Enable scrolling horizontally if needed */
+    overflow-x: auto; 
   }
   
   #profile-page .profile-header {
@@ -75,32 +75,32 @@
   /* Responsive Styles */
   @media (max-width: 768px) {
     #profile-page .profile-main {
-        margin-left: 0; /* Remove margin to adapt to mobile screen */
-        padding: 10px; /* Reduce padding for smaller screens */
+        margin-left: 0; 
+        padding: 10px;
     }
   
     #profile-page .profile-header {
-        font-size: 28px; /* Adjust font size for mobile */
-        text-align: center; /* Center align header text */
+        font-size: 28px;
+        text-align: center; 
     }
   
     #profile-page .profile-info {
-        padding: 15px; /* Reduce padding for mobile */
-        font-size: 14px; /* Smaller font size for mobile */
+        padding: 15px; 
+        font-size: 14px; 
     }
   
     #profile-page .profile-info p {
-        font-size: 14px; /* Adjust font size for smaller screens */
+        font-size: 14px; 
     }
   
     #profile-page .profile-actions {
-        flex-direction: column; /* Stack action buttons vertically */
-        align-items: stretch; /* Make buttons full width */
+        flex-direction: column; 
+        align-items: stretch; 
     }
   
     #profile-page .profile-actions button {
-        width: 100%; /* Make buttons take up full width on mobile */
-        padding: 12px; /* Adjust padding for mobile */
+        width: 100%; 
+        padding: 12px; 
     }
   }
   

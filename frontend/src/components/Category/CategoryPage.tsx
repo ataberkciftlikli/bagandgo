@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
-import CategoryItem from './CategoryItem'; // Renamed component to avoid conflicts
+import CategoryItem from './CategoryItem'; 
 import './CategoryPage.css';
 import { categories } from './CategoriesData';
 

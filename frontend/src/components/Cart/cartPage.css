@@ -24,8 +24,8 @@
     padding: 0px 20px 20px 20px;
     
     box-sizing: border-box;
-    overflow-x: auto; /* Enable scrolling horizontally if needed */
-    gap: 20px; /* Space between items and summary */
+    overflow-x: auto; 
+    gap: 20px; 
   }
   
   #cart-page h1 {
@@ -91,7 +91,7 @@
 }
 
 #cart-page .modal-unique p.warning {
-  color: #ff4d4d; /* Warning message in red */
+  color: #ff4d4d; 
   font-weight: bold;
 }
 
@@ -122,7 +122,7 @@
 }
 
 #cart-page .modal-button-green:hover {
-  background-color: #31c244; /* Green on hover */
+  background-color: #31c244; 
   color: black;
 }
 
@@ -136,7 +136,7 @@
 }
 
 #cart-page .modal-button-red:hover {
-  background-color: #a02424; /* Darker red on hover */
+  background-color: #a02424; 
   color: white;
 }
 

@@ -45,10 +45,78 @@
   flex-wrap: wrap;
 }
 
+/* Modal Styles */
+
+#home-page .modal-overlay-home {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; 
+  padding-top: 10%; 
+  z-index: 1000;
+}
+
+/* Modal Container */
+#home-page .modal-home {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+}
+
+
+
+/* Buttons Container */
+#home-page .modal-buttons-home {
+  display: flex;
+  justify-content: end;
+  margin-top: 1rem;
+}
+
+/* Sign In Button */
+#home-page .sign-in-button-home {
+  padding: 0.5rem 1rem;
+  border: none;
+  margin-right: 10px;
+  border-radius: 5px;
+  background-color: #3498db;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#home-page .sign-in-button-home:hover {
+  background-color: #217dbb;
+}
+
+/* Close Button */
+#home-page .close-button-home {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #e74c3c;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#home-page .close-button-home:hover {
+  background-color: #c0392b;
+}
+
 
 
 @media (max-width: 768px) {
-  /* Make sections stack on top of each other in smaller screens */
   #home-page .home-bottom {
     flex-direction: column;
   }

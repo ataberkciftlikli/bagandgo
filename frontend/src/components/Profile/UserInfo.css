@@ -59,45 +59,45 @@
   /* Responsive Styles */
   @media (max-width: 768px) {
     #info-section {
-      padding: 10%; /* Reduce padding on smaller screens */
-      margin: 2rem auto; /* Center the section and reduce margins */
-      width: 100%; /* Make the section take up more width on mobile */
-      height: auto; /* Allow height to adjust based on content */
+      padding: 10%; 
+      margin: 2rem auto; 
+      width: 100%;
+      height: auto; 
     }
   
     #info-section .picture-container {
-      margin-bottom: 15px; /* Adjust space for mobile */
+      margin-bottom: 15px; 
     }
   
     #info-section .profile-picture {
-      width: 80px; /* Smaller profile picture */
+      width: 80px; 
       height: 80px;
     }
   
     #info-section .change-picture-button {
-      padding: 8px 15px; /* Reduce button size for mobile */
+      padding: 8px 15px; 
     }
   
     #info-section .Header {
-      font-size: 24px; /* Adjust header font size for mobile */
+      font-size: 24px; 
     }
   
     #info-section .info-form {
-      padding: 0; /* Ensure form takes full width */
+      padding: 0;
     }
   
     #info-section .form-group {
-      margin-bottom: 10px; /* Reduce spacing between form elements */
+      margin-bottom: 10px; 
     }
   
     #info-section .form-control {
-      font-size: 14px; /* Adjust font size for mobile */
-      padding: 8px; /* Adjust padding for smaller screens */
+      font-size: 14px;
+      padding: 8px; 
     }
   
     #info-section .btn-primary {
-      width: 100%; /* Make the button take up full width on mobile */
-      padding: 12px; /* Adjust padding */
+      width: 100%; 
+      padding: 12px; 
     }
   }
   

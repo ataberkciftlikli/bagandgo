@@ -7,7 +7,7 @@
     border-radius: 8px;
     background: #fafafa;
     margin-top: 3px;
-    justify-content: space-between; /* Ensure spacing between content */
+    justify-content: space-between; 
   }
   
   #cartItem .cart-item-image {
@@ -62,8 +62,8 @@
   }
   #cartItem .buttons{
     display: flex;
-    align-items: flex-end; /* Align buttons to the right */
-    gap: 10px; /* Add spacing between buttons */
+    align-items: flex-end; 
+    gap: 10px;
   }
 
   #cartItem .add-to-favorites-button {

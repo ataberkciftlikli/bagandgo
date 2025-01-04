@@ -13,13 +13,6 @@
     text-align: left; /* Ensure text is left-aligned */
   }
   
-  #error-message.registration-error {
-    /* Custom styles for registration errors */
-  }
-  
-  #error-message.login-error {
-    /* Custom styles for login errors */
-  }
   
   #error-message .error-icon {
     margin-right: 10px;

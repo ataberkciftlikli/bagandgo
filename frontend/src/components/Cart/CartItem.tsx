@@ -10,7 +10,7 @@ interface CartItemProps {
     image: string;
   };
   onAddToFavorites: (productId: number) => void;
-  onRemoveFromCart: (productId: number) => void; // Add prop for removing from cart
+  onRemoveFromCart: (productId: number) => void; 
 }
 
 const CartItem: React.FC<CartItemProps> = ({ item, onAddToFavorites, onRemoveFromCart }) => {

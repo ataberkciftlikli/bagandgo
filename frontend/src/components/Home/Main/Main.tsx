@@ -26,7 +26,6 @@ const Sales: React.FC = () => {
     { title: 'Cleaning Products', date: 'Today', source: 'Our Store', url: '/category/cleaning-products', image: otherSaleImage3 },
   ];
 
-  // State to track the current index for hot sale images
   const [currentHotSaleIndex, setCurrentHotSaleIndex] = useState(0);
 
   // Auto-slide timer
@@ -35,7 +34,7 @@ const Sales: React.FC = () => {
       setCurrentHotSaleIndex((prevIndex) => (prevIndex + 1) % hotSaleItems.length);
     }, 5000); // Change slide every 5 seconds
 
-    return () => clearInterval(interval); // Cleanup interval on unmount
+    return () => clearInterval(interval); 
   }, [hotSaleItems.length]);
 
   const handleNextHotSale = () => {
@@ -50,9 +49,9 @@ const Sales: React.FC = () => {
 
   const handleSaleClick = (url: string) => {
     if (url.startsWith('/')) {
-      navigate(url); // Use React Router for internal navigation
+      navigate(url); 
     } else {
-      window.open(url, '_blank'); // Use window.open for external URLs
+      window.open(url, '_blank');
     }
   };
 

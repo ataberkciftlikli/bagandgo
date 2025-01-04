@@ -37,7 +37,7 @@
   border-radius: 50%;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  z-index: 10; /* Ensure buttons stay on top */
+  z-index: 10;
 }
 
 #sales-section .nav-button:hover {

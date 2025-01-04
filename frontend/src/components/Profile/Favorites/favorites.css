@@ -51,7 +51,7 @@
   width: 600px; /* Increased width to accommodate the layout */
   height: 400px;
   display: flex; /* Use flexbox to align items side by side */
-  gap: 20px; /* Add spacing between image and details */
+  gap: 20px; 
   align-items: center; /* Vertically align image and details */
 }
 

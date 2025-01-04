@@ -69,7 +69,7 @@
 }
 
 #qrcode .qr-manual-input-unique input {
-  width: calc(100% - 20px); /* Leave space for padding */
+  width: calc(100% - 20px); 
   max-width: 300px;
   padding: 10px;
   font-size: 16px;
@@ -115,9 +115,9 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
     width: 600px; /* Increased width to accommodate the layout */
     height: 400px;
-    display: flex; /* Use flexbox to align items side by side */
-    gap: 20px; /* Add spacing between image and details */
-    align-items: center; /* Vertically align image and details */
+    display: flex; 
+    gap: 20px; 
+    align-items: center; 
   }
   
   
@@ -159,13 +159,13 @@
   
   #qrcode .close-button-unique {
     position: absolute;
-    top: 10px; /* Position it inside the modal at the top-right corner */
+    top: 10px; 
     right: 10px;
     background: transparent;
     border: none;
     font-size: 20px;
     cursor: pointer;
-    color: #2e4255; /* Adjust color */
+    color: #2e4255;
   }
   
   #qrcode .close-button-unique:hover {

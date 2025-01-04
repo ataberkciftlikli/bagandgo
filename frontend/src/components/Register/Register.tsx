@@ -126,13 +126,13 @@ const Register = () => {
         <div
           className="header"
           onClick={() => {
-            navigate('/home');
+            navigate('/');
           }}
           style={{ cursor: 'pointer' }}
         >
           BagAndGo
         </div>
-        <form className="register-form w-100" onSubmit={handleSubmit}>
+        <form className="register-form" onSubmit={handleSubmit}>
           <h2 className="text-center mb-4">Register</h2>
 
           <InputField

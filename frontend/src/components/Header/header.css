@@ -6,7 +6,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: fixed; /* Keep the header fixed on larger screens */
+  position: fixed; 
   top: 0;
   left: 0;
   right: 0;
@@ -141,19 +141,19 @@
 #header .cart {
   width: 30px;
   height: 30px;
-  margin-right: 8px; /* Add space between icon and text */
+  margin-right: 8px; 
 
 }
 #header .code {
   width: 30px;
   height: 30px;
-  margin-right: 8px; /* Add space between icon and text */
+  margin-right: 8px;
 
 }
 #header .info {
   width: 10px;
   height: 25px;
-  margin-right: 8px; /* Add space between icon and text */
+  margin-right: 8px; 
 
 }
 
@@ -165,19 +165,19 @@
 #header .general {
   display: flex;
   flex-direction: row;
-  align-items: flex-start; /* Align elements to the left */
+  align-items: flex-start; 
   width: 100%;
 }
 
 #header .navbar2 {
   display: flex;
   justify-content: end;
-  align-items:center; /* Align elements to the left */
+  align-items:center;
   flex-grow: 1;
 }
 /* Desktop Styles */
 #header .exit-button-mobile {
-  display: none; /* Hide the button on desktop */
+  display: none;
 }
 
 
@@ -186,7 +186,7 @@
   #header {
     position: relative;
     flex-direction: column;
-    align-items: flex-start; /* Align everything to the left */
+    align-items: flex-start; 
     padding: 10px;
     width: 100%;
   }
@@ -211,11 +211,11 @@
   }
 
   #header .exit-button-mobile {
-    display: block; /* Show the button only in mobile */
+    display: block; 
     background-color: transparent;
     border: none;
     padding: 0;
-    margin-left: 80%; /* Align to the right */
+    margin-left: 80%; 
     width: 24px;
     height: 24px;
     cursor: pointer;
@@ -251,7 +251,7 @@
   #header .guest-links {
     display: flex;
     justify-content: flex-start;
-    flex-direction: column; /* Stack the nav-links horizontally */
+    flex-direction: column; 
     flex-wrap: nowrap;
     gap: 10px;
     width: 100%;

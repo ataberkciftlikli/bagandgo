@@ -122,7 +122,7 @@ const CartPage: React.FC = () => {
         setCheckoutModalOpen(false); // Close modal
         await fetchCartItems(); // Refresh cart items after checkout
         await fetchUserProfile();
-        setCartItems([]); // Ensure the cart visually clears
+        setCartItems([]); 
         setTotalAmount(0); // Reset the total amount
 
         navigate('/profile/history'); // Redirect to the order history page

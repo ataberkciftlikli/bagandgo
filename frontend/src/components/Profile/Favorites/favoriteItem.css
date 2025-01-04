@@ -1,6 +1,6 @@
 #favoriteItem .favorite-item {
   width: 150px;
-  height: 250px; /* Set a fixed height for all items */
+  height: 250px; 
   padding: 10px;
   border: 1px solid #bebaba;
   border-radius: 8px;
@@ -20,11 +20,11 @@
 #favoriteItem .favorite-item-image {
   width: 140px;
   height: 100px;
-  display: block; /* Ensure the image behaves as a block element */
-  object-fit: contain; /* Keep the aspect ratio and fit the image inside the box */
-  object-position: center; /* Center the image within the container */
+  display: block; 
+  object-fit: contain; 
+  object-position: center; 
   border-bottom: 2px solid #e0e0e0; /* Add a border only under the image */
-  box-sizing: border-box; /* Ensure padding and border are included in dimensions */
+  box-sizing: border-box; 
   background-color: #ffffff; /* Set the image background to white */
 }
 
