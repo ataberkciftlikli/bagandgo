@@ -90,5 +90,5 @@ By following these steps, we maintain code quality and avoid breaking `main`. Th
 Feel free to submit issues or pull requests. For major changes, please discuss them first with the team.
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+See the [LICENSE](LICENSE) file for details.
 
