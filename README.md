@@ -28,10 +28,28 @@ By following these steps, we maintain code quality and avoid breaking `main`. Th
 - **Backend**: Python, SQL, Postman
 - **Frontend**: HTML/CSS, ReactJS, Typescript
 
+### Libraries and Tools
+The following libraries and tools are used in the project:
+
+#### Frontend
+- **React** (`react`, `react-dom`, `react-bootstrap`, `react-router-dom`, etc.): Core library for building the user interface, enabling component-based architecture.
+- **TypeScript** (`typescript`, `@types/react`, `@types/react-dom`): Adds static typing to JavaScript, helping improve code quality and maintainability.
+- **Vite** (`vite`, `@vitejs/plugin-react`): Build tool and development server with fast hot-module replacement (HMR).
+- **QR Code Scanning & Generation** (`qrcode.react`, `react-qr-code`, `react-qr-scanner`): Libraries used for integrating QR code functionality for item scanning and generation.
+- **Bootstrap** (`bootstrap`): For UI components and layout.
+
+#### Linting and Code Quality
+- **ESLint** (`eslint`, `@eslint/js`, `eslint-plugin-react-hooks`, `eslint-plugin-react-refresh`): Ensures code quality and consistency across the project by enforcing coding standards.
+- **Prettier**: For automatic code formatting (if used, based on eslint configuration).
+
+#### Backend
+- **Django** (`django`, `django-rest-framework`): Framework for building the backend APIs and handling database interactions.
+- **Axios** (`axios`): Promise-based HTTP client for making requests from the frontend to the backend.
+
 ## Server Access Information
 - **Public IP address**: xxx
-- **Username**: king
-- **Password**: [shared privately with team members]
+- **Username**: xxx
+- **Password**: xxx
 
 ## Versions
 - **Backend**: Python 3.13, Django 5.1.2, Django Rest Framework 3.15.2
