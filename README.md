@@ -104,9 +104,14 @@ The following libraries and tools are used in the project:
 - Admins can log in and manage items through the `localhost:8000/admin` route.
 - Users can register, log in, and start self-checking out items through QR code scanning.
 
-## Contributing
-Feel free to submit issues or pull requests. For major changes, please discuss them first with the team.
-
+## Liability and Warranty 
+   - This software is provided **"as is"**, without any warranty of any kind, either express or implied.  
+   - You are solely responsible for reviewing and complying with the respective licenses for any data, logo, or framework used within this project.
+     
+## License & Usage  
+   - The **code** within this repository may be covered by its own license terms.  
+   - For any reuse or distribution, please ensure you comply with all license and attribution requirements.
+    
 ## License
 See the [LICENSE](LICENSE) file for details.
 
