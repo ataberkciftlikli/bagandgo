@@ -14,14 +14,14 @@ By following these steps, we maintain code quality and avoid breaking `main`. Th
 **Bag & Go** is a self-checkout web app designed for stores, eliminating the need for staff and relying solely on CCTV for security. Users can register, verify their identity, scan items via QR codes, and manage their purchases through a prepaid balance system. Admins can manage products, including discounted items, through a dedicated admin interface.
 
 ## Team
-- **Beran Orkan Işık** - Team Leader, DevOps, Front-end developer
+- **Ataberk Çiftlikli** - Subject Expert, DevOps, Backend, DB Manager & API Testing
+- **Yiğit Alp Bilgin** - Budget Manager, Front-end developer
+- **Beran Orkan Işık** - DevOps, Front-end developer
 - **Miraç Merthan Durdağ** - Budget Manager, Back-end developer
 - **Yiğit Güriş** - Business Analyst, Back-end developer
-- **Yiğit Alp Bilgin** - Budget Manager, Front-end developer
 - **Kerem Er** - Scribe, Back-end developer
 - **Cemal Yılmaz** - Business Analyst, Front-end developer
 - **Ceren Birsu Yılmaz** - QA, Front-end developer
-- **Ataberk Çiftlikli** - Subject Expert, DevOps, DB Manager & API Testing
 
 ## Technology Stack
 - **Project Configuration Management**: Git, Docker, VSCode
@@ -29,7 +29,7 @@ By following these steps, we maintain code quality and avoid breaking `main`. Th
 - **Frontend**: HTML/CSS, ReactJS, Typescript
 
 ## Server Access Information
-- **Public IP address**: 20.199.80.88
+- **Public IP address**: xxx
 - **Username**: king
 - **Password**: [shared privately with team members]
 
